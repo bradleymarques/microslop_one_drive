@@ -14,7 +14,7 @@ module MicroslopOneDrive
         parsed_response: fixture_response("drives/drive.json")
       )
 
-    drive = @client.drive(drive_id: @drive_id)
+      drive = @client.drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::Drive, drive
       assert_equal "0f097864e0cfea42", drive.id
       assert_equal "OneDrive", drive.name
