@@ -385,6 +385,33 @@ module MicroslopOneDrive
       assert_equal file1.parent, folder
     end
 
+    def test_delta_sets_the_path_and_full_path_for_nested_items
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_added_nested_items.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 7, drive_items.size
+
+      root = drive_items.find { it.name == "root" }
+      folder = drive_items.find { it.name == "folder" }
+      subfolder = drive_items.find { it.name == "subfolder" }
+      subsubfolder = drive_items.find { it.name == "subsubfolder" }
+      file3 = drive_items.find { it.name == "file_003.txt" }
+      file2 = drive_items.find { it.name == "file_002.txt" }
+      file1 = drive_items.find { it.name == "file_001.txt" }
+
+      assert_equal "root:", root.path
+      assert_equal "root:/folder", folder.path
+      assert_equal "root:/folder/subfolder", subfolder.path
+      assert_equal "root:/folder/subfolder/subsubfolder", subsubfolder.path
+      assert_equal "root:/folder/file_001.txt", file1.path
+      assert_equal "root:/folder/subfolder/file_002.txt", file2.path
+      assert_equal "root:/folder/subfolder/subsubfolder/file_003.txt", file3.path
+    end
+
     private
 
     def fixture_response(fixture_file_name)

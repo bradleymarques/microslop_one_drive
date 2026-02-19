@@ -12,7 +12,9 @@ module MicroslopOneDrive
                 :parent_identifier,
                 :mime_type,
                 :parent,
-                :children
+                :children,
+                :path,
+                :full_path
 
     def initialize(item_hash)
       @item_hash = item_hash
@@ -37,6 +39,8 @@ module MicroslopOneDrive
 
       @deleted = @item_hash.dig("deleted", "state") == "deleted"
 
+      @path = build_path
+
       @parent = nil
       @children = []
     end
@@ -58,14 +62,38 @@ module MicroslopOneDrive
     end
 
     def set_parent(parent)
+      if @parent
+        @parent.remove_child(self)
+      end
+
       @parent = parent
       @parent.add_child(self)
+    end
+
+    def is_root?
+      @item_hash.key?("root")
     end
 
     protected
 
     def add_child(child)
       @children << child
+    end
+
+    def remove_child(child)
+      @children.delete(child)
+    end
+
+    private
+
+    def build_path
+      return "root:" if is_root?
+
+      full_parent_path = @item_hash.dig("parentReference", "path")
+      return nil if full_parent_path.nil?
+
+      full_path_with_name = File.join(full_parent_path, @name)
+      full_path_with_name.sub(/\A.*root:\//, "root:/")
     end
   end
 end
