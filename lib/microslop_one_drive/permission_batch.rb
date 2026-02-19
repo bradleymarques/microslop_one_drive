@@ -1,14 +1,5 @@
 module MicroslopOneDrive
   class PermissionBatch
-    # OneDrive roles to generic permission roles
-    # @see https://learn.microsoft.com/en-us/onedrive/developer/rest-api/resources/permission#roles-enumeration
-    ONE_DRIVE_TO_ROLE_MAP = {
-      "read" => :viewer,
-      "write" => :editor,
-      "owner" => :owner,
-      "member" => :editor
-    }.freeze
-
     attr_reader :identifier, :role, :audiences
 
     def initialize(parsed_response)
@@ -27,8 +18,7 @@ module MicroslopOneDrive
 
     def build_role
       roles = @parsed_response.fetch("roles", [])
-      one_drive_role = roles.is_a?(Array) ? roles.first : roles
-      ONE_DRIVE_TO_ROLE_MAP[one_drive_role] || raise("Unknown OneDrive role: '#{one_drive_role}'")
+      roles.is_a?(Array) ? roles.first : roles
     end
 
     def build_audiences
