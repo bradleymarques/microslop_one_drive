@@ -44,18 +44,6 @@ module MicroslopOneDrive
       MicroslopOneDrive::Drive.new(response.parsed_response)
     end
 
-    # Gets a delta of changes to a Drive.
-    #
-    # @param drive_id [String] The ID of the Drive to get the delta of.
-    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
-    #
-    # @return [MicroslopOneDrive::DriveItemList]
-    def delta(drive_id:, token: nil)
-      response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
-      handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveItemList.new(response.parsed_response)
-    end
-
     # Gets a specific DriveItem (folder or file) by its ID.
     #
     # @param item_id [String] The ID of the Drive Item to get.
@@ -79,6 +67,18 @@ module MicroslopOneDrive
       return true if response.success?
 
       handle_error(response)
+    end
+
+    # Gets a delta of changes to a Drive.
+    #
+    # @param drive_id [String] The ID of the Drive to get the delta of.
+    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
+    #
+    # @return [MicroslopOneDrive::DriveItemList]
+    def delta(drive_id:, token: nil)
+      response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::DriveItemList.new(response.parsed_response)
     end
 
     # def permissions(item_id:)

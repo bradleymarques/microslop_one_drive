@@ -1,0 +1,6 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+    "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwOTAwNzg5MjMwMDAwOzg5NzY3OTY2NDslMjM7JTIzOyUyMzA7JTIz",
+    "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+    "value": []
+}

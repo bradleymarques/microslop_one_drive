@@ -32,6 +32,12 @@ module MicroslopOneDrive
       end
 
       @parent_identifier = @item_hash.dig("parentReference", "id")
+
+      @deleted = @item_hash.dig("deleted", "state") == "deleted"
+    end
+
+    def deleted?
+      @deleted
     end
 
     def shared?

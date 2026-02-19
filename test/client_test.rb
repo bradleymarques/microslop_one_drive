@@ -81,6 +81,96 @@ module MicroslopOneDrive
       assert_equal "personal", drive.drive_type
     end
 
+    def test_drive_item_fetches_a_drive_item
+      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
+
+      mock_get(
+        path: "me/drive/items/#{item_id}",
+        parsed_response: fixture_response("drive_item.json")
+      )
+
+      drive_item = @client.drive_item(item_id: item_id)
+      assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+
+      assert_equal "Getting started with OneDrive.pdf", drive_item.name
+      assert_equal "application/pdf", drive_item.mime_type
+      assert_equal :file, drive_item.file_or_folder
+      assert_equal true, drive_item.file?
+      assert_equal false, drive_item.folder?
+      assert_equal "https://onedrive.live.com?cid=#{@drive_id}&id=#{item_id}", drive_item.url
+      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.identifier
+      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_identifier
+      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.created_at
+      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
+      assert_equal 1053417, drive_item.size
+    end
+
+    def test_drive_item_fetches_a_drive_item
+      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
+
+      mock_get(
+        path: "me/drive/items/#{item_id}",
+        parsed_response: fixture_response("drive_item.json")
+      )
+
+      drive_item = @client.drive_item(item_id: item_id)
+      assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+
+      assert_equal "Getting started with OneDrive.pdf", drive_item.name
+      assert_equal "application/pdf", drive_item.mime_type
+      assert_equal :file, drive_item.file_or_folder
+      assert_equal true, drive_item.file?
+      assert_equal false, drive_item.folder?
+      assert_equal "https://onedrive.live.com?cid=#{@drive_id}&id=#{item_id}", drive_item.url
+      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.identifier
+      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_identifier
+      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.created_at
+      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
+      assert_equal 1053417, drive_item.size
+    end
+
+    def test_drive_item_for_an_item_that_does_not_exist
+      item_id = "F097864E0CFEA42!not-an-item-id"
+
+      mock_get(
+        path: "me/drive/items/#{item_id}",
+        parsed_response: fixture_response("drive_item_not_found.json"),
+        response_code: 404,
+        success: false,
+      )
+
+      error = assert_raises MicroslopOneDrive::Errors::ClientError do
+        @client.drive_item(item_id: item_id)
+      end
+
+      assert_equal 404, error.response_code
+      assert_includes(error.response_body["error"]["message"], "Item not found")
+    end
+
+    def test_item_exists_returns_true_if_the_item_exists
+      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
+      mock_get(
+        path: "me/drive/items/#{item_id}",
+        parsed_response: fixture_response("drive_item.json"),
+        response_code: 200,
+        success: true,
+      )
+
+      assert_equal true, @client.item_exists?(item_id: item_id)
+    end
+
+    def test_item_exists_returns_false_if_the_item_does_not_exist
+      item_id = "F097864E0CFEA42!not-an-item-id"
+      mock_get(
+        path: "me/drive/items/#{item_id}",
+        parsed_response: fixture_response("drive_item_not_found.json"),
+        response_code: 404,
+        success: false,
+      )
+
+      assert_equal false, @client.item_exists?(item_id: item_id)
+    end
+
     def test_delta_fetches_an_initial_delta_of_changes_to_a_drive
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
@@ -155,98 +245,41 @@ module MicroslopOneDrive
       assert drive_item_list.next_token.include?("YzYtOTI4Y")
     end
 
-    def test_drive_item_fetches_a_drive_item
-      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
-
+    def test_empty_delta
       mock_get(
-        path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json")
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_empty.json")
       )
 
-      drive_item = @client.drive_item(item_id: item_id)
-      assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
 
-      assert_equal "Getting started with OneDrive.pdf", drive_item.name
-      assert_equal "application/pdf", drive_item.mime_type
-      assert_equal :file, drive_item.file_or_folder
-      assert_equal true, drive_item.file?
-      assert_equal false, drive_item.folder?
-      assert_equal "https://onedrive.live.com?cid=#{@drive_id}&id=#{item_id}", drive_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.identifier
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_identifier
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.created_at
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
-      assert_equal 1053417, drive_item.size
+      assert drive_item_list.delta_link
+      assert drive_item_list.delta_token
+
+      assert_equal false, drive_item_list.next_page?
+
+      assert_equal 0, drive_item_list.items.size
     end
 
-    def test_drive_item_fetches_a_drive_item
-      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
-
+    def test_delta_labels_files_and_folders_that_were_deleted
       mock_get(
-        path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json")
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_deleted_root_file.json")
       )
 
-      drive_item = @client.drive_item(item_id: item_id)
-      assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 2, drive_items.size
 
-      assert_equal "Getting started with OneDrive.pdf", drive_item.name
-      assert_equal "application/pdf", drive_item.mime_type
-      assert_equal :file, drive_item.file_or_folder
-      assert_equal true, drive_item.file?
-      assert_equal false, drive_item.folder?
-      assert_equal "https://onedrive.live.com?cid=#{@drive_id}&id=#{item_id}", drive_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.identifier
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_identifier
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.created_at
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
-      assert_equal 1053417, drive_item.size
-    end
+      root = drive_items[0]
+      assert_equal "root", root.name
+      assert_equal false, root.deleted?
 
-    def test_drive_item_for_an_item_that_does_not_exist
-      item_id = "F097864E0CFEA42!not-an-item-id"
-
-      mock_get(
-        path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("item_not_found.json"),
-        response_code: 404,
-        success: false,
-      )
-
-      error = assert_raises MicroslopOneDrive::Errors::ClientError do
-        @client.drive_item(item_id: item_id)
-      end
-
-      assert_equal 404, error.response_code
-      assert_includes(error.response_body["error"]["message"], "Item not found")
-    end
-
-    def test_item_exists_returns_true_if_the_item_exists
-      item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
-      mock_get(
-        path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json"),
-        response_code: 200,
-        success: true,
-      )
-
-      assert_equal true, @client.item_exists?(item_id: item_id)
-    end
-
-    def test_item_exists_returns_false_if_the_item_does_not_exist
-      item_id = "F097864E0CFEA42!not-an-item-id"
-      mock_get(
-        path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("item_not_found.json"),
-        response_code: 404,
-        success: false,
-      )
-
-      assert_equal false, @client.item_exists?(item_id: item_id)
-    end
-
-    def test_something
-      flunk
+      deleted_file = drive_items[1]
+      assert_equal "F097864E0CFEA42!sd08d0f9a7b58474fba9cc6172138e9a1", deleted_file.identifier
+      assert_nil deleted_file.name # Name not returned for deleted files
+      assert_equal true, deleted_file.deleted?
     end
 
     private

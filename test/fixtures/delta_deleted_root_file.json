@@ -1,0 +1,53 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+  "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwOTAyNzQ1MzAwMDAwOzg5NzY4MTQxMzslMjM7JTIzOyUyMzA7JTIz",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+  "value": [
+    {
+      "createdDateTime": "2026-02-16T05:06:27Z",
+      "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+      "lastModifiedDateTime": "2026-02-19T09:31:08Z",
+      "name": "root",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
+      "size": 1053417,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-16T05:06:27Z",
+        "lastModifiedDateTime": "2026-02-19T09:31:08Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "sortBy": "name",
+          "sortOrder": "ascending",
+          "viewType": "thumbnails"
+        }
+      },
+      "root": {}
+    },
+    {
+      "id": "F097864E0CFEA42!sd08d0f9a7b58474fba9cc6172138e9a1",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66E2B6G5AWD3J5D3VHGGC4QTR2NB",
+      "cTag": "\"c:{D08D0F9A-7B58-474F-BA9C-C6172138E9A1},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "file": {
+        "hashes": {
+          "quickXorHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {}
+    }
+  ]
+}
