@@ -44,10 +44,12 @@ drive_list.drives # => [MicroslopOneDrive::Drive, ...]
 
 drive = drive_list.drives.first
 drive.class # => MicroslopOneDrive::Drive
-drive.id # => "0f0**********42"
+drive.identifier # => "0f0**********42"
 drive.name # => "OneDrive"
 drive.url # => "https://my.microsoftpersonalcontent.com/..."
 drive.drive_type # => "personal"
+drive.created_at
+drive.updated_at
 ```
 
 ### Get a single Drive
@@ -56,7 +58,7 @@ drive.drive_type # => "personal"
 drive = client.drive(drive_id: "0f097********a42")
 
 drive.class # => MicroslopOneDrive::Drive
-drive.id # => "0f097********a42"
+drive.identifier # => "0f097********a42"
 drive.name # => "OneDrive"
 drive.url # => "https://my.microsoftpersonalcontent.com/personal/..."
 drive.drive_type # => "personal"
