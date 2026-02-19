@@ -6,9 +6,11 @@ Gem::Specification.new do |spec|
   spec.authors = ["Bradley Marques"]
   spec.email = [""]
 
+  spec.license = "MIT"
+
   spec.summary = "Ruby client helpers for Microsoft Graph OneDrive/SharePoint API (drive items, delta, permissions)."
   spec.description = "Lightweight value objects and HTTP client for OneDrive delta sync, item metadata, and sharing permissions."
-  spec.homepage = "https://github.com/haikucode/microslop_one_drive"
+  spec.homepage = "https://github.com/bradleymarques/microslop_one_drive"
   spec.required_ruby_version = ">= 3.4.2"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage

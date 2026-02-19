@@ -8,8 +8,10 @@ Graph explorer (API sandbox): <https://developer.microsoft.com/en-us/graph/graph
 
 ## Installation
 
+Add this to your Gemfile:
+
 ```rb
-TODO: DOCUMENT
+gem "microslop_one_drive"
 ```
 
 ## Usage
@@ -147,5 +149,14 @@ bundle exec rake test
 ## Building and publishing
 
 ```sh
+# Signin if not already:
+gem signin
+
+# Bump version in lib/microslop_one_drive/version.rb
+
+# Then build:
 gem build microslop_drive.gemspec
+# You will get a *.gem file like microslop_one_drive-X.Y.Z.gem
+
+gem push microslop_one_drive-X.Y.Z.gem
 ```
