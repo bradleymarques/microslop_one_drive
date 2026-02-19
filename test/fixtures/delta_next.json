@@ -1,0 +1,169 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+  "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=YzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwODY4MjA5MjAwMDAwOzg5NzY1MjA0MTslMjM7JTIzOyUyMzA7JTIz",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+  "value": [
+    {
+      "createdDateTime": "2026-02-16T05:06:27Z",
+      "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+      "lastModifiedDateTime": "2026-02-19T07:35:52Z",
+      "name": "root",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
+      "size": 1053417,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-16T05:06:27Z",
+        "lastModifiedDateTime": "2026-02-19T07:35:52Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "sortBy": "name",
+          "sortOrder": "ascending",
+          "viewType": "thumbnails"
+        }
+      },
+      "root": {}
+    },
+    {
+      "createdDateTime": "2026-02-19T07:35:51Z",
+      "eTag": "\"{C790A7C3-AABC-4257-A7D0-0B0D7711DC7D},1\"",
+      "id": "F097864E0CFEA42!sc790a7c3aabc4257a7d00b0d7711dc7d",
+      "lastModifiedDateTime": "2026-02-19T07:35:51Z",
+      "name": "Documents",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GDU6IMPPFKK5BKPUALBV3RDXD5",
+      "cTag": "\"c:{C790A7C3-AABC-4257-A7D0-0B0D7711DC7D},0\"",
+      "size": 0,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T07:35:51Z",
+        "lastModifiedDateTime": "2026-02-19T07:35:51Z"
+      },
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      },
+      "specialFolder": {
+        "name": "documents"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T07:35:51Z",
+      "eTag": "\"{B664E3D9-8E5C-43A0-B949-7B864AB73CF5},1\"",
+      "id": "F097864E0CFEA42!sb664e3d98e5c43a0b9497b864ab73cf5",
+      "lastModifiedDateTime": "2026-02-19T07:35:51Z",
+      "name": "Pictures",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GZ4NSLMXEOUBB3SSL3QZFLOPHV",
+      "cTag": "\"c:{B664E3D9-8E5C-43A0-B949-7B864AB73CF5},0\"",
+      "size": 0,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T07:35:51Z",
+        "lastModifiedDateTime": "2026-02-19T07:35:51Z"
+      },
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      },
+      "specialFolder": {
+        "name": "photos"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T07:35:52Z",
+      "eTag": "\"{A466B445-9868-496A-BE59-BB1479272D27},1\"",
+      "id": "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27",
+      "lastModifiedDateTime": "2026-02-19T07:35:52Z",
+      "name": "Getting started with OneDrive.pdf",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66CFWRTKI2EYNJE34WN3CR4SOLJH",
+      "cTag": "\"c:{A466B445-9868-496A-BE59-BB1479272D27},1\"",
+      "size": 1053417,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "id": "0f097864e0cfea42",
+          "displayName": "brad@haikucode.dev"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "file": {
+        "mimeType": "application/pdf",
+        "hashes": {
+          "quickXorHash": "uSkB7tg/Gnjxt0Nkvy4NUc+eIBc="
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T07:35:52Z",
+        "lastModifiedDateTime": "2026-02-19T07:35:52Z"
+      }
+    }
+  ]
+}

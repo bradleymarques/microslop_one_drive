@@ -1,0 +1,22 @@
+require "httparty"
+require "json"
+
+require_relative "microslop_one_drive/version"
+require_relative "microslop_one_drive/utils"
+require_relative "microslop_one_drive/errors/client_error"
+require_relative "microslop_one_drive/user"
+require_relative "microslop_one_drive/list_response"
+require_relative "microslop_one_drive/drive_list"
+require_relative "microslop_one_drive/drive"
+require_relative "microslop_one_drive/drive_item"
+require_relative "microslop_one_drive/drive_item_list"
+require_relative "microslop_one_drive/client"
+
+
+
+# require_relative "microslop_one_drive/one_drive_permission_list"
+# require_relative "microslop_one_drive/constants"
+# require_relative "microslop_one_drive/one_drive_audience"
+# require_relative "microslop_one_drive/one_drive_item"
+# require_relative "microslop_one_drive/one_drive_permission"
+# require_relative "microslop_one_drive/one_drive_permission_batch"

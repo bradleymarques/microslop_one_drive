@@ -1,0 +1,15 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me?$select=signInActivity,accountEnabled",
+  "userPrincipalName": "person@example.com",
+  "id": "0f097864e0cfea42",
+  "displayName": "Person Example",
+  "surname": "Example",
+  "givenName": "Person",
+  "preferredLanguage": "en-GB",
+  "mail": "person@example.com",
+  "mobilePhone": null,
+  "jobTitle": null,
+  "officeLocation": null,
+  "businessPhones": []
+}

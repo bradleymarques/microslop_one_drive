@@ -1,0 +1,71 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#drives",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives?$select=driveType,owner",
+  "value": [
+    {
+      "createdDateTime": "2026-02-16T05:06:35Z",
+      "description": "Document library to store albums and album items",
+      "id": "b!yrJJ08s7HE-lCa2NkThQHcsbUN8HJONLtUb9AXHysUmgd4eSO7JZSa2Rl8IAPGeD",
+      "lastModifiedDateTime": "2026-02-16T05:06:35Z",
+      "name": "AEEE102E-CFF8-4E2A-89C6-03841FF83500",
+      "webUrl": "https://my.microsoftpersonalcontent.com/personal/0f097864e0cfea42/AEEE102ECFF84E2A89C603841FF83500",
+      "driveType": "personal",
+      "createdBy": {
+        "user": {
+          "displayName": "System Account"
+        }
+      },
+      "owner": {
+        "user": {
+          "email": "person@example.com",
+          "displayName": "person@example.com"
+        }
+      },
+      "quota": {
+        "deleted": 0,
+        "remaining": 5367655703,
+        "state": "normal",
+        "total": 5368709120,
+        "used": 1053417,
+        "storagePlanInformation": {
+          "upgradeAvailable": true
+        }
+      }
+    },
+    {
+      "createdDateTime": "2026-02-16T05:06:27Z",
+      "description": "",
+      "id": "0f097864e0cfea42",
+      "lastModifiedDateTime": "2026-02-19T07:39:49Z",
+      "name": "OneDrive",
+      "webUrl": "https://my.microsoftpersonalcontent.com/personal/0f097864e0cfea42/Documents",
+      "driveType": "personal",
+      "createdBy": {
+        "user": {
+          "displayName": "System Account"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "displayName": "System Account"
+        }
+      },
+      "owner": {
+        "user": {
+          "email": "person@example.com",
+          "displayName": "person@example.com"
+        }
+      },
+      "quota": {
+        "deleted": 0,
+        "remaining": 5367655703,
+        "state": "normal",
+        "total": 5368709120,
+        "used": 1053417,
+        "storagePlanInformation": {
+          "upgradeAvailable": true
+        }
+      }
+    }
+  ]
+}
