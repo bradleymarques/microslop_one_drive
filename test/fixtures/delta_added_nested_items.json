@@ -1,0 +1,272 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+  "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwOTA4MjA4NTcwMDAwOzg5NzY4NDQ1NzslMjM7JTIzOyUyMzA7JTIz",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+  "value": [
+    {
+      "createdDateTime": "2026-02-16T05:06:27Z",
+      "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+      "lastModifiedDateTime": "2026-02-19T09:39:42Z",
+      "name": "root",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
+      "size": 1053423,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-16T05:06:27Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:42Z"
+      },
+      "folder": {
+        "childCount": 5,
+        "view": {
+          "sortBy": "name",
+          "sortOrder": "ascending",
+          "viewType": "thumbnails"
+        }
+      },
+      "root": {}
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:39Z",
+      "eTag": "\"{BFAF283E-5974-4E83-9F02-C5FAA0321C13},1\"",
+      "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+      "lastModifiedDateTime": "2026-02-19T09:39:39Z",
+      "name": "folder",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66B6FCX365CZQNHJ6AWF7KQDEHAT",
+      "cTag": "\"c:{BFAF283E-5974-4E83-9F02-C5FAA0321C13},0\"",
+      "size": 6,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:39Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:39Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {}
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:41Z",
+      "eTag": "\"{BFCEF07A-6690-46A1-9431-656EC9916BC1},1\"",
+      "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+      "lastModifiedDateTime": "2026-02-19T09:39:41Z",
+      "name": "subfolder",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66D26DHL7EDGUFDJIMLFN3EZC26B",
+      "cTag": "\"c:{BFCEF07A-6690-46A1-9431-656EC9916BC1},0\"",
+      "size": 4,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+        "path": "/drives/0f097864e0cfea42/root:/folder",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:41Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:41Z"
+      },
+      "folder": {
+        "childCount": 2,
+        "view": {}
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:41Z",
+      "eTag": "\"{C0C96339-2951-4BD3-81D6-5E3FA97323E3},1\"",
+      "id": "F097864E0CFEA42!sc0c9633929514bd381d65e3fa97323e3",
+      "lastModifiedDateTime": "2026-02-19T09:39:41Z",
+      "name": "subsubfolder",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66BZMPE4AUJJ2NFYDVS6H6UXGI7D",
+      "cTag": "\"c:{C0C96339-2951-4BD3-81D6-5E3FA97323E3},0\"",
+      "size": 2,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+        "path": "/drives/0f097864e0cfea42/root:/folder/subfolder",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:41Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:41Z"
+      },
+      "folder": {
+        "childCount": 1,
+        "view": {}
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:42Z",
+      "eTag": "\"{791B43CF-ED4A-4CBA-8781-2162F3EA55FE},1\"",
+      "id": "F097864E0CFEA42!s791b43cfed4a4cba87812162f3ea55fe",
+      "lastModifiedDateTime": "2026-02-19T09:39:42Z",
+      "name": "file_003.txt",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GPIMNXSSXNXJGIPAJBMLZ6UVP6",
+      "cTag": "\"c:{791B43CF-ED4A-4CBA-8781-2162F3EA55FE},1\"",
+      "size": 2,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sc0c9633929514bd381d65e3fa97323e3",
+        "path": "/drives/0f097864e0cfea42/root:/folder/subfolder/subsubfolder",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "quickXorHash": "LlAAAAAAAAAAAAAAAgAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:42Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:42Z"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:42Z",
+      "eTag": "\"{3F5C52C8-D48A-41A4-8EBA-65E8C1AA4425},1\"",
+      "id": "F097864E0CFEA42!s3f5c52c8d48a41a48eba65e8c1aa4425",
+      "lastModifiedDateTime": "2026-02-19T09:39:42Z",
+      "name": "file_002.txt",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GIKJOD7CWUURAY5OTF5DA2URBF",
+      "cTag": "\"c:{3F5C52C8-D48A-41A4-8EBA-65E8C1AA4425},1\"",
+      "size": 2,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+        "path": "/drives/0f097864e0cfea42/root:/folder/subfolder",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "quickXorHash": "LlAAAAAAAAAAAAAAAgAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:42Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:42Z"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T09:39:41Z",
+      "eTag": "\"{2D2A98A0-CC8C-4C3A-96C5-F9C93C7AFE29},1\"",
+      "id": "F097864E0CFEA42!s2d2a98a0cc8c4c3a96c5f9c93c7afe29",
+      "lastModifiedDateTime": "2026-02-19T09:39:41Z",
+      "name": "file_001.txt",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66FATAVC3DGMHJGJNRPZZE6HV7RJ",
+      "cTag": "\"c:{2D2A98A0-CC8C-4C3A-96C5-F9C93C7AFE29},1\"",
+      "size": 2,
+      "createdBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+        "path": "/drives/0f097864e0cfea42/root:/folder",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "file": {
+        "mimeType": "text/plain",
+        "hashes": {
+          "quickXorHash": "LlAAAAAAAAAAAAAAAgAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T09:39:41Z",
+        "lastModifiedDateTime": "2026-02-19T09:39:41Z"
+      }
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+require "debug"
 require "test_helper"
 
 module MicroslopOneDrive
@@ -280,6 +281,108 @@ module MicroslopOneDrive
       assert_equal "F097864E0CFEA42!sd08d0f9a7b58474fba9cc6172138e9a1", deleted_file.identifier
       assert_nil deleted_file.name # Name not returned for deleted files
       assert_equal true, deleted_file.deleted?
+    end
+
+    def test_delta_for_a_renamed_file
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_renamed.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 2, drive_items.size
+
+      root = drive_items[0]
+      assert_equal "root", root.name
+
+      renamed_file = drive_items[1]
+      assert_equal "Getting started with OneDrive (RENAMED).pdf", renamed_file.name
+    end
+
+    def test_delta_for_added_nested_items
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_added_nested_items.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 7, drive_items.size
+
+      expected_names = [
+        "root",
+        "folder",
+        "subfolder",
+        "subsubfolder",
+        "file_003.txt",
+        "file_002.txt",
+        "file_001.txt",
+      ]
+
+      assert_equal expected_names, drive_items.map(&:name)
+    end
+
+    def test_delta_sets_the_correct_parent_identifier_for_nested_items
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_added_nested_items.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 7, drive_items.size
+
+      root = drive_items.find { it.name == "root" }
+      folder = drive_items.find { it.name == "folder" }
+      subfolder = drive_items.find { it.name == "subfolder" }
+      subsubfolder = drive_items.find { it.name == "subsubfolder" }
+      file3 = drive_items.find { it.name == "file_003.txt" }
+      file2 = drive_items.find { it.name == "file_002.txt" }
+      file1 = drive_items.find { it.name == "file_001.txt" }
+
+      assert_equal file1.parent_identifier, folder.identifier
+      assert_equal file2.parent_identifier, subfolder.identifier
+      assert_equal file3.parent_identifier, subsubfolder.identifier
+      assert_equal subsubfolder.parent_identifier, subfolder.identifier
+      assert_equal subfolder.parent_identifier, folder.identifier
+      assert_equal folder.parent_identifier, root.identifier
+      assert_nil root.parent_identifier
+    end
+
+    def test_delta_sets_parent_and_children
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_added_nested_items.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+      assert_equal 7, drive_items.size
+
+      root = drive_items.find { it.name == "root" }
+      folder = drive_items.find { it.name == "folder" }
+      subfolder = drive_items.find { it.name == "subfolder" }
+      subsubfolder = drive_items.find { it.name == "subsubfolder" }
+      file3 = drive_items.find { it.name == "file_003.txt" }
+      file2 = drive_items.find { it.name == "file_002.txt" }
+      file1 = drive_items.find { it.name == "file_001.txt" }
+
+      assert_equal root.children, [folder]
+      assert_equal folder.children, [subfolder, file1]
+      assert_equal subfolder.children, [subsubfolder, file2]
+      assert_equal subsubfolder.children, [file3]
+      assert_equal file3.children, []
+      assert_equal file2.children, []
+      assert_equal file1.children, []
+
+      assert_nil root.parent
+      assert_equal folder.parent, root
+      assert_equal subfolder.parent, folder
+      assert_equal subsubfolder.parent, subfolder
+      assert_equal file3.parent, subsubfolder
+      assert_equal file2.parent, subfolder
+      assert_equal file1.parent, folder
     end
 
     private

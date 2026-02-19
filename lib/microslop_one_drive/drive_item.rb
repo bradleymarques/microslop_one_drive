@@ -10,7 +10,9 @@ module MicroslopOneDrive
                 :size,
                 :file_or_folder,
                 :parent_identifier,
-                :mime_type
+                :mime_type,
+                :parent,
+                :children
 
     def initialize(item_hash)
       @item_hash = item_hash
@@ -34,6 +36,9 @@ module MicroslopOneDrive
       @parent_identifier = @item_hash.dig("parentReference", "id")
 
       @deleted = @item_hash.dig("deleted", "state") == "deleted"
+
+      @parent = nil
+      @children = []
     end
 
     def deleted?
@@ -50,6 +55,17 @@ module MicroslopOneDrive
 
     def folder?
       @file_or_folder == :folder
+    end
+
+    def set_parent(parent)
+      @parent = parent
+      @parent.add_child(self)
+    end
+
+    protected
+
+    def add_child(child)
+      @children << child
     end
   end
 end

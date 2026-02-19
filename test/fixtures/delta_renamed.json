@@ -42,16 +42,16 @@
           "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
         },
         "user": {
-          "email": "brad@haikucode.dev",
+          "email": "person@example.com",
           "id": "0f097864e0cfea42",
-          "displayName": "Bradley Marques"
+          "displayName": "Example Person"
         }
       },
       "lastModifiedBy": {
         "user": {
-          "email": "brad@haikucode.dev",
+          "email": "person@example.com",
           "id": "0f097864e0cfea42",
-          "displayName": "Bradley Marques"
+          "displayName": "Example Person"
         }
       },
       "parentReference": {
