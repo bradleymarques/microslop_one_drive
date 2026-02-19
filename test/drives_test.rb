@@ -10,7 +10,7 @@ module MicroslopOneDrive
     def test_drives_fetches_the_current_user_drives
       mock_get(
         path: "me/drives",
-        parsed_response: fixture_response("drives.json")
+        parsed_response: fixture_response("drives/drives.json")
       )
 
       drive_list = @client.drives

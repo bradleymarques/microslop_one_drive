@@ -14,7 +14,7 @@ module MicroslopOneDrive
 
       mock_get(
         path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json")
+        parsed_response: fixture_response("drive_items/drive_item.json")
       )
 
       drive_item = @client.drive_item(item_id: item_id)
@@ -38,7 +38,7 @@ module MicroslopOneDrive
 
       mock_get(
         path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json")
+        parsed_response: fixture_response("drive_items/drive_item.json")
       )
 
       drive_item = @client.drive_item(item_id: item_id)
@@ -62,7 +62,7 @@ module MicroslopOneDrive
 
       mock_get(
         path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item_not_found.json"),
+        parsed_response: fixture_response("drive_items/drive_item_not_found.json"),
         response_code: 404,
         success: false,
       )

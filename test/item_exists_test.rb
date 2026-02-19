@@ -11,7 +11,7 @@ module MicroslopOneDrive
       item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
       mock_get(
         path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item.json"),
+        parsed_response: fixture_response("drive_items/drive_item.json"),
         response_code: 200,
         success: true,
       )
@@ -23,7 +23,7 @@ module MicroslopOneDrive
       item_id = "F097864E0CFEA42!not-an-item-id"
       mock_get(
         path: "me/drive/items/#{item_id}",
-        parsed_response: fixture_response("drive_item_not_found.json"),
+        parsed_response: fixture_response("drive_items/drive_item_not_found.json"),
         response_code: 404,
         success: false,
       )

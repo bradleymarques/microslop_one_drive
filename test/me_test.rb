@@ -10,7 +10,7 @@ module MicroslopOneDrive
     def test_me_fetches_the_current_user
       mock_get(
         path: "me",
-        parsed_response: fixture_response("me.json")
+        parsed_response: fixture_response("users/me.json")
       )
 
       me = @client.me

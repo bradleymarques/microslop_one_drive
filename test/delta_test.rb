@@ -12,7 +12,7 @@ module MicroslopOneDrive
     def test_delta_fetches_an_initial_delta_of_changes_to_a_drive
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_initial.json")
+        parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -44,7 +44,7 @@ module MicroslopOneDrive
     def test_delta_with_a_delta_link_and_delta_token
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_initial.json")
+        parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -65,7 +65,7 @@ module MicroslopOneDrive
     def test_delta_with_a_next_link_and_next_token
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_next.json")
+        parsed_response: fixture_response("deltas/delta_next.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -86,7 +86,7 @@ module MicroslopOneDrive
     def test_empty_delta
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_empty.json")
+        parsed_response: fixture_response("deltas/delta_empty.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -103,7 +103,7 @@ module MicroslopOneDrive
     def test_delta_labels_files_and_folders_that_were_deleted
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_deleted_root_file.json")
+        parsed_response: fixture_response("deltas/delta_deleted_root_file.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -123,7 +123,7 @@ module MicroslopOneDrive
     def test_delta_for_a_renamed_file
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_renamed.json")
+        parsed_response: fixture_response("deltas/delta_renamed.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -140,7 +140,7 @@ module MicroslopOneDrive
     def test_delta_for_added_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_added_nested_items.json")
+        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -163,7 +163,7 @@ module MicroslopOneDrive
     def test_delta_sets_the_correct_parent_identifier_for_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_added_nested_items.json")
+        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -190,7 +190,7 @@ module MicroslopOneDrive
     def test_delta_sets_parent_and_children
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_added_nested_items.json")
+        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -225,7 +225,7 @@ module MicroslopOneDrive
     def test_delta_sets_the_path_for_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_added_nested_items.json")
+        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -252,7 +252,7 @@ module MicroslopOneDrive
     def test_delta_for_deleted_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_deleted_nested_items.json")
+        parsed_response: fixture_response("deltas/delta_deleted_nested_items.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
@@ -273,7 +273,7 @@ module MicroslopOneDrive
     def test_delta_with_an_initial_set_of_permissions
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("delta_with_permissions_initial.json")
+        parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
