@@ -1,0 +1,79 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('brad%40haikucode.dev')/drive/items('F097864E0CFEA42%21se0d408c95b584ccf9403220e8cce56a3')/permissions",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drive/items('<key>')/permissions?$select=expirationDateTime,grantedTo",
+  "value": [
+    {
+      "id": "47f8c2a7-b883-4758-9412-f37c0c203abb",
+      "roles": [
+        "write"
+      ],
+      "shareId": "u!aHR0cHM6Ly8xZHJ2Lm1zL2YvYy8wZjA5Nzg2NGUwY2ZlYTQyL0lnREpDTlRnV0Z2UFRKUURJZzZNemxhakFVZFNHVVdBM0hCdkZkaFlHZlM0UW5J",
+      "hasPassword": false,
+      "grantedToIdentitiesV2": [
+        {
+          "siteUser": {
+            "displayName": "Gian Haikucode",
+            "email": "gian@haikucode.dev",
+            "id": "6",
+            "loginName": "i:0#.f|membership|gian@haikucode.dev"
+          }
+        },
+        {
+          "siteUser": {
+            "displayName": "Bradley Marques",
+            "email": "bradleyrcmarques@protonmail.com",
+            "id": "7",
+            "loginName": "i:0#.f|membership|bradleyrcmarques@protonmail.com"
+          }
+        }
+      ],
+      "grantedToIdentities": [
+        {
+          "user": {
+            "displayName": "Gian Haikucode",
+            "email": "gian@haikucode.dev",
+            "id": "6"
+          }
+        },
+        {
+          "user": {
+            "displayName": "Bradley Marques",
+            "email": "bradleyrcmarques@protonmail.com",
+            "id": "7"
+          }
+        }
+      ],
+      "link": {
+        "scope": "anonymous",
+        "type": "edit",
+        "webUrl": "https://1drv.ms/f/c/0f097864e0cfea42/IgDJCNTgWFvPTJQDIg6MzlajAUdSGUWA3HBvFdhYGfS4QnI",
+        "preventsDownload": false
+      }
+    },
+    {
+      "id": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+      "roles": [
+        "owner"
+      ],
+      "shareId": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+      "grantedToV2": {
+        "siteUser": {
+          "displayName": "Bradley Marques",
+          "email": "brad@haikucode.dev",
+          "id": "4",
+          "loginName": "i:0#.f|membership|brad@haikucode.dev"
+        }
+      },
+      "grantedTo": {
+        "user": {
+          "displayName": "Bradley Marques",
+          "email": "brad@haikucode.dev",
+          "id": "4"
+        }
+      },
+      "link": {
+        "webUrl": "https://1drv.ms/f/c/0f097864e0cfea42/AskI1OBYW89MlAMiDozOVqM"
+      }
+    }
+  ]
+}
