@@ -26,6 +26,22 @@ module MicroslopOneDrive
       assert_permission(permissions[3], "Example Person", "person@example.com", "person@example.com", "owner", "user")
     end
 
+    def test_permissions_removed
+      item_id = "F097864E0CFEA42!s76b80a6457684886b4a55cf65da40603"
+
+      mock_get(
+        path: "me/drive/items/#{item_id}/permissions",
+        parsed_response: fixture_response("permissions/permissions_removed.json")
+      )
+
+      permission_list = @client.permissions(item_id: item_id)
+      permissions = permission_list.permissions
+
+      assert_equal 1, permissions.size
+
+      assert_permission(permissions[0], "Example Person", "person@example.com", "person@example.com", "owner", "user")
+    end
+
     private
 
     def assert_permission(permission, display_name, email, identifier, role, audience_type)
