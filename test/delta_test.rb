@@ -279,17 +279,17 @@ module MicroslopOneDrive
       drive_item_list = @client.delta(drive_id: @drive_id)
       drive_items = drive_item_list.items
 
-      assert_equal 5, drive_items.size
+      assert_equal 7, drive_items.size
 
       root = get_drive_item_by_name(drive_items, "root")
       documents = get_drive_item_by_name(drive_items, "Documents")
       shared_folder = get_drive_item_by_name(drive_items, "Shared Folder")
       word_document = get_drive_item_by_name(drive_items, "A Word Document.docx")
 
-      assert_equal false, root.shared?
+      assert_equal true, root.shared?
       assert_equal false, documents.shared?
       assert_equal true, shared_folder.shared?
-      assert_equal true, word_document.shared?
+      assert_equal false, word_document.shared?
     end
   end
 end

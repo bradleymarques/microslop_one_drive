@@ -1,22 +1,21 @@
 {
   "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
-  "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwOTMxNjgyNDMwMDAwOzg5NzcxMjM3MjslMjM7JTIzOyUyMzA7JTIz",
-  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+  "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcxMDM3NzAzMTcwMDAwOzg5NzgwODA3NTslMjM7JTIzOyUyMzA7JTIz",
   "value": [
     {
       "createdDateTime": "2026-02-16T05:06:27Z",
       "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
-      "lastModifiedDateTime": "2026-02-19T10:18:58Z",
+      "lastModifiedDateTime": "2026-02-19T10:20:43Z",
       "name": "root",
       "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
-      "size": 1053417,
+      "size": 1064835,
       "parentReference": {
         "driveType": "personal",
         "driveId": "0f097864e0cfea42"
       },
       "fileSystemInfo": {
         "createdDateTime": "2026-02-16T05:06:27Z",
-        "lastModifiedDateTime": "2026-02-19T10:18:58Z"
+        "lastModifiedDateTime": "2026-02-19T10:20:43Z"
       },
       "folder": {
         "childCount": 5,
@@ -26,55 +25,8 @@
           "viewType": "thumbnails"
         }
       },
-      "root": {}
-    },
-    {
-      "createdDateTime": "2026-02-19T10:18:45Z",
-      "eTag": "\"{E4847186-7370-4E81-9999-8D620B7E34FF},1\"",
-      "id": "F097864E0CFEA42!se484718673704e8199998d620b7e34ff",
-      "lastModifiedDateTime": "2026-02-19T10:18:45Z",
-      "name": "Attachments",
-      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66EGOGCOI4DTQFHJTGMNMIFX4NH7",
-      "cTag": "\"c:{E4847186-7370-4E81-9999-8D620B7E34FF},0\"",
-      "size": 0,
-      "createdBy": {
-        "application": {
-          "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
-        },
-        "user": {
-          "email": "person@example.com",
-          "id": "0f097864e0cfea42",
-          "displayName": "Example Person"
-        }
-      },
-      "lastModifiedBy": {
-        "application": {
-          "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
-        },
-        "user": {
-          "email": "person@example.com",
-          "id": "0f097864e0cfea42",
-          "displayName": "Example Person"
-        }
-      },
-      "parentReference": {
-        "driveType": "personal",
-        "driveId": "0f097864e0cfea42",
-        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
-        "path": "/drives/0f097864e0cfea42/root:",
-        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
-      },
-      "fileSystemInfo": {
-        "createdDateTime": "2026-02-19T10:18:45Z",
-        "lastModifiedDateTime": "2026-02-19T10:18:45Z"
-      },
-      "folder": {
-        "childCount": 0,
-        "view": {}
-      },
-      "specialFolder": {
-        "name": "attachments"
-      }
+      "root": {},
+      "shared": {}
     },
     {
       "createdDateTime": "2026-02-19T07:35:51Z",
@@ -84,7 +36,7 @@
       "name": "Documents",
       "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GDU6IMPPFKK5BKPUALBV3RDXD5",
       "cTag": "\"c:{C790A7C3-AABC-4257-A7D0-0B0D7711DC7D},0\"",
-      "size": 0,
+      "size": 11418,
       "createdBy": {
         "application": {
           "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
@@ -132,7 +84,7 @@
       "name": "Shared Folder",
       "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GJBDKOAWC3Z5GJIAZCB2GM4VVD",
       "cTag": "\"c:{E0D408C9-5B58-4CCF-9403-220E8CCE56A3},0\"",
-      "size": 0,
+      "size": 11418,
       "createdBy": {
         "user": {
           "email": "person@example.com",
@@ -206,22 +158,154 @@
       "file": {
         "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         "hashes": {
-          "quickXorHash": "Ylf0PqA3BoKaJoRLMb/Gt3zzBDA="
+          "quickXorHash": "Ylf0PqA3BoKaJoRLMb/Gt3zzBDA=",
+          "sha1Hash": "F0F450979C27EF4696E96B4C6A746D4628A23141",
+          "sha256Hash": "A6CE81A7B8F25D90F91F189733809353E61AC7308BF7D3BCF84D3269D103F9FF"
         }
       },
       "fileSystemInfo": {
         "createdDateTime": "2026-02-19T10:18:37Z",
         "lastModifiedDateTime": "2026-02-19T10:18:58Z"
-      },
-      "shared": {
-        "scope": "users",
-        "owner": {
-          "user": {
-            "email": "person@example.com",
-            "id": "0f097864e0cfea42",
-            "displayName": "Example Person"
-          }
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T07:35:51Z",
+      "eTag": "\"{B664E3D9-8E5C-43A0-B949-7B864AB73CF5},1\"",
+      "id": "F097864E0CFEA42!sb664e3d98e5c43a0b9497b864ab73cf5",
+      "lastModifiedDateTime": "2026-02-19T07:35:51Z",
+      "name": "Pictures",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GZ4NSLMXEOUBB3SSL3QZFLOPHV",
+      "cTag": "\"c:{B664E3D9-8E5C-43A0-B949-7B864AB73CF5},0\"",
+      "size": 0,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
         }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T07:35:51Z",
+        "lastModifiedDateTime": "2026-02-19T07:35:51Z"
+      },
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      },
+      "specialFolder": {
+        "name": "photos"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T07:35:52Z",
+      "eTag": "\"{A466B445-9868-496A-BE59-BB1479272D27},3\"",
+      "id": "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27",
+      "lastModifiedDateTime": "2026-02-19T09:36:21Z",
+      "name": "Getting started with OneDrive (RENAMED).pdf",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66CFWRTKI2EYNJE34WN3CR4SOLJH",
+      "cTag": "\"c:{A466B445-9868-496A-BE59-BB1479272D27},1\"",
+      "size": 1053417,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|00000000-0000-0000-0000-000000048beb@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "file": {
+        "mimeType": "application/pdf",
+        "hashes": {
+          "quickXorHash": "uSkB7tg/Gnjxt0Nkvy4NUc+eIBc="
+        }
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T07:35:52Z",
+        "lastModifiedDateTime": "2026-02-19T09:36:21Z"
+      }
+    },
+    {
+      "createdDateTime": "2026-02-19T10:18:45Z",
+      "eTag": "\"{E4847186-7370-4E81-9999-8D620B7E34FF},1\"",
+      "id": "F097864E0CFEA42!se484718673704e8199998d620b7e34ff",
+      "lastModifiedDateTime": "2026-02-19T10:18:45Z",
+      "name": "Attachments",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66EGOGCOI4DTQFHJTGMNMIFX4NH7",
+      "cTag": "\"c:{E4847186-7370-4E81-9999-8D620B7E34FF},0\"",
+      "size": 0,
+      "createdBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "lastModifiedBy": {
+        "application": {
+          "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
+        },
+        "user": {
+          "email": "person@example.com",
+          "id": "0f097864e0cfea42",
+          "displayName": "Example Person"
+        }
+      },
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "path": "/drives/0f097864e0cfea42/root:",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-19T10:18:45Z",
+        "lastModifiedDateTime": "2026-02-19T10:18:45Z"
+      },
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      },
+      "specialFolder": {
+        "name": "attachments"
       }
     }
   ]
