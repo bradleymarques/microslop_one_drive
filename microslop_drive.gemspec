@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name = "microslop_one_drive"
   spec.version = MicroslopOneDrive::VERSION
   spec.authors = ["Bradley Marques"]
-  spec.email = ["bradleyrcmarques@protonmail.com"]
+  spec.email = [""]
 
   spec.summary = "Ruby client helpers for Microsoft Graph OneDrive/SharePoint API (drive items, delta, permissions)."
   spec.description = "Lightweight value objects and HTTP client for OneDrive delta sync, item metadata, and sharing permissions."

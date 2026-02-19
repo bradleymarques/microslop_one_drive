@@ -143,3 +143,9 @@ bundle install
 ```sh
 bundle exec rake test
 ```
+
+## Building and publishing
+
+```sh
+gem build microslop_drive.gemspec
+```
