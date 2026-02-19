@@ -1,0 +1,155 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+  "@odata.deltaLink": "https://graph.microsoft.com/v1.0/me/drives/0f097864e0cfea42/root/delta?token=NDslMjM0OyUyMzE7MztkOTMyZDY2Yy1lYzg2LTRmYzYtOTI4Yi05ZGExZjRlNDhhNDU7NjM5MDcwOTI3NTYxMjAwMDAwOzg5NzcwNjE4NjslMjM7JTIzOyUyMzA7JTIz",
+  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drives('<key>')/root/microsoft.graph.delta?$select=audio,bundle",
+  "value": [
+    {
+      "createdDateTime": "2026-02-16T05:06:27Z",
+      "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+      "lastModifiedDateTime": "2026-02-19T10:12:30Z",
+      "name": "root",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
+      "size": 1053423,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42"
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-16T05:06:27Z",
+        "lastModifiedDateTime": "2026-02-19T10:12:30Z"
+      },
+      "folder": {
+        "childCount": 4,
+        "view": {
+          "sortBy": "name",
+          "sortOrder": "ascending",
+          "viewType": "thumbnails"
+        }
+      },
+      "root": {}
+    },
+    {
+      "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66B6FCX365CZQNHJ6AWF7KQDEHAT",
+      "cTag": "\"c:{BFAF283E-5974-4E83-9F02-C5FAA0321C13},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "fileSystemInfo": {},
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      }
+    },
+    {
+      "id": "F097864E0CFEA42!s2d2a98a0cc8c4c3a96c5f9c93c7afe29",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66FATAVC3DGMHJGJNRPZZE6HV7RJ",
+      "cTag": "\"c:{2D2A98A0-CC8C-4C3A-96C5-F9C93C7AFE29},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "file": {
+        "hashes": {
+          "quickXorHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {}
+    },
+    {
+      "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66D26DHL7EDGUFDJIMLFN3EZC26B",
+      "cTag": "\"c:{BFCEF07A-6690-46A1-9431-656EC9916BC1},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfaf283e59744e839f02c5faa0321c13",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "fileSystemInfo": {},
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      }
+    },
+    {
+      "id": "F097864E0CFEA42!s3f5c52c8d48a41a48eba65e8c1aa4425",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GIKJOD7CWUURAY5OTF5DA2URBF",
+      "cTag": "\"c:{3F5C52C8-D48A-41A4-8EBA-65E8C1AA4425},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "file": {
+        "hashes": {
+          "quickXorHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {}
+    },
+    {
+      "id": "F097864E0CFEA42!sc0c9633929514bd381d65e3fa97323e3",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66BZMPE4AUJJ2NFYDVS6H6UXGI7D",
+      "cTag": "\"c:{C0C96339-2951-4BD3-81D6-5E3FA97323E3},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sbfcef07a669046a19431656ec9916bc1",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "fileSystemInfo": {},
+      "folder": {
+        "childCount": 0,
+        "view": {}
+      }
+    },
+    {
+      "id": "F097864E0CFEA42!s791b43cfed4a4cba87812162f3ea55fe",
+      "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66GPIMNXSSXNXJGIPAJBMLZ6UVP6",
+      "cTag": "\"c:{791B43CF-ED4A-4CBA-8781-2162F3EA55FE},4294967295\"",
+      "size": 0,
+      "parentReference": {
+        "driveType": "personal",
+        "driveId": "0f097864e0cfea42",
+        "id": "F097864E0CFEA42!sc0c9633929514bd381d65e3fa97323e3",
+        "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+      },
+      "deleted": {
+        "state": "deleted"
+      },
+      "file": {
+        "hashes": {
+          "quickXorHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        }
+      },
+      "fileSystemInfo": {}
+    }
+  ]
+}

@@ -412,6 +412,27 @@ module MicroslopOneDrive
       assert_equal "root:/folder/subfolder/subsubfolder/file_003.txt", file3.path
     end
 
+    def test_delta_for_deleted_nested_items
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("delta_deleted_nested_items.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+
+      assert_equal 7, drive_items.size
+      root = drive_items.find { it.name == "root" }
+
+      assert_equal false, root.deleted?
+      other_items = drive_items.reject { it.name == "root" }
+      assert_equal 6, other_items.size
+
+      other_items.each do |item|
+        assert_equal true, item.deleted?
+      end
+    end
+
     private
 
     def fixture_response(fixture_file_name)
