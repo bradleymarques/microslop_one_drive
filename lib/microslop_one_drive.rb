@@ -10,11 +10,14 @@ require_relative "microslop_one_drive/drive_list"
 require_relative "microslop_one_drive/drive"
 require_relative "microslop_one_drive/drive_item"
 require_relative "microslop_one_drive/drive_item_list"
+require_relative "microslop_one_drive/permission_list"
+require_relative "microslop_one_drive/permission_batch"
+require_relative "microslop_one_drive/permission"
+require_relative "microslop_one_drive/audience"
 require_relative "microslop_one_drive/client"
 
 
 
-# require_relative "microslop_one_drive/one_drive_permission_list"
 # require_relative "microslop_one_drive/constants"
 # require_relative "microslop_one_drive/one_drive_audience"
 # require_relative "microslop_one_drive/one_drive_item"

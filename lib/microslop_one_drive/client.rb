@@ -85,14 +85,14 @@ module MicroslopOneDrive
     #
     # @param item_id [String] The ID of the Drive Item to get the permissions of.
     #
-    # @return [MicroslopOneDrive::OneDrivePermissionList]
+    # @return [MicroslopOneDrive::PermissionList]
     def permissions(item_id:)
       response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
 
-      return MicroslopOneDrive::OneDrivePermissionList.new("value" => []) if response.code == 404
+      return MicroslopOneDrive::PermissionList.new("value" => []) if response.code == 404
 
       handle_error(response) unless response.success?
-      MicroslopOneDrive::OneDrivePermissionList.new(response.parsed_response)
+      MicroslopOneDrive::PermissionList.new(response.parsed_response)
     end
 
     private

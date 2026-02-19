@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  class OneDriveAudience
+  class Audience
     attr_reader :type, :identifier, :display_name, :email_address
 
     def initialize(type:, identifier:, display_name:, email_address: nil)

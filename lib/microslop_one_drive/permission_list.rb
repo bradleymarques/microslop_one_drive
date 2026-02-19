@@ -1,8 +1,10 @@
 module MicroslopOneDrive
-  class OneDrivePermissionList
+  class PermissionList < ListResponse
     attr_reader :permissions
 
     def initialize(parsed_response)
+      super(parsed_response)
+
       @parsed_response = parsed_response
       @permissions = build_permissions
     end
@@ -11,7 +13,7 @@ module MicroslopOneDrive
 
     def build_permissions
       value_list = @parsed_response.is_a?(Array) ? @parsed_response : @parsed_response.fetch("value", [])
-      permission_batches = value_list.map { MicroslopOneDrive::OneDrivePermissionBatch.new(it) }
+      permission_batches = value_list.map { MicroslopOneDrive::PermissionBatch.new(it) }
 
       # At this stage, the permissions could contain multiple Audiences for the same Permission.
       # This is because OneDrive can return multiple permissions for the same thing.

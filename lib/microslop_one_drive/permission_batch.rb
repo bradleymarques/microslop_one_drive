@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  class OneDrivePermissionBatch
+  class PermissionBatch
     # OneDrive roles to generic permission roles
     # @see https://learn.microsoft.com/en-us/onedrive/developer/rest-api/resources/permission#roles-enumeration
     ONE_DRIVE_TO_ROLE_MAP = {
@@ -20,7 +20,7 @@ module MicroslopOneDrive
     end
 
     def to_permissions
-      @audiences.map { OneDrivePermission.new(identifier: @identifier, role: @role, audience: it) }
+      @audiences.map { Permission.new(identifier: @identifier, role: @role, audience: it) }
     end
 
     private
@@ -46,7 +46,7 @@ module MicroslopOneDrive
       site_users << @parsed_response.dig("grantedToV2", "siteUser")
       site_users.compact!
 
-      site_users.map { OneDriveAudience.from_site_user(it) }
+      site_users.map { Audience.from_site_user(it) }
     end
 
     def audiences_from_anonymous_links
@@ -58,10 +58,10 @@ module MicroslopOneDrive
       return [] unless link_scope == "anonymous" # I.e. an "anyone with the link" audience
 
       [
-        OneDriveAudience.new(
+        Audience.new(
           type: "anyone",
-          identifier: MicroslopOneDrive::ANYONE_WITH_LINK_IDENTIFIER,
-          display_name: MicroslopOneDrive::ANYONE_WITH_LINK_DISPLAY_NAME,
+          identifier: "anyone_with_the_link",
+          display_name: "Anyone with the link",
           email_address: nil
         )
       ]

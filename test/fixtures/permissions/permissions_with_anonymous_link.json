@@ -1,5 +1,5 @@
 {
-  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('brad%40haikucode.dev')/drive/items('F097864E0CFEA42%21se0d408c95b584ccf9403220e8cce56a3')/permissions",
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items('F097864E0CFEA42%21se0d408c95b584ccf9403220e8cce56a3')/permissions",
   "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drive/items('<key>')/permissions?$select=expirationDateTime,grantedTo",
   "value": [
     {
@@ -12,33 +12,33 @@
       "grantedToIdentitiesV2": [
         {
           "siteUser": {
-            "displayName": "Gian Haikucode",
-            "email": "gian@haikucode.dev",
+            "displayName": "Amy Smith",
+            "email": "amy@example.com",
             "id": "6",
-            "loginName": "i:0#.f|membership|gian@haikucode.dev"
+            "loginName": "i:0#.f|membership|amy@example.com"
           }
         },
         {
           "siteUser": {
-            "displayName": "Bradley Marques",
-            "email": "bradleyrcmarques@protonmail.com",
+            "displayName": "Bob Myers",
+            "email": "bob@example.com",
             "id": "7",
-            "loginName": "i:0#.f|membership|bradleyrcmarques@protonmail.com"
+            "loginName": "i:0#.f|membership|bob@example.com"
           }
         }
       ],
       "grantedToIdentities": [
         {
           "user": {
-            "displayName": "Gian Haikucode",
-            "email": "gian@haikucode.dev",
+            "displayName": "Amy Smith",
+            "email": "amy@example.com",
             "id": "6"
           }
         },
         {
           "user": {
-            "displayName": "Bradley Marques",
-            "email": "bradleyrcmarques@protonmail.com",
+            "displayName": "Bob Myers",
+            "email": "bob@example.com",
             "id": "7"
           }
         }
@@ -58,16 +58,16 @@
       "shareId": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
       "grantedToV2": {
         "siteUser": {
-          "displayName": "Bradley Marques",
-          "email": "brad@haikucode.dev",
+          "displayName": "Example Person",
+          "email": "person@example.com",
           "id": "4",
-          "loginName": "i:0#.f|membership|brad@haikucode.dev"
+          "loginName": "i:0#.f|membership|person@example.com"
         }
       },
       "grantedTo": {
         "user": {
-          "displayName": "Bradley Marques",
-          "email": "brad@haikucode.dev",
+          "displayName": "Example Person",
+          "email": "person@example.com",
           "id": "4"
         }
       },

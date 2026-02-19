@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  class OneDrivePermission
+  class Permission
     attr_reader :identifier, :role, :audience
 
     def initialize(identifier:, role:, audience:)
