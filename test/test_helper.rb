@@ -26,4 +26,26 @@ class BaseTest < Minitest::Test
     assert(drive_item, "Drive item with name #{name} not found")
     drive_item
   end
+
+  def mock_post(path:, expected_body:, response_code: 200, success: true, parsed_response: {})
+    stubbed_response = stub(code: response_code, success?: success, parsed_response: parsed_response)
+
+    HTTParty
+      .expects(:post)
+      .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, body: expected_body)
+      .returns(stubbed_response)
+  end
+
+  def assert_permission(permission, drive_item_id, display_name, email, id, role, audience_type)
+    assert_equal drive_item_id, permission.drive_item_id
+    assert_equal role, permission.role
+    assert_equal audience_type, permission.audience.type
+    assert_equal display_name, permission.audience.display_name
+    assert_equal id, permission.audience.id
+    if email
+      assert_equal email, permission.audience.email_address
+    else
+      assert_nil permission.audience.email_address
+    end
+  end
 end

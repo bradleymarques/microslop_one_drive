@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "BadRequest",
+    "message": "Request Id 1 has to be unique in a batch.",
+    "innerError": {
+      "date": "2026-02-20T12:04:26",
+      "request-id": "bf7dc505-8b1b-49f4-b06d-7093bcb1cced",
+      "client-request-id": "e4bbf02e-41df-1f55-4d10-edb200212d93"
+    }
+  }
+}

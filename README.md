@@ -16,7 +16,10 @@ gem "microslop_one_drive"
 
 ## Usage
 
-### Create a client
+Here's a quickstart showing listing drives, getting some files in a drive, and getting permissions for some files in
+a batched manner:
+
+### Creating a client
 
 ```rb
 access_token = "..." # Get an access token via OAuth 2.0
@@ -24,114 +27,70 @@ access_token = "..." # Get an access token via OAuth 2.0
 client = MicroslopOneDrive::Client.new(access_token)
 ```
 
-### Get the current user
+### Listing Drives
 
-```rb
-me = client.me
-me.class # => MicroslopOneDrive::User
-me.email_address # => person@example.com
-me.display_name # => Example Person
-```
-
-### Get a list of the user's Drives
+Note: Microsoft will return all Drives a user has access to. Some of these seem to be for internal Microsoft use only
+(they're things like face scans, AI metadata, and other really terrifying and disgusting things). You can use the
+`drive_exists?()` method to check if it's a real drive you can interact with.
 
 ```rb
 drive_list = client.drives
+drive_list.drives.size # => 2
 
-drive_list.class # => MicroslopOneDrive::DriveList
-drive_list.next_page? # => false
-drive_list.drives # => [MicroslopOneDrive::Drive, ...]
+drive = drive_list.drives[1]
+drive.name # => OneDrive
+drive.id # => "0f0**********42"
 
-drive = drive_list.drives.first
-drive.class # => MicroslopOneDrive::Drive
-drive.identifier # => "0f0**********42"
-drive.name # => "OneDrive"
-drive.url # => "https://my.microsoftpersonalcontent.com/..."
-drive.drive_type # => "personal"
-drive.created_at
-drive.updated_at
+client.drive_exists?(drive.id) # => true (it's a real Drive)
 ```
 
-### Get a single Drive
+### Listing Drive Items (Folders and Files)
 
 ```rb
-drive = client.drive(drive_id: "0f097********a42")
+page1 = client.delta(drive_id: drive.id)
+page1.items.size # => 200
 
-drive.class # => MicroslopOneDrive::Drive
-drive.identifier # => "0f097********a42"
-drive.name # => "OneDrive"
-drive.url # => "https://my.microsoftpersonalcontent.com/personal/..."
-drive.drive_type # => "personal"
+page1.next_page? # => true
+page2 = client.delta(drive_id: drive.id, token: page1.next_token)
+page2.items.size # => 14
+page2.next_page? # => false
+
+delta_token = page2.delta_token # Save this somewhere and use as "token" in the next client.delta() call so ensure you
+# only get new changes, and don't list the whole drive from the beginning again.
 ```
 
-### Get a delta of changes to a Drive
+### Get Permissions for a single Drive Item
 
 ```rb
-# Initial delta (all current items + token for later)
-drive_item_list = client.delta(drive_id: "0f097********a42")
+drive_item_list = client.delta(drive_id: drive.id)
+shared_items = drive_item_list.items.select(&:shared?)
 
-drive_item_list.class # => MicroslopOneDrive::DriveItemList
-drive_item_list.items # => [MicroslopOneDrive::DriveItem, ...]
+example_item = shared_items.first
 
-drive_item_list.next_page? # => true if more pages
-drive_item_list.next_token # => use with delta(drive_id:, token:) for next page
-drive_item_list.delta_link # => URL for incremental sync (when no next_page?)
-drive_item_list.delta_token # => use with delta(drive_id:, token:) for incremental sync
+permission_list = client.permissions(item_id: example_item.id)
+permission = permission_list.first
 
-# Next page (if next_page? was true)
-client.delta(drive_id: "0f097********a42", token: drive_item_list.next_token)
-
-# Incremental sync (only changes since last delta)
-client.delta(drive_id: "0f097********a42", token: saved_delta_token)
+permission.role # => "write"
+permission.audience.type # => "user"
+permission.audience.id # => "person@example.com"
+permission.audience.display_name # => "Example Person"
+permission.audience.email_address # => "person@example.com"
 ```
 
-Delta items have parent/child set: `item.parent`, `item.children`, and `item.path` (e.g. `"root:/folder/subfolder/file.txt"`).
+### Get Permissions for multiple Drive Items
 
-### Get a DriveItem (file or folder)
+Instead of calling `client.permissions(...)` for each item -- which would make N API calls for N items -- we use
+Microsoft Graph API [batch](https://learn.microsoft.com/en-us/graph/json-batching?tabs=http) feature.
 
 ```rb
-item = client.drive_item(item_id: "F0**********42!sa466********************1479272d27")
+drive_item_list = client.delta(drive_id: drive.id)
+shared_items = drive_item_list.items.select(&:shared?)
 
-item.class # => MicroslopOneDrive::DriveItem
-item.name # => "Getting started with OneDrive.pdf"
-item.identifier # => "F0**********42!sa466********************1479272d27"
-item.url # => "https://onedrive.live.com?cid=..."
-item.file? # => true
-item.folder? # => false
-item.mime_type # => "application/pdf"
-item.size # => 1053417
-item.created_at # => 2026-02-19 07:35:52 UTC
-item.updated_at # => 2026-02-19 07:35:52 UTC
-item.parent_identifier # => "F0**********42!sea8cc6b********************5c639"
-item.deleted? # => false
-item.shared? # => true if the item has sharing info
-item.path # => "root:/Documents/Getting started with OneDrive.pdf" (from delta only; nil for single item)
-item.is_root? # => true for root folder
+permission_batch = client.batch_permissions(item_ids: shared_items.map(&:id))
+
+# Under the hood, this will batch the shared_items into batches of 20 (the max Microsoft allows on their batch endpoint)
+# and returns an aggregated result.
 ```
-
-### Check if a DriveItem exists
-
-```rb
-client.item_exists?(item_id: "F0**********42!sa466********************1479272d27") # => true
-client.item_exists?(item_id: "F0**********42!not-an-item-id") # => false
-```
-
-### Get permissions for a DriveItem
-
-```rb
-permission_list = client.permissions(item_id: "F0**********42!sa466********************1479272d27")
-permission_list.class # => MicroslopOneDrive::PermissionList
-permission_list.permissions # => [MicroslopOneDrive::Permission, ...]
-
-permission = permission_list.permissions.first
-permission.role # => "write" or "owner" etc.
-permission.audience.type # => "user" or "anyone"
-permission.audience.identifier # => email for user, "anyone_with_the_link" for link
-permission.audience.display_name # => "Amy Smith"
-permission.audience.email_address # => "amy@example.com" (nil for "anyone with the link")
-```
-
-Returns an empty permission list if the item does not exist (404).
 
 ## Contributing
 

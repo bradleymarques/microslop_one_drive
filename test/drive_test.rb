@@ -16,7 +16,7 @@ module MicroslopOneDrive
 
       drive = @client.drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::Drive, drive
-      assert_equal "0f097864e0cfea42", drive.identifier
+      assert_equal "0f097864e0cfea42", drive.id
       assert_equal "OneDrive", drive.name
       assert_equal "https://my.microsoftpersonalcontent.com/personal/0f097864e0cfea42/Documents", drive.url
       assert_equal "personal", drive.drive_type

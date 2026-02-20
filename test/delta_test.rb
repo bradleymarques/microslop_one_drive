@@ -34,8 +34,8 @@ module MicroslopOneDrive
       assert_equal true, sample_item.file?
       assert_equal false, sample_item.folder?
       assert_equal "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66CFWRTKI2EYNJE34WN3CR4SOLJH", sample_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", sample_item.identifier
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", sample_item.parent_identifier
+      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", sample_item.id
+      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", sample_item.parent_id
       assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.created_at
       assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.updated_at
       assert_equal 1053417, sample_item.size
@@ -115,7 +115,7 @@ module MicroslopOneDrive
       assert_equal false, root.deleted?
 
       deleted_file = drive_items[1]
-      assert_equal "F097864E0CFEA42!sd08d0f9a7b58474fba9cc6172138e9a1", deleted_file.identifier
+      assert_equal "F097864E0CFEA42!sd08d0f9a7b58474fba9cc6172138e9a1", deleted_file.id
       assert_nil deleted_file.name # Name not returned for deleted files
       assert_equal true, deleted_file.deleted?
     end
@@ -160,7 +160,7 @@ module MicroslopOneDrive
       assert_equal expected_names, drive_items.map(&:name)
     end
 
-    def test_delta_sets_the_correct_parent_identifier_for_nested_items
+    def test_delta_sets_the_correct_parent_id_for_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_added_nested_items.json")
@@ -178,13 +178,13 @@ module MicroslopOneDrive
       file2 = get_drive_item_by_name(drive_items, "file_002.txt")
       file1 = get_drive_item_by_name(drive_items, "file_001.txt")
 
-      assert_equal file1.parent_identifier, folder.identifier
-      assert_equal file2.parent_identifier, subfolder.identifier
-      assert_equal file3.parent_identifier, subsubfolder.identifier
-      assert_equal subsubfolder.parent_identifier, subfolder.identifier
-      assert_equal subfolder.parent_identifier, folder.identifier
-      assert_equal folder.parent_identifier, root.identifier
-      assert_nil root.parent_identifier
+      assert_equal file1.parent_id, folder.id
+      assert_equal file2.parent_id, subfolder.id
+      assert_equal file3.parent_id, subsubfolder.id
+      assert_equal subsubfolder.parent_id, subfolder.id
+      assert_equal subfolder.parent_id, folder.id
+      assert_equal folder.parent_id, root.id
+      assert_nil root.parent_id
     end
 
     def test_delta_sets_parent_and_children

@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "BadRequest",
+    "message": "Invalid batch payload format.",
+    "innerError": {
+      "date": "2026-02-20T11:46:51",
+      "request-id": "6c0fc7d9-d7ec-4e56-9094-1562cb01e8f1",
+      "client-request-id": "290c9ba2-51d4-c492-619e-c0f8ccb5a93b"
+    }
+  }
+}

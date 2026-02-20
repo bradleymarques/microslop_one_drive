@@ -2,14 +2,14 @@ module MicroslopOneDrive
   class DriveItem
     DIRECTORY_MIME_TYPE = "inode/directory".freeze
 
-    attr_reader :identifier,
+    attr_reader :id,
                 :name,
                 :created_at,
                 :updated_at,
                 :url,
                 :size,
                 :file_or_folder,
-                :parent_identifier,
+                :parent_id,
                 :mime_type,
                 :parent,
                 :children,
@@ -19,7 +19,7 @@ module MicroslopOneDrive
     def initialize(item_hash)
       @item_hash = item_hash
 
-      @identifier = @item_hash.fetch("id", nil)
+      @id = @item_hash.fetch("id", nil)
       @name = @item_hash.fetch("name", nil)
       @url = @item_hash.fetch("webUrl", nil)
       @size = @item_hash.fetch("size", nil)
@@ -35,7 +35,7 @@ module MicroslopOneDrive
         @mime_type = DIRECTORY_MIME_TYPE
       end
 
-      @parent_identifier = @item_hash.dig("parentReference", "id")
+      @parent_id = @item_hash.dig("parentReference", "id")
 
       @deleted = @item_hash.dig("deleted", "state") == "deleted"
 

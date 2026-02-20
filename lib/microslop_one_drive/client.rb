@@ -1,6 +1,7 @@
 module MicroslopOneDrive
   class Client
     BASE_URL = "https://graph.microsoft.com/v1.0".freeze
+    BATCH_REQUEST_LIMIT = 20.freeze
 
     def initialize(access_token)
       @access_token = access_token
@@ -99,20 +100,75 @@ module MicroslopOneDrive
     def permissions(item_id:)
       response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
 
-      return MicroslopOneDrive::PermissionList.new("value" => []) if response.code == 404
+      if response.code == 404
+        return MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: { "value" => [] })
+      end
 
       handle_error(response) unless response.success?
-      MicroslopOneDrive::PermissionList.new(response.parsed_response)
+
+      MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: response.parsed_response)
+    end
+
+    # Gets the permissions for multiple Drive Items.
+    #
+    # Uses the batch Microsoft Graph API to make multiple API calls in batches of 20 (the max Microsoft allows on their
+    # batch endpoint).
+    #
+    # See: https://learn.microsoft.com/en-us/graph/json-batching
+    #
+    # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
+    #
+    # @return [Array<MicroslopOneDrive::Permission>]
+    def batch_permissions(item_ids:)
+      requests = item_ids.map { |item_id| { id: item_id, method: "GET", url: "/me/drive/items/#{item_id}/permissions" } }
+      batch_response = batch(requests: requests)
+      successful_responses = batch_response.responses.select(&:success?)
+
+      permission_lists = successful_responses.map do |response|
+        MicroslopOneDrive::PermissionList.new(drive_item_id: response.id, parsed_response: response.body)
+      end
+
+      permission_lists.flat_map(&:permissions)
+    end
+
+    # Makes a batch request to the Microsoft Graph API.
+    #
+    # @param requests [Array<Hash>] The requests to make. Each request should be a hash with the following keys:
+    #   - id: The ID of the request.
+    #   - method: The HTTP method to use for the request.
+    #   - url: The URL to make the request to.
+    #
+    # Note: Microsoft allows a maximum of 20 requests per batch. If you pass more than 20 requests, the client will
+    # make multiple batch requests to Microsoft. This might make this a slow method.
+    #
+    # @return [MicroslopOneDrive::BatchResponse]
+    def batch(requests:)
+      batch_response = MicroslopOneDrive::BatchResponse.new
+
+      # No requests, so simply return an empty batch response:
+      return batch_response if requests.empty?
+
+      batches = requests.each_slice(BATCH_REQUEST_LIMIT).to_a
+      batches.each do |batch|
+        response = post(path: "$batch", body: { requests: batch })
+        handle_error(response) unless response.success?
+        new_responses = response.parsed_response.fetch("responses", [])
+        new_responses.each do |new_response_hash|
+          batch_response.add_response(MicroslopOneDrive::Response.new(new_response_hash))
+        end
+      end
+
+      batch_response
     end
 
     private
 
     def get(path:, query: {})
-      response = HTTParty.get("#{BASE_URL}/#{path}", headers: @headers, query: query)
+      HTTParty.get("#{BASE_URL}/#{path}", headers: @headers, query: query)
+    end
 
-      @debug_response_writer&.call(path, response.parsed_response)
-
-      response
+    def post(path:, body:)
+      HTTParty.post("#{BASE_URL}/#{path}", headers: @headers, body: body)
     end
 
     def handle_error(response)

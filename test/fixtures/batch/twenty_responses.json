@@ -1,0 +1,444 @@
+{
+  "responses": [
+    {
+      "id": "1",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "2",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "20",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "3",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "19",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "4",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "5",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "18",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "17",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "16",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "15",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "7",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "14",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "8",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "13",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "9",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "12",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "10",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "11",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    },
+    {
+      "id": "6",
+      "status": 200,
+      "headers": {
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "userPrincipalName": "person@example.com",
+        "id": "0f097864e0cfea42",
+        "displayName": "Example Person",
+        "surname": "Person",
+        "givenName": "Example",
+        "preferredLanguage": "en-GB",
+        "mail": "person@example.com",
+        "mobilePhone": null,
+        "jobTitle": null,
+        "officeLocation": null,
+        "businessPhones": []
+      }
+    }
+  ]
+}

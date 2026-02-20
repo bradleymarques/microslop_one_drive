@@ -1,17 +1,18 @@
 module MicroslopOneDrive
-  class PermissionBatch
-    attr_reader :identifier, :role, :audiences
+  class PermissionSet
+    attr_reader :id, :role, :audiences
 
-    def initialize(parsed_response)
+    def initialize(drive_item_id:, parsed_response:)
       @parsed_response = parsed_response
 
-      @identifier = @parsed_response.fetch("id", nil)
+      @drive_item_id = drive_item_id
+      @id = @parsed_response.fetch("id", nil)
       @role = build_role
       @audiences = build_audiences
     end
 
     def to_permissions
-      @audiences.map { Permission.new(identifier: @identifier, role: @role, audience: it) }
+      @audiences.map { Permission.new(id: @id, drive_item_id: @drive_item_id, role: @role, audience: it) }
     end
 
     private
@@ -50,7 +51,7 @@ module MicroslopOneDrive
       [
         Audience.new(
           type: "anyone",
-          identifier: "anyone_with_the_link",
+          id: "anyone_with_the_link",
           display_name: "Anyone with the link",
           email_address: nil
         )
