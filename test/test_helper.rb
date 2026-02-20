@@ -36,12 +36,12 @@ class BaseTest < Minitest::Test
       .returns(stubbed_response)
   end
 
-  def assert_permission(permission, drive_item_id, display_name, email, identifier, role, audience_type)
+  def assert_permission(permission, drive_item_id, display_name, email, id, role, audience_type)
     assert_equal drive_item_id, permission.drive_item_id
     assert_equal role, permission.role
     assert_equal audience_type, permission.audience.type
     assert_equal display_name, permission.audience.display_name
-    assert_equal identifier, permission.audience.identifier
+    assert_equal id, permission.audience.id
     if email
       assert_equal email, permission.audience.email_address
     else

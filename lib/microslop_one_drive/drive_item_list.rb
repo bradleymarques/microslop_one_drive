@@ -21,8 +21,8 @@ module MicroslopOneDrive
 
     def set_parent_and_child_relationships(items)
       items.each do |item|
-        next if item.parent_identifier.nil?
-        parent = items.find { it.identifier == item.parent_identifier }
+        next if item.parent_id.nil?
+        parent = items.find { it.id == item.parent_id }
         next if parent.nil?
 
         item.set_parent(parent)

@@ -1,9 +1,9 @@
 module MicroslopOneDrive
   class Permission
-    attr_reader :identifier, :drive_item_id, :role, :audience
+    attr_reader :id, :drive_item_id, :role, :audience
 
-    def initialize(identifier:, drive_item_id:, role:, audience:)
-      @identifier = identifier
+    def initialize(id:, drive_item_id:, role:, audience:)
+      @id = id
       @drive_item_id = drive_item_id
       @role = role
       @audience = audience

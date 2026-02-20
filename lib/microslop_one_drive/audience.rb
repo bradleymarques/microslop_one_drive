@@ -1,10 +1,10 @@
 module MicroslopOneDrive
   class Audience
-    attr_reader :type, :identifier, :display_name, :email_address
+    attr_reader :type, :id, :display_name, :email_address
 
-    def initialize(type:, identifier:, display_name:, email_address: nil)
+    def initialize(type:, id:, display_name:, email_address: nil)
       @type = type
-      @identifier = identifier
+      @id = id
       @display_name = display_name
       @email_address = email_address
     end
@@ -23,7 +23,7 @@ module MicroslopOneDrive
     def self.from_site_user(site_user)
       new(
         type: "user",
-        identifier: site_user.fetch("email"),
+        id: site_user.fetch("email"),
         display_name: site_user.fetch("displayName"),
         email_address: site_user.fetch("email")
       )

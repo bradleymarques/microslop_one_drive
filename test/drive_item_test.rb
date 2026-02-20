@@ -26,8 +26,8 @@ module MicroslopOneDrive
       assert_equal true, drive_item.file?
       assert_equal false, drive_item.folder?
       assert_equal "https://onedrive.live.com?cid=#{@drive_id}&id=#{item_id}", drive_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.identifier
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_identifier
+      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", drive_item.id
+      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", drive_item.parent_id
       assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.created_at
       assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
       assert_equal 1053417, drive_item.size

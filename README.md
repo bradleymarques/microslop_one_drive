@@ -39,19 +39,19 @@ drive_list.drives.size # => 2
 
 drive = drive_list.drives[1]
 drive.name # => OneDrive
-drive.identifier # => "0f0**********42"
+drive.id # => "0f0**********42"
 
-client.drive_exists?(drive.identifier) # => true (it's a real Drive)
+client.drive_exists?(drive.id) # => true (it's a real Drive)
 ```
 
 ### Listing Drive Items (Folders and Files)
 
 ```rb
-page1 = client.delta(drive_id: drive.identifier)
+page1 = client.delta(drive_id: drive.id)
 page1.items.size # => 200
 
 page1.next_page? # => true
-page2 = client.delta(drive_id: drive.identifier, token: page1.next_token)
+page2 = client.delta(drive_id: drive.id, token: page1.next_token)
 page2.items.size # => 14
 page2.next_page? # => false
 
@@ -62,17 +62,17 @@ delta_token = page2.delta_token # Save this somewhere and use as "token" in the 
 ### Get Permissions for a single Drive Item
 
 ```rb
-drive_item_list = client.delta(drive_id: drive.identifier)
+drive_item_list = client.delta(drive_id: drive.id)
 shared_items = drive_item_list.items.select(&:shared?)
 
 example_item = shared_items.first
 
-permission_list = client.permissions(item_id: example_item.identifier)
+permission_list = client.permissions(item_id: example_item.id)
 permission = permission_list.first
 
 permission.role # => "write"
 permission.audience.type # => "user"
-permission.audience.identifier # => "person@example.com"
+permission.audience.id # => "person@example.com"
 permission.audience.display_name # => "Example Person"
 permission.audience.email_address # => "person@example.com"
 ```
@@ -83,10 +83,10 @@ Instead of calling `client.permissions(...)` for each item -- which would make N
 Microsoft Graph API [batch](https://learn.microsoft.com/en-us/graph/json-batching?tabs=http) feature.
 
 ```rb
-drive_item_list = client.delta(drive_id: drive.identifier)
+drive_item_list = client.delta(drive_id: drive.id)
 shared_items = drive_item_list.items.select(&:shared?)
 
-permission_batch = client.batch_permissions(item_ids: shared_items.map(&:identifier))
+permission_batch = client.batch_permissions(item_ids: shared_items.map(&:id))
 
 # Under the hood, this will batch the shared_items into batches of 20 (the max Microsoft allows on their batch endpoint)
 # and returns an aggregated result.
