@@ -44,6 +44,16 @@ module MicroslopOneDrive
       MicroslopOneDrive::Drive.new(response.parsed_response)
     end
 
+    # Asks if a Drive exists by its ID.
+    #
+    # @param drive_id [String] The ID of the Drive to check.
+    #
+    # @return [Boolean]
+    def drive_exists?(drive_id:)
+      response = get(path: "me/drives/#{drive_id}", query: {})
+      response.success?
+    end
+
     # Gets a specific DriveItem (folder or file) by its ID.
     #
     # @param item_id [String] The ID of the Drive Item to get.

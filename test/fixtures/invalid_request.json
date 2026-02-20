@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "invalidRequest",
+    "message": "Invalid request",
+    "innerError": {
+      "date": "2026-02-20T06:32:08",
+      "request-id": "ad95de5b-75de-4a8f-be37-4e064e73575c",
+      "client-request-id": "db31e007-7b6f-220a-b796-f622d475632a"
+    }
+  }
+}
