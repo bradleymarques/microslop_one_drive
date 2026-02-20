@@ -1,7 +1,7 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  class PermissionBatchTest < BaseTest
+  class BatchPermissionsTest < BaseTest
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
@@ -23,7 +23,12 @@ module MicroslopOneDrive
       )
 
       permission_batch = @client.batch_permissions(item_ids: item_ids)
-      assert_kind_of MicroslopOneDrive::PermissionBatch, permission_batch
+      assert_kind_of Array, permission_batch
+
+      assert_equal 11, permission_batch.size
+
+      assert_permission(permission_batch[0], item_ids[0], "Amy Smith", "amy@example.com", "amy@example.com", "write", "user")
+      assert_permission(permission_batch[9], item_ids[1], "Anyone with the link", nil, "anyone_with_the_link", "write", "anyone")
     end
 
     private

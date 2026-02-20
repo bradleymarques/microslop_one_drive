@@ -2,16 +2,17 @@ module MicroslopOneDrive
   class PermissionSet
     attr_reader :identifier, :role, :audiences
 
-    def initialize(parsed_response)
+    def initialize(drive_item_id:, parsed_response:)
       @parsed_response = parsed_response
 
+      @drive_item_id = drive_item_id
       @identifier = @parsed_response.fetch("id", nil)
       @role = build_role
       @audiences = build_audiences
     end
 
     def to_permissions
-      @audiences.map { Permission.new(identifier: @identifier, role: @role, audience: it) }
+      @audiences.map { Permission.new(identifier: @identifier, drive_item_id: @drive_item_id, role: @role, audience: it) }
     end
 
     private

@@ -35,4 +35,17 @@ class BaseTest < Minitest::Test
       .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, body: expected_body)
       .returns(stubbed_response)
   end
+
+  def assert_permission(permission, drive_item_id, display_name, email, identifier, role, audience_type)
+    assert_equal drive_item_id, permission.drive_item_id
+    assert_equal role, permission.role
+    assert_equal audience_type, permission.audience.type
+    assert_equal display_name, permission.audience.display_name
+    assert_equal identifier, permission.audience.identifier
+    if email
+      assert_equal email, permission.audience.email_address
+    else
+      assert_nil permission.audience.email_address
+    end
+  end
 end
