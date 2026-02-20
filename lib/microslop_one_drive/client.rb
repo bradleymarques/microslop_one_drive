@@ -150,7 +150,7 @@ module MicroslopOneDrive
 
       batches = requests.each_slice(BATCH_REQUEST_LIMIT).to_a
       batches.each do |batch|
-        response = post(path: "$batch", body: { requests: batch })
+        response = post(path: "$batch", body: { requests: batch }.to_json)
         handle_error(response) unless response.success?
         new_responses = response.parsed_response.fetch("responses", [])
         new_responses.each do |new_response_hash|

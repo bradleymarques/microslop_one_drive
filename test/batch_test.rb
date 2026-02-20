@@ -14,7 +14,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 400,
         success: false,
         parsed_response: fixture_response("batch/invalid_format.json")
@@ -36,7 +36,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 400,
         success: false,
         parsed_response: fixture_response("batch/non_unique_ids.json")
@@ -64,7 +64,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/one_response.json")
@@ -93,7 +93,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/multiple_responses.json")
@@ -125,7 +125,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/some_responses_invalid.json")
@@ -154,7 +154,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests },
+        expected_body: { requests: requests }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/twenty_responses.json")
@@ -172,7 +172,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests.first(20) },
+        expected_body: { requests: requests.first(20) }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/twenty_responses.json")
@@ -180,7 +180,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests.last(1) },
+        expected_body: { requests: requests.last(1) }.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/one_response.json")

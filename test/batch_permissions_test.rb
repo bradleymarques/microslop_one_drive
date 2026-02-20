@@ -36,7 +36,7 @@ module MicroslopOneDrive
     def build_expected_post_body(item_ids)
       {
         requests: item_ids.map { { id: it, method: "GET", url: "/me/drive/items/#{it}/permissions" } }
-      }
+      }.to_json
     end
   end
 end
