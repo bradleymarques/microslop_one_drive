@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "BadRequest",
+    "message": "Number of requests inside batch exceed the limit.",
+    "innerError": {
+      "date": "2026-02-20T11:27:12",
+      "request-id": "327f7bf0-0f1d-4d83-8a70-53cafbbdb9c5",
+      "client-request-id": "e8b4e1da-46d1-000f-75ca-9b3130d489ac"
+    }
+  }
+}

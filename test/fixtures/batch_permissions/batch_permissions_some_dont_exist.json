@@ -1,0 +1,190 @@
+{
+  "responses": [
+    {
+      "id": "does-not-exist",
+      "status": 200,
+      "headers": {
+        "Link": "<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\",<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\"",
+        "Deprecation": "Fri, 03 Sep 2021 23:59:59 GMT",
+        "Sunset": "Sun, 01 Oct 2023 23:59:59 GMT",
+        "Cache-Control": "private",
+        "SPLogId": "c5cff8a1-8002-1000-5847-0781fc68b39d",
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items('does-not-exist')/permissions",
+        "value": [
+          {
+            "id": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "roles": [
+              "owner"
+            ],
+            "shareId": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "grantedToV2": {
+              "siteUser": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4",
+                "loginName": "i:0#.f|membership|person@example.com"
+              }
+            },
+            "grantedTo": {
+              "user": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "also-does-not-exist",
+      "status": 200,
+      "headers": {
+        "Link": "<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\",<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\"",
+        "Deprecation": "Fri, 03 Sep 2021 23:59:59 GMT",
+        "Sunset": "Sun, 01 Oct 2023 23:59:59 GMT",
+        "Cache-Control": "private",
+        "SPLogId": "c5cff8a1-5002-1000-4f5f-a2761238427c",
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items('also-does-not-exist')/permissions",
+        "value": [
+          {
+            "id": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "roles": [
+              "owner"
+            ],
+            "shareId": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "grantedToV2": {
+              "siteUser": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4",
+                "loginName": "i:0#.f|membership|person@example.com"
+              }
+            },
+            "grantedTo": {
+              "user": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "F097864E0CFEA42!se0d408c95b584ccf9403220e8cce56a3",
+      "status": 200,
+      "headers": {
+        "Link": "<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\",<https://developer.microsoft-tst.com/en-us/graph/changes?$filterby=v1.0,Removal&from=2021-09-01&to=2021-10-01>;rel=\"deprecation\";type=\"text/html\"",
+        "Deprecation": "Fri, 03 Sep 2021 23:59:59 GMT",
+        "Sunset": "Sun, 01 Oct 2023 23:59:59 GMT",
+        "Cache-Control": "private",
+        "SPLogId": "c5cff8a1-403e-1000-6246-7633a11e97a9",
+        "OData-Version": "4.0",
+        "Content-Type": "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"
+      },
+      "body": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items('F097864E0CFEA42%21se0d408c95b584ccf9403220e8cce56a3')/permissions",
+        "value": [
+          {
+            "id": "47f8c2a7-b883-4758-9412-f37c0c203abb",
+            "roles": [
+              "write"
+            ],
+            "shareId": "u!aHR0cHM6Ly8xZHJ2Lm1zL2YvYy8wZjA5Nzg2NGUwY2ZlYTQyL0lnREpDTlRnV0Z2UFRKUURJZzZNemxhakFVZFNHVVdBM0hCdkZkaFlHZlM0UW5J",
+            "hasPassword": false,
+            "grantedToIdentitiesV2": [
+              {
+                "siteUser": {
+                  "displayName": "Amy Smith",
+                  "email": "amy@example.com",
+                  "id": "6",
+                  "loginName": "i:0#.f|membership|amy@example.com"
+                }
+              },
+              {
+                "siteUser": {
+                  "displayName": "Charles Garcia",
+                  "email": "charles@example.com",
+                  "id": "7",
+                  "loginName": "i:0#.f|membership|charles@example.com"
+                }
+              },
+              {
+                "siteUser": {
+                  "displayName": "Bob Myers",
+                  "email": "bob@example.com",
+                  "id": "13",
+                  "loginName": "i:0#.f|membership|bob@example.com"
+                }
+              }
+            ],
+            "grantedToIdentities": [
+              {
+                "user": {
+                  "displayName": "Amy Smith",
+                  "email": "amy@example.com",
+                  "id": "6"
+                }
+              },
+              {
+                "user": {
+                  "displayName": "Charles Garcia",
+                  "email": "charles@example.com",
+                  "id": "7"
+                }
+              },
+              {
+                "user": {
+                  "displayName": "Bob ",
+                  "email": "bob@example.com",
+                  "id": "13"
+                }
+              }
+            ],
+            "link": {
+              "scope": "anonymous",
+              "type": "edit",
+              "webUrl": "https://1drv.ms/f/c/0f097864e0cfea42/IgDJCNTgWFvPTJQDIg6MzlajAUdSGUWA3HBvFdhYGfS4QnI",
+              "preventsDownload": false
+            }
+          },
+          {
+            "id": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "roles": [
+              "owner"
+            ],
+            "shareId": "aTowIy5mfG1lbWJlcnNoaXB8YnJhZEBoYWlrdWNvZGUuZGV2",
+            "grantedToV2": {
+              "siteUser": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4",
+                "loginName": "i:0#.f|membership|person@example.com"
+              }
+            },
+            "grantedTo": {
+              "user": {
+                "displayName": "Example Person",
+                "email": "person@example.com",
+                "id": "4"
+              }
+            },
+            "link": {
+              "webUrl": "https://1drv.ms/f/c/0f097864e0cfea42/AskI1OBYW89MlAMiDozOVqM"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

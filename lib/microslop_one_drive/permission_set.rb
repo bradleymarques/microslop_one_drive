@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  class PermissionBatch
+  class PermissionSet
     attr_reader :identifier, :role, :audiences
 
     def initialize(parsed_response)

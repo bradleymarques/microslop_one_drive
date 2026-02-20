@@ -1,0 +1,37 @@
+require "test_helper"
+
+module MicroslopOneDrive
+  class PermissionBatchTest < BaseTest
+    def setup
+      @access_token = "mock_access_token"
+      @client = MicroslopOneDrive::Client.new(@access_token)
+    end
+
+    def test_permissions_batch_can_fetch_permissions_for_multiple_drive_items
+      item_ids = [
+        "F097864E0CFEA42!se0d408c95b584ccf9403220e8cce56a3",
+        "F097864E0CFEA42!sdb175a6fe02b4039886168a4a695387c",
+        "F097864E0CFEA42!s76b80a6457684886b4a55cf65da40603"
+      ]
+
+      expected_post_body = build_expected_post_body(item_ids)
+
+      mock_post(
+        path: "$batch",
+        expected_body: expected_post_body,
+        parsed_response: fixture_response("batch_permissions/batch_permissions.json")
+      )
+
+      permission_batch = @client.batch_permissions(item_ids: item_ids)
+      assert_kind_of MicroslopOneDrive::PermissionBatch, permission_batch
+    end
+
+    private
+
+    def build_expected_post_body(item_ids)
+      {
+        requests: item_ids.map { { id: it, method: "GET", url: "/me/drive/items/#{it}/permissions" } }
+      }
+    end
+  end
+end

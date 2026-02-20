@@ -26,4 +26,13 @@ class BaseTest < Minitest::Test
     assert(drive_item, "Drive item with name #{name} not found")
     drive_item
   end
+
+  def mock_post(path:, expected_body:, response_code: 200, success: true, parsed_response: {})
+    stubbed_response = stub(code: response_code, success?: success, parsed_response: parsed_response)
+
+    HTTParty
+      .expects(:post)
+      .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, body: expected_body)
+      .returns(stubbed_response)
+  end
 end

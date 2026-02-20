@@ -105,6 +105,20 @@ module MicroslopOneDrive
       MicroslopOneDrive::PermissionList.new(response.parsed_response)
     end
 
+    # Gets the permissions for multiple Drive Items.
+    #
+    # Uses the batch Microsoft Graph API to make multiple API calls in batches of 20 (the max Microsoft allows on their
+    # batch endpoint).
+    #
+    # See: https://learn.microsoft.com/en-us/graph/json-batching
+    #
+    # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
+    #
+    # @return [MicroslopOneDrive::PermissionList]
+    def batch_permissions(item_ids:)
+      raise NotImplementedError, "Not implemented yet"
+    end
+
     private
 
     def get(path:, query: {})
