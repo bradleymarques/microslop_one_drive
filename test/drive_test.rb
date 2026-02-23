@@ -22,6 +22,7 @@ module MicroslopOneDrive
       assert_equal "personal", drive.drive_type
       assert_equal Time.parse("2026-02-16T05:06:27Z"), drive.created_at
       assert_equal Time.parse("2026-02-19T07:39:49Z"), drive.updated_at
+      assert_equal "", drive.description
     end
   end
 end

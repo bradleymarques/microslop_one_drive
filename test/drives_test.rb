@@ -26,6 +26,10 @@ module MicroslopOneDrive
       assert_equal "OneDrive", drive.name
       assert_equal "https://my.microsoftpersonalcontent.com/personal/0f097864e0cfea42/Documents", drive.url
       assert_equal "personal", drive.drive_type
+      assert_equal "", drive.description
+
+      internal_drive = drive_list.drives[0]
+      assert_equal "Document library to store albums and album items", internal_drive.description
     end
   end
 end
