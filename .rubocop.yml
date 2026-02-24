@@ -1,8 +1,11 @@
-require:
-  - ./lib/rubocop/require
-
 AllCops:
   NewCops: enable
+
+Metrics/ParameterLists: # We have lots of data objects
+  Max: 20
+
+Naming/AccessorMethodName: # We have API methods prefixed with get_
+  Enabled: false
 
 # Commonly used screens these days easily fit more than 80 characters.
 Layout/LineLength:

@@ -1,0 +1,33 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items/$entity",
+  "createdDateTime": "2026-02-16T05:06:27Z",
+  "eTag": "\"{5EBF4C1B-D7DF-4364-BC2A-001E2E4851AE},17\"",
+  "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+  "lastModifiedDateTime": "2026-02-23T13:41:28Z",
+  "name": "root",
+  "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66F6Y2GOVW7725BZO354PWSELRRZ",
+  "size": 17798,
+  "createdBy": {
+    "user": {
+      "email": "person@example.com",
+      "displayName": "Example Person"
+    }
+  },
+  "parentReference": {
+    "driveType": "personal",
+    "driveId": "0f097864e0cfea42"
+  },
+  "fileSystemInfo": {
+    "createdDateTime": "2026-02-16T05:06:27Z",
+    "lastModifiedDateTime": "2026-02-23T13:41:28Z"
+  },
+  "folder": {
+    "childCount": 5,
+    "view": {
+      "sortBy": "name",
+      "sortOrder": "ascending",
+      "viewType": "thumbnails"
+    }
+  },
+  "root": {}
+}

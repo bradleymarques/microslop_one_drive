@@ -16,8 +16,7 @@ gem "microslop_one_drive"
 
 ## Usage
 
-Here's a quickstart showing listing drives, getting some files in a drive, and getting permissions for some files in
-a batched manner:
+Quickstart: current user, drives, drive items, shared-with-me, delta (changes), and permissions (single or batched).
 
 ### Creating a client
 
@@ -25,6 +24,17 @@ a batched manner:
 access_token = "..." # Get an access token via OAuth 2.0
 
 client = MicroslopOneDrive::Client.new(access_token)
+
+# Optional: pass a logger to log all API requests and responses (e.g. Rails.logger)
+client = MicroslopOneDrive::Client.new(access_token, logger: Rails.logger)
+```
+
+### Get current user
+
+```rb
+user = client.me
+user.display_name # => "Jane Doe"
+user.email_address # => "jane@example.com"
 ```
 
 ### Listing Drives
@@ -34,7 +44,7 @@ Note: Microsoft will return all Drives a user has access to. Some of these seem 
 `drive_exists?()` method to check if it's a real drive you can interact with.
 
 ```rb
-drive_list = client.drives
+drive_list = client.all_drives
 drive_list.drives.size # => 2
 
 drive = drive_list.drives[1]
@@ -42,6 +52,29 @@ drive.name # => OneDrive
 drive.id # => "0f0**********42"
 
 client.drive_exists?(drive.id) # => true (it's a real Drive)
+```
+
+### Get a single drive
+
+```rb
+# Default (current user's) drive
+drive = client.drive
+
+# Or a specific drive by ID
+drive = client.drive(drive_id: "0f0**********42")
+drive.name # => "OneDrive"
+```
+
+### Get a single drive item
+
+```rb
+item = client.drive_item(item_id: "01ABC123...", drive_id: drive.id)
+item.name # => "My Document.docx"
+item.file? # => true
+item.folder? # => false
+
+# Check if an item exists without raising
+client.drive_item_exists?(item_id: "01ABC123...", drive_id: drive.id) # => true
 ```
 
 ### Listing Drive Items (Folders and Files)
@@ -58,6 +91,34 @@ page2.next_page? # => false
 delta_token = page2.delta_token # Save this somewhere and use as "token" in the next client.delta() call so ensure you
 # only get new changes, and don't list the whole drive from the beginning again.
 ```
+
+### Shared with me
+
+Get drive items (files and folders) that others have shared with the current user.
+
+```rb
+shared_list = client.shared_with_me
+shared_list.shared_with_me_items.size # => 5
+
+item = shared_list.shared_with_me_items.first
+item.name # => "Spreadsheet One.xlsx"
+item.id # => "64E5DD3210FD6004!s1d8ad87a1d6e4d4e..."
+item.web_url # => "https://onedrive.live.com?cid=..."
+item.size # => 6183
+item.created_at # => 2026-02-17 14:27:26 UTC
+item.updated_at # => 2026-02-17 14:27:27 UTC
+
+# Who shared it
+item.created_by.display_name # => "Someone Else"
+item.created_by.email_address # => "outlook_64E5DD3210FD6004@outlook.com"
+item.last_modified_by.display_name # => "Someone Else"
+
+# The underlying drive item (with file?, folder?, mime_type, shared?, etc.)
+item.remote_item.file? # => true
+item.remote_item.shared? # => true
+```
+
+Use `shared_list.next_page?` and `shared_list.next_token` to paginate when there are many items.
 
 ### Get Permissions for a single Drive Item
 
@@ -86,10 +147,9 @@ Microsoft Graph API [batch](https://learn.microsoft.com/en-us/graph/json-batchin
 drive_item_list = client.delta(drive_id: drive.id)
 shared_items = drive_item_list.items.select(&:shared?)
 
-permission_batch = client.batch_permissions(item_ids: shared_items.map(&:id))
-
-# Under the hood, this will batch the shared_items into batches of 20 (the max Microsoft allows on their batch endpoint)
-# and returns an aggregated result.
+permissions = client.batch_permissions(item_ids: shared_items.map(&:id))
+# Returns a flat array of MicroslopOneDrive::Permission (batches of 20 are made under the hood).
+permissions.each { |p| puts "#{p.audience.display_name}: #{p.role}" }
 ```
 
 ## Contributing

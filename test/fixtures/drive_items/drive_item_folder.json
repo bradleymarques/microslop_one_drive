@@ -1,0 +1,56 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items/$entity",
+  "createdDateTime": "2026-02-23T07:19:04Z",
+  "eTag": "\"{544FFBA8-9753-4F04-9019-16B65605DB43},1\"",
+  "id": "F097864E0CFEA42!s544ffba897534f04901916b65605db43",
+  "lastModifiedDateTime": "2026-02-23T07:19:04Z",
+  "name": "Documents",
+  "webUrl": "https://onedrive.live.com?cid=0f097864e0cfea42&id=F097864E0CFEA42!s544ffba897534f04901916b65605db43",
+  "cTag": "\"c:{544FFBA8-9753-4F04-9019-16B65605DB43},0\"",
+  "size": 0,
+  "createdBy": {
+    "application": {
+      "id": "b3af06fc-dbcf-4a28-98b2-4624811440d8",
+      "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
+    },
+    "user": {
+      "email": "person@example.com",
+      "id": "0f097864e0cfea42",
+      "displayName": "Example Person"
+    }
+  },
+  "lastModifiedBy": {
+    "application": {
+      "id": "b3af06fc-dbcf-4a28-98b2-4624811440d8",
+      "displayName": "i:0i.t|ms.sp.ext|b3af06fc-dbcf-4a28-98b2-4624811440d8@9188040d-6c67-4c5b-b112-36a304b66dad"
+    },
+    "user": {
+      "email": "person@example.com",
+      "id": "0f097864e0cfea42",
+      "displayName": "Example Person"
+    }
+  },
+  "parentReference": {
+    "driveType": "personal",
+    "driveId": "0f097864e0cfea42",
+    "id": "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639",
+    "name": "Documents",
+    "path": "/drive/root:",
+    "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+  },
+  "fileSystemInfo": {
+    "createdDateTime": "2026-02-23T07:19:04Z",
+    "lastModifiedDateTime": "2026-02-23T07:19:04Z"
+  },
+  "folder": {
+    "childCount": 0,
+    "view": {
+      "sortBy": "name",
+      "sortOrder": "ascending",
+      "viewType": "thumbnails"
+    }
+  },
+  "specialFolder": {
+    "name": "documents"
+  }
+}

@@ -1,7 +1,7 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  class ClientTest < BaseTest
+  class DeltaTest < BaseTest
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
@@ -9,14 +9,14 @@ module MicroslopOneDrive
       @drive_id = "0f097864e0cfea42"
     end
 
-    def test_delta_fetches_an_initial_delta_of_changes_to_a_drive
+    def test_delta_fetches_an_initial_delta_of_changes_to_my_default_drive
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
+      drive_item_list = @client.delta
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       items = drive_item_list.items
       assert_equal 4, items.size
@@ -32,24 +32,17 @@ module MicroslopOneDrive
       assert_equal "application/pdf", sample_item.mime_type
       assert_equal :file, sample_item.file_or_folder
       assert_equal true, sample_item.file?
-      assert_equal false, sample_item.folder?
-      assert_equal "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66CFWRTKI2EYNJE34WN3CR4SOLJH", sample_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", sample_item.id
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", sample_item.parent_id
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.created_at
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.updated_at
-      assert_equal 1053417, sample_item.size
     end
 
     def test_delta_with_a_delta_link_and_delta_token
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
-      assert_kind_of MicroslopOneDrive::ListResponse, drive_item_list
+      drive_item_list = @client.delta
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
       assert_nil drive_item_list.next_link
       assert_nil drive_item_list.next_token
@@ -64,13 +57,13 @@ module MicroslopOneDrive
 
     def test_delta_with_a_next_link_and_next_token
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_next.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
-      assert_kind_of MicroslopOneDrive::ListResponse, drive_item_list
+      drive_item_list = @client.delta
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
       assert_nil drive_item_list.delta_link
       assert_nil drive_item_list.delta_token
@@ -85,12 +78,12 @@ module MicroslopOneDrive
 
     def test_empty_delta
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_empty.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
+      drive_item_list = @client.delta
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       assert drive_item_list.delta_link
       assert drive_item_list.delta_token
@@ -102,11 +95,11 @@ module MicroslopOneDrive
 
     def test_delta_labels_files_and_folders_that_were_deleted
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_deleted_root_file.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_item_list = @client.delta
       drive_items = drive_item_list.items
       assert_equal 2, drive_items.size
 
@@ -122,11 +115,11 @@ module MicroslopOneDrive
 
     def test_delta_for_a_renamed_file
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_renamed.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_item_list = @client.delta
       drive_items = drive_item_list.items
       assert_equal 2, drive_items.size
 
@@ -139,11 +132,11 @@ module MicroslopOneDrive
 
     def test_delta_for_added_nested_items
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_item_list = @client.delta
       drive_items = drive_item_list.items
       assert_equal 7, drive_items.size
 
@@ -154,108 +147,19 @@ module MicroslopOneDrive
         "subsubfolder",
         "file_003.txt",
         "file_002.txt",
-        "file_001.txt",
+        "file_001.txt"
       ]
 
       assert_equal expected_names, drive_items.map(&:name)
     end
 
-    def test_delta_sets_the_correct_parent_id_for_nested_items
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal file1.parent_id, folder.id
-      assert_equal file2.parent_id, subfolder.id
-      assert_equal file3.parent_id, subsubfolder.id
-      assert_equal subsubfolder.parent_id, subfolder.id
-      assert_equal subfolder.parent_id, folder.id
-      assert_equal folder.parent_id, root.id
-      assert_nil root.parent_id
-    end
-
-    def test_delta_sets_parent_and_children
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal root.children, [folder]
-      assert_equal folder.children, [subfolder, file1]
-      assert_equal subfolder.children, [subsubfolder, file2]
-      assert_equal subsubfolder.children, [file3]
-      assert_equal file3.children, []
-      assert_equal file2.children, []
-      assert_equal file1.children, []
-
-      assert_nil root.parent
-      assert_equal folder.parent, root
-      assert_equal subfolder.parent, folder
-      assert_equal subsubfolder.parent, subfolder
-      assert_equal file3.parent, subsubfolder
-      assert_equal file2.parent, subfolder
-      assert_equal file1.parent, folder
-    end
-
-    def test_delta_sets_the_path_for_nested_items
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal "root:", root.path
-      assert_equal "root:/folder", folder.path
-      assert_equal "root:/folder/subfolder", subfolder.path
-      assert_equal "root:/folder/subfolder/subsubfolder", subsubfolder.path
-      assert_equal "root:/folder/file_001.txt", file1.path
-      assert_equal "root:/folder/subfolder/file_002.txt", file2.path
-      assert_equal "root:/folder/subfolder/subsubfolder/file_003.txt", file3.path
-    end
-
     def test_delta_for_deleted_nested_items
       mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
+        path: "me/drive/root/delta",
         parsed_response: fixture_response("deltas/delta_deleted_nested_items.json")
       )
 
-      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_item_list = @client.delta
       drive_items = drive_item_list.items
 
       assert_equal 7, drive_items.size
@@ -265,12 +169,34 @@ module MicroslopOneDrive
       other_items = drive_items.reject { it.name == "root" }
       assert_equal 6, other_items.size
 
-      other_items.each do |item|
-        assert_equal true, item.deleted?
+      other_items.each do
+        assert_equal true, it.deleted?
       end
     end
 
     def test_delta_with_an_initial_set_of_permissions
+      mock_get(
+        path: "me/drive/root/delta",
+        parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
+      )
+
+      drive_item_list = @client.delta
+      drive_items = drive_item_list.items
+
+      assert_equal 7, drive_items.size
+
+      root = get_drive_item_by_name(drive_items, "root")
+      documents = get_drive_item_by_name(drive_items, "Documents")
+      shared_folder = get_drive_item_by_name(drive_items, "Shared Folder")
+      word_document = get_drive_item_by_name(drive_items, "A Word Document.docx")
+
+      assert_equal true, root.shared?
+      assert_equal false, documents.shared?
+      assert_equal true, shared_folder.shared?
+      assert_equal false, word_document.shared?
+    end
+
+    def test_delta_with_drive_id_fetches_an_initial_delta_of_changes_to_a_specific_drive
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")

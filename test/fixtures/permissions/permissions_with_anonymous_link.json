@@ -1,6 +1,5 @@
 {
   "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items('F097864E0CFEA42%21se0d408c95b584ccf9403220e8cce56a3')/permissions",
-  "@microsoft.graph.tips": "Use $select to choose only the properties your app needs, as this can lead to performance improvements. For example: GET me/drive/items('<key>')/permissions?$select=expirationDateTime,grantedTo",
   "value": [
     {
       "id": "47f8c2a7-b883-4758-9412-f37c0c203abb",

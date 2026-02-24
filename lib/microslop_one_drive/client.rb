@@ -3,7 +3,7 @@ require "json"
 module MicroslopOneDrive
   class Client
     BASE_URL = "https://graph.microsoft.com/v1.0".freeze
-    BATCH_REQUEST_LIMIT = 20.freeze
+    BATCH_REQUEST_LIMIT = 20 # This is set by Microsoft
 
     # @param access_token [String] OAuth access token for Microsoft Graph.
     # @param logger [Object, nil] Optional logger (e.g. Rails.logger) that responds to +#info+, +#debug+, +#warn+, +#error+.
@@ -25,30 +25,41 @@ module MicroslopOneDrive
     def me
       response = get(path: "me", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::User.new(response.parsed_response)
+      MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(response.parsed_response)
     end
 
-    # Gets all Drives the current user has access to.
+    # Gets a Drive.
+    #
+    # If no drive_id is provided, the current User's default Drive will be returned, else, the specific Drive identified
+    # by the drive_id will be returned.
+    #
+    # From the docs:
+    #
+    # > Most users will only have a single Drive resource.
+    # > Groups and Sites may have multiple Drive resources available.
+    #
+    # @param drive_id [String, nil] The ID of the Drive to get. If not provided, the current User's default Drive will
+    # be returned.
+    #
+    # @return [MicroslopOneDrive::Drive]
+    def drive(drive_id: nil)
+      url = drive_id.nil? ? "me/drive" : "me/drives/#{drive_id}"
+      response = get(path: url, query: {})
+
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
+    end
+
+    # Gets ALL Drives the current user has access to.
     #
     # NOTE: This will include some internal Microsoft drives that aren't real drives, such as AI, Face scans, and other
     # shitty things.
     #
     # @return [MicroslopOneDrive::DriveList]
-    def drives
+    def all_drives
       response = get(path: "me/drives", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveList.new(response.parsed_response)
-    end
-
-    # Gets a specific Drive by its ID.
-    #
-    # @param drive_id [String] The ID of the Drive to get.
-    #
-    # @return [MicroslopOneDrive::Drive]
-    def drive(drive_id:)
-      response = get(path: "me/drives/#{drive_id}", query: {})
-      handle_error(response) unless response.success?
-      MicroslopOneDrive::Drive.new(response.parsed_response)
+      MicroslopOneDrive::ListResponses::DriveList.new(response.parsed_response)
     end
 
     # Asks if a Drive exists by its ID.
@@ -61,24 +72,31 @@ module MicroslopOneDrive
       response.success?
     end
 
-    # Gets a specific DriveItem (folder or file) by its ID.
+    # Gets a specific DriveItem (folder or file)
     #
+    # @param drive_id [String, nil] The ID of the Drive to get the Drive Item from. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to get.
     #
     # @return [MicroslopOneDrive::DriveItem]
-    def drive_item(item_id:)
-      response = get(path: "me/drive/items/#{item_id}", query: {})
+    def drive_item(item_id:, drive_id: nil)
+      url = drive_id.nil? ? "me/drive/items/#{item_id}" : "me/drives/#{drive_id}/items/#{item_id}"
+      response = get(path: url, query: {})
+
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveItem.new(response.parsed_response)
+      MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Asks if a DriveItem (folder or file) exists by its ID.
     #
+    # @param drive_id [String, nil] The ID of the Drive to check the Drive Item in. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to check.
     #
     # @return [Boolean]
-    def item_exists?(item_id:)
-      response = get(path: "me/drive/items/#{item_id}", query: {})
+    def drive_item_exists?(item_id:, drive_id: nil)
+      url = drive_id.nil? ? "me/drive/items/#{item_id}" : "me/drives/#{drive_id}/items/#{item_id}"
+      response = get(path: url, query: {})
 
       return false if response.code == 404
       return true if response.success?
@@ -86,33 +104,58 @@ module MicroslopOneDrive
       handle_error(response)
     end
 
-    # Gets a delta of changes to a Drive.
+    # Gets a delta of changes in a Drive.
     #
-    # @param drive_id [String] The ID of the Drive to get the delta of.
-    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
+    # @param drive_id [String, nil] The ID of the Drive to get the delta of. If not provided, the current User's default
+    # Drive will be used.
+    # @param token [String, nil] The token to use for the delta. If not provided, the initial delta will be returned.
     #
     # @return [MicroslopOneDrive::DriveItemList]
-    def delta(drive_id:, token: nil)
-      response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
+    def delta(drive_id: nil, token: nil)
+      url = drive_id.nil? ? "me/drive/root/delta" : "me/drives/#{drive_id}/root/delta"
+      response = get(path: url, query: {token: token})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveItemList.new(response.parsed_response)
+      MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
     end
 
-    # Gets the permissions for a DriveItem (folder or file).
+    # Gets the Drive Items shared with the current user.
     #
+    # @return [MicroslopOneDrive::SharedWithMeList]
+    def shared_with_me
+      response = get(path: "me/drive/sharedWithMe")
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::ListResponses::SharedWithMeList.new(response.parsed_response)
+    end
+
+    # Gets the permissions for a DriveItem (folder or file) in a Drive.
+    #
+    # @param drive_id [String, nil] The ID of the Drive to get the permissions of. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to get the permissions of.
     #
     # @return [MicroslopOneDrive::PermissionList]
-    def permissions(item_id:)
-      response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
+    def permissions(item_id:, drive_id: nil)
+      url = if drive_id.nil?
+              "me/drive/items/#{item_id}/permissions"
+            else
+              "me/drives/#{drive_id}/items/#{item_id}/permissions"
+            end
+
+      response = get(path: url, query: {})
 
       if response.code == 404
-        return MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: { "value" => [] })
+        return MicroslopOneDrive::ListResponses::PermissionList.new(
+          drive_item_id: item_id,
+          parsed_response: {"value" => []}
+        )
       end
 
       handle_error(response) unless response.success?
 
-      MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: response.parsed_response)
+      MicroslopOneDrive::ListResponses::PermissionList.new(
+        drive_item_id: item_id,
+        parsed_response: response.parsed_response
+      )
     end
 
     # Gets the permissions for multiple Drive Items.
@@ -122,16 +165,21 @@ module MicroslopOneDrive
     #
     # See: https://learn.microsoft.com/en-us/graph/json-batching
     #
+    # @param drive_id [String, nil] The ID of the Drive to get the permissions of. If not provided, the current User's
+    # default Drive will be used.
     # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
     #
     # @return [Array<MicroslopOneDrive::Permission>]
-    def batch_permissions(item_ids:)
-      requests = item_ids.map { |item_id| { id: item_id, method: "GET", url: "/me/drive/items/#{item_id}/permissions" } }
+    def batch_permissions(item_ids:, drive_id: nil)
+      requests = build_batch_permissions_requests(item_ids: item_ids, drive_id: drive_id)
       batch_response = batch(requests: requests)
       successful_responses = batch_response.responses.select(&:success?)
 
-      permission_lists = successful_responses.map do |response|
-        MicroslopOneDrive::PermissionList.new(drive_item_id: response.id, parsed_response: response.body)
+      permission_lists = successful_responses.map do
+        MicroslopOneDrive::ListResponses::PermissionList.new(
+          drive_item_id: it.id,
+          parsed_response: it.body
+        )
       end
 
       permission_lists.flat_map(&:permissions)
@@ -149,18 +197,18 @@ module MicroslopOneDrive
     #
     # @return [MicroslopOneDrive::BatchResponse]
     def batch(requests:)
-      batch_response = MicroslopOneDrive::BatchResponse.new
+      batch_response = MicroslopOneDrive::Batch::BatchResponse.new
 
       # No requests, so simply return an empty batch response:
       return batch_response if requests.empty?
 
       batches = requests.each_slice(BATCH_REQUEST_LIMIT).to_a
-      batches.each do |batch|
-        response = post(path: "$batch", body: { requests: batch }.to_json)
+      batches.each do
+        response = post(path: "$batch", body: {requests: it}.to_json)
         handle_error(response) unless response.success?
         new_responses = response.parsed_response.fetch("responses", [])
-        new_responses.each do |new_response_hash|
-          batch_response.add_response(MicroslopOneDrive::Response.new(new_response_hash))
+        new_responses.each do
+          batch_response.add_response(MicroslopOneDrive::Batch::Response.new(it))
         end
       end
 
@@ -168,6 +216,14 @@ module MicroslopOneDrive
     end
 
     private
+
+    def build_batch_permissions_requests(item_ids:, drive_id: nil)
+      if drive_id.nil?
+        item_ids.map { {id: it, method: "GET", url: "/me/drive/items/#{it}/permissions"} }
+      else
+        item_ids.map { {id: it, method: "GET", url: "/me/drives/#{drive_id}/items/#{it}/permissions"} }
+      end
+    end
 
     def get(path:, query: {})
       url = "#{BASE_URL}/#{path}"
@@ -200,7 +256,7 @@ module MicroslopOneDrive
       @logger.info "==================== START MicroslopOneDrive #{method} #{url} ===================="
       @logger.info "Request method: #{method}"
       @logger.info "Request url: #{url}"
-      @logger.info "Request query: #{query.inspect}" if query && query.any?
+      @logger.info "Request query: #{query.inspect}" if query&.any?
       @logger.info "Request body: #{body.inspect}" if body
     end
 

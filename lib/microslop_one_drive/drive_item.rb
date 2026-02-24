@@ -4,53 +4,70 @@ module MicroslopOneDrive
 
     attr_reader :id,
                 :name,
-                :created_at,
-                :updated_at,
-                :url,
+                :download_url,
+                :web_url,
                 :size,
+                :created_date_time,
+                :last_modified_date_time,
+                :e_tag,
+                :c_tag,
                 :file_or_folder,
-                :parent_id,
                 :mime_type,
-                :parent,
-                :children,
-                :path,
-                :full_path
+                :parent_reference,
+                :is_deleted,
+                :is_shared,
+                :full_path,
+                :path
 
-    def initialize(item_hash)
-      @item_hash = item_hash
+    def initialize(
+      id:,
+      name:,
+      download_url:,
+      web_url:,
+      size:,
+      created_date_time:,
+      last_modified_date_time:,
+      e_tag:,
+      c_tag:,
+      file_or_folder:,
+      mime_type:,
+      parent_reference:,
+      is_deleted:,
+      is_shared:
+    )
+      @id = id
+      @name = name
+      @download_url = download_url
+      @web_url = web_url
+      @size = size
+      @created_date_time = created_date_time
+      @last_modified_date_time = last_modified_date_time
+      @e_tag = e_tag
+      @c_tag = c_tag
+      @file_or_folder = file_or_folder
+      @mime_type = mime_type
+      @parent_reference = parent_reference
+      @is_deleted = is_deleted
+      @is_shared = is_shared
 
-      @id = @item_hash.fetch("id", nil)
-      @name = @item_hash.fetch("name", nil)
-      @url = @item_hash.fetch("webUrl", nil)
-      @size = @item_hash.fetch("size", nil)
+      @full_path = build_full_path
+      @path = build_path(@full_path)
+    end
 
-      @created_at = Utils.safe_parse_time(@item_hash.fetch("createdDateTime", nil))
-      @updated_at = Utils.safe_parse_time(@item_hash.fetch("lastModifiedDateTime", nil))
+    def created_at
+      @created_date_time
+    end
 
-      if @item_hash.key?("file")
-        @file_or_folder = :file
-        @mime_type = @item_hash.dig("file", "mimeType")
-      elsif @item_hash.key?("folder")
-        @file_or_folder = :folder
-        @mime_type = DIRECTORY_MIME_TYPE
-      end
-
-      @parent_id = @item_hash.dig("parentReference", "id")
-
-      @deleted = @item_hash.dig("deleted", "state") == "deleted"
-
-      @path = build_path
-
-      @parent = nil
-      @children = []
+    def updated_at
+      @last_modified_date_time
     end
 
     def deleted?
-      @deleted
+      @is_deleted
     end
 
     def shared?
-      @item_hash.key?("shared")
+      @is_shared
     end
 
     def file?
@@ -61,39 +78,20 @@ module MicroslopOneDrive
       @file_or_folder == :folder
     end
 
-    def set_parent(parent)
-      if @parent
-        @parent.remove_child(self)
-      end
-
-      @parent = parent
-      @parent.add_child(self)
+    def root?
+      false
     end
 
-    def is_root?
-      @item_hash.key?("root")
+    def build_full_path
+      return nil if parent_reference&.path.nil? || name.nil?
+
+      ::File.join(parent_reference.path, name)
     end
 
-    protected
+    def build_path(full_path)
+      return "" if full_path.nil?
 
-    def add_child(child)
-      @children << child
-    end
-
-    def remove_child(child)
-      @children.delete(child)
-    end
-
-    private
-
-    def build_path
-      return "root:" if is_root?
-
-      full_parent_path = @item_hash.dig("parentReference", "path")
-      return nil if full_parent_path.nil?
-
-      full_path_with_name = File.join(full_parent_path, @name)
-      full_path_with_name.sub(/\A.*root:\//, "root:/")
+      full_path.gsub(%r{\A/?drive/root:/?}, "").chomp("/")
     end
   end
 end

@@ -1,27 +1,23 @@
 require_relative "lib/microslop_one_drive/version"
 
-Gem::Specification.new do |spec|
-  spec.name = "microslop_one_drive"
-  spec.version = MicroslopOneDrive::VERSION
-  spec.authors = ["Bradley Marques"]
-  spec.email = [""]
+Gem::Specification.new do
+  it.name = "microslop_one_drive"
+  it.version = MicroslopOneDrive::VERSION
+  it.authors = ["Bradley Marques"]
+  it.email = [""]
 
-  spec.license = "MIT"
+  it.license = "MIT"
 
-  spec.summary = "Ruby client helpers for Microsoft Graph OneDrive/SharePoint API (drive items, delta, permissions)."
-  spec.description = "Lightweight value objects and HTTP client for OneDrive delta sync, item metadata, and sharing permissions."
-  spec.homepage = "https://github.com/bradleymarques/microslop_one_drive"
-  spec.required_ruby_version = ">= 3.4.2"
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = spec.homepage
+  it.summary = "Simple and lightweight Ruby client for Microsoft Graph OneDrive/SharePoint API."
+  it.description = "Simple and lightweight Ruby client for Microsoft Graph OneDrive/SharePoint API."
+  it.homepage = "https://github.com/bradleymarques/microslop_one_drive"
+  it.required_ruby_version = ">= 3.4.2"
+  it.metadata["homepage_uri"] = it.homepage
+  it.metadata["source_code_uri"] = it.homepage
+  it.metadata["rubygems_mfa_required"] = "true"
 
-  spec.files = Dir["lib/**/*", "README.md", "LICENSE.txt"]
-  spec.require_paths = ["lib"]
+  it.files = Dir["lib/**/*", "README.md", "LICENSE.txt"]
+  it.require_paths = ["lib"]
 
-  spec.add_dependency "httparty", "~> 0.24"
-
-  spec.add_development_dependency "minitest", "~> 5"
-  spec.add_development_dependency "mocha", "~> 2"
-  spec.add_development_dependency "rake", "~> 13"
-  spec.add_development_dependency "rubocop", "~> 1"
+  it.add_dependency "httparty", "~> 0.24"
 end

@@ -13,7 +13,7 @@ module MicroslopOneDrive
         path: "me/drives/#{drive_id}",
         parsed_response: fixture_response("drives/drive.json"),
         response_code: 200,
-        success: true,
+        success: true
       )
 
       assert_equal true, @client.drive_exists?(drive_id: drive_id)
@@ -25,7 +25,7 @@ module MicroslopOneDrive
         path: "me/drives/#{drive_id}",
         parsed_response: fixture_response("invalid_request.json"),
         response_code: 404,
-        success: false,
+        success: false
       )
 
       assert_equal false, @client.drive_exists?(drive_id: drive_id)

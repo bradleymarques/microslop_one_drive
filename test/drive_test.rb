@@ -5,10 +5,26 @@ module MicroslopOneDrive
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
+
       @drive_id = "0f097864e0cfea42"
     end
 
-    def test_drive_fetches_a_drive
+    def test_drive_without_drive_id_fetches_the_current_user_default_drive
+      mock_get(
+        path: "me/drive",
+        parsed_response: fixture_response("drives/drive.json")
+      )
+
+      drive = @client.drive
+      assert_kind_of MicroslopOneDrive::Drive, drive
+
+      assert_equal @drive_id, drive.id
+      assert_equal "OneDrive", drive.name
+      assert_equal "personal", drive.drive_type
+      assert_equal "", drive.description
+    end
+
+    def test_drive_with_drive_id_fetches_a_specific_drive
       mock_get(
         path: "me/drives/#{@drive_id}",
         parsed_response: fixture_response("drives/drive.json")
@@ -16,7 +32,7 @@ module MicroslopOneDrive
 
       drive = @client.drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::Drive, drive
-      assert_equal "0f097864e0cfea42", drive.id
+      assert_equal @drive_id, drive.id
       assert_equal "OneDrive", drive.name
       assert_equal "https://my.microsoftpersonalcontent.com/personal/0f097864e0cfea42/Documents", drive.url
       assert_equal "personal", drive.drive_type
