@@ -83,7 +83,7 @@ module MicroslopOneDrive
     def drive_item(item_id:)
       response = get(path: "me/drive/items/#{item_id}", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveItem.new(response.parsed_response)
+      MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(response.parsed_response)
     end
 
     # Asks if a DriveItem (folder or file) exists by its ID.

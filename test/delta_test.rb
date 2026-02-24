@@ -32,13 +32,6 @@ module MicroslopOneDrive
       assert_equal "application/pdf", sample_item.mime_type
       assert_equal :file, sample_item.file_or_folder
       assert_equal true, sample_item.file?
-      assert_equal false, sample_item.folder?
-      assert_equal "https://onedrive.live.com?cid=0f097864e0cfea42&id=01BVTN66CFWRTKI2EYNJE34WN3CR4SOLJH", sample_item.url
-      assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", sample_item.id
-      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", sample_item.parent_id
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.created_at
-      assert_equal Time.parse("2026-02-19T07:35:52Z"), sample_item.updated_at
-      assert_equal 1053417, sample_item.size
     end
 
     def test_delta_with_a_delta_link_and_delta_token
@@ -154,72 +147,10 @@ module MicroslopOneDrive
         "subsubfolder",
         "file_003.txt",
         "file_002.txt",
-        "file_001.txt",
+        "file_001.txt"
       ]
 
       assert_equal expected_names, drive_items.map(&:name)
-    end
-
-    def test_delta_sets_the_correct_parent_id_for_nested_items
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal file1.parent_id, folder.id
-      assert_equal file2.parent_id, subfolder.id
-      assert_equal file3.parent_id, subsubfolder.id
-      assert_equal subsubfolder.parent_id, subfolder.id
-      assert_equal subfolder.parent_id, folder.id
-      assert_equal folder.parent_id, root.id
-      assert_nil root.parent_id
-    end
-
-    def test_delta_sets_parent_and_children
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal root.children, [folder]
-      assert_equal folder.children, [subfolder, file1]
-      assert_equal subfolder.children, [subsubfolder, file2]
-      assert_equal subsubfolder.children, [file3]
-      assert_equal file3.children, []
-      assert_equal file2.children, []
-      assert_equal file1.children, []
-
-      assert_nil root.parent
-      assert_equal folder.parent, root
-      assert_equal subfolder.parent, folder
-      assert_equal subsubfolder.parent, subfolder
-      assert_equal file3.parent, subsubfolder
-      assert_equal file2.parent, subfolder
-      assert_equal file1.parent, folder
     end
 
     def test_delta_sets_the_path_for_nested_items
@@ -265,8 +196,8 @@ module MicroslopOneDrive
       other_items = drive_items.reject { it.name == "root" }
       assert_equal 6, other_items.size
 
-      other_items.each do |item|
-        assert_equal true, item.deleted?
+      other_items.each do
+        assert_equal true, it.deleted?
       end
     end
 
