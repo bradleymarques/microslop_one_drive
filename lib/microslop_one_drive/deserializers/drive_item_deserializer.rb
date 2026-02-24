@@ -1,8 +1,8 @@
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class DriveItemFactory
+  module Deserializers
+    class DriveItemDeserializer
       # Creates a new DriveItem object from a hash.
       #
       # @param drive_item_hash [Hash] The hash to create the DriveItem object from.
@@ -32,7 +32,9 @@ module MicroslopOneDrive
                     end
 
         parent_reference_hash = drive_item_hash.fetch(:parentReference, nil)
-        parent_reference = (ParentReferenceFactory.create_from_hash(parent_reference_hash) if parent_reference_hash)
+        parent_reference = (if parent_reference_hash
+                              ParentReferenceDeserializer.create_from_hash(parent_reference_hash)
+                            end)
 
         is_deleted = drive_item_hash.dig(:deleted, :state) == "deleted"
         is_shared = drive_item_hash.key?(:shared)

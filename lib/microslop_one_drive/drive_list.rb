@@ -6,7 +6,7 @@ module MicroslopOneDrive
       super
 
       @drives = response_hash.fetch("value", []).map do
-        MicroslopOneDrive::Factories::DriveFactory.create_from_hash(it)
+        MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(it)
       end
     end
   end

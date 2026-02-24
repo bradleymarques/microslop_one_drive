@@ -12,7 +12,7 @@ module MicroslopOneDrive
 
     def build_items(parsed_response)
       parsed_response.fetch("value", []).map do
-        MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(it)
+        MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(it)
       end
     end
   end

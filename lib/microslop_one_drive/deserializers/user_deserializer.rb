@@ -1,8 +1,8 @@
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class UserFactory
+  module Deserializers
+    class UserDeserializer
       # Creates a new User object from a hash.
       #
       # @param user_hash [Hash] The hash to create the User object from.

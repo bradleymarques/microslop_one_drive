@@ -2,10 +2,10 @@ require "test_helper"
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class DriveFactoryTest < BaseTest
+  module Deserializers
+    class DriveDeserializerTest < BaseTest
       def test_can_create_a_drive_from_an_empty_hash
-        drive = MicroslopOneDrive::Factories::DriveFactory.create_from_hash({})
+        drive = MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash({})
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         assert_nil drive.id
@@ -16,7 +16,7 @@ module MicroslopOneDrive
 
       def test_can_create_a_drive_from_a_string_key_hash
         drive_hash = fixture_response("drives/drive.json")
-        drive = MicroslopOneDrive::Factories::DriveFactory.create_from_hash(drive_hash)
+        drive = MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(drive_hash)
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         assert_equal "0f097864e0cfea42", drive.id
@@ -37,7 +37,7 @@ module MicroslopOneDrive
         drive_hash = fixture_response("drives/drive.json")
         drive_hash = Utils.deep_symbolize_keys(drive_hash)
 
-        drive = MicroslopOneDrive::Factories::DriveFactory.create_from_hash(drive_hash)
+        drive = MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(drive_hash)
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         assert_equal "0f097864e0cfea42", drive.id
@@ -56,7 +56,7 @@ module MicroslopOneDrive
 
       def test_assigns_created_by_last_modified_by_and_owner_as_users
         drive_hash = fixture_response("drives/drive.json")
-        drive = MicroslopOneDrive::Factories::DriveFactory.create_from_hash(drive_hash)
+        drive = MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(drive_hash)
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         created_by = drive.created_by
@@ -75,7 +75,7 @@ module MicroslopOneDrive
 
       def test_assigns_quota_as_a_quota_object
         drive_hash = fixture_response("drives/drive.json")
-        drive = MicroslopOneDrive::Factories::DriveFactory.create_from_hash(drive_hash)
+        drive = MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(drive_hash)
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         quota = drive.quota

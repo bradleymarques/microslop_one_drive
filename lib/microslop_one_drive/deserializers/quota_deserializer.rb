@@ -1,8 +1,8 @@
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class QuotaFactory
+  module Deserializers
+    class QuotaDeserializer
       # Creates a new Quota object from a hash.
       #
       # @param quota_hash [Hash] The hash to create the Quota object from.

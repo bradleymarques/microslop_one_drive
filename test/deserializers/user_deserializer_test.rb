@@ -1,10 +1,10 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  module Factories
-    class UserFactoryTest < BaseTest
+  module Deserializers
+    class UserDeserializerTest < BaseTest
       def test_create_from_empty_hash
-        user = MicroslopOneDrive::Factories::UserFactory.create_from_hash({})
+        user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash({})
         assert_kind_of MicroslopOneDrive::User, user
 
         assert_nil user.principal_name
@@ -37,7 +37,7 @@ module MicroslopOneDrive
           "businessPhones" => []
         }
 
-        user = MicroslopOneDrive::Factories::UserFactory.create_from_hash(user_hash)
+        user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(user_hash)
         assert_kind_of MicroslopOneDrive::User, user
 
         assert_equal "Example Person", user.display_name
@@ -69,7 +69,7 @@ module MicroslopOneDrive
           :businessPhones => []
         }
 
-        user = MicroslopOneDrive::Factories::UserFactory.create_from_hash(user_hash)
+        user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(user_hash)
         assert_kind_of MicroslopOneDrive::User, user
 
         assert_equal "Example Person", user.display_name

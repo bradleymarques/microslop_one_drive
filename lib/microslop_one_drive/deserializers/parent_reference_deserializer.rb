@@ -1,8 +1,8 @@
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class ParentReferenceFactory
+  module Deserializers
+    class ParentReferenceDeserializer
       def self.create_from_hash(parent_reference_hash)
         parent_reference_hash = Utils.deep_symbolize_keys(parent_reference_hash)
 

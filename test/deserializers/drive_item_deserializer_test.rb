@@ -2,11 +2,11 @@ require "test_helper"
 require "microslop_one_drive/utils"
 
 module MicroslopOneDrive
-  module Factories
-    class DriveFactoryTest < BaseTest
+  module Deserializers
+    class DriveDeserializerTest < BaseTest
       def test_can_create_a_drive_item_from_a_hash
         drive_item_hash = fixture_response("drive_items/drive_item.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::DriveItem, drive_item
 
         url = "https://onedrive.live.com?cid=0f097864e0cfea42&id=F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
@@ -27,7 +27,7 @@ module MicroslopOneDrive
 
       def test_can_create_a_file
         drive_item_hash = fixture_response("drive_items/drive_item.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::DriveItem, drive_item
         assert_kind_of MicroslopOneDrive::File, drive_item
 
@@ -38,7 +38,7 @@ module MicroslopOneDrive
 
       def test_can_create_a_folder
         drive_item_hash = fixture_response("drive_items/drive_item_folder.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::DriveItem, drive_item
         assert_kind_of MicroslopOneDrive::Folder, drive_item
 
@@ -49,7 +49,7 @@ module MicroslopOneDrive
 
       def test_can_create_the_root_folder
         drive_item_hash = fixture_response("drive_items/drive_item_root.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::DriveItem, drive_item
         assert_kind_of MicroslopOneDrive::Folder, drive_item
         assert_kind_of MicroslopOneDrive::RootFolder, drive_item
@@ -61,7 +61,7 @@ module MicroslopOneDrive
 
       def test_sets_paths_for_the_root_folder
         drive_item_hash = fixture_response("drive_items/drive_item_root.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::RootFolder, drive_item
 
         assert_equal "/drive/root:", drive_item.full_path
@@ -70,7 +70,7 @@ module MicroslopOneDrive
 
       def test_sets_paths_for_a_folder
         drive_item_hash = fixture_response("drive_items/drive_item_folder.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::Folder, drive_item
 
         assert_equal "/drive/root:/Documents", drive_item.full_path
@@ -79,7 +79,7 @@ module MicroslopOneDrive
 
       def test_sets_paths_for_a_nested_file
         drive_item_hash = fixture_response("drive_items/drive_item_nested_file.json")
-        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        drive_item = MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(drive_item_hash)
         assert_kind_of MicroslopOneDrive::File, drive_item
 
         assert_equal "/drive/root:/Documents/Sub Folder/Project Proposal.docx", drive_item.full_path

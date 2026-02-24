@@ -25,7 +25,7 @@ module MicroslopOneDrive
     def me
       response = get(path: "me", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::Factories::UserFactory.create_from_hash(response.parsed_response)
+      MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Gets the current User's "main" OneDrive drive.
@@ -39,7 +39,7 @@ module MicroslopOneDrive
     def my_drive
       response = get(path: "me/drive", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::Factories::DriveFactory.create_from_hash(response.parsed_response)
+      MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Gets ALL Drives the current user has access to.
@@ -62,7 +62,7 @@ module MicroslopOneDrive
     def drive(drive_id:)
       response = get(path: "me/drives/#{drive_id}", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::Factories::DriveFactory.create_from_hash(response.parsed_response)
+      MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Asks if a Drive exists by its ID.
@@ -83,7 +83,7 @@ module MicroslopOneDrive
     def drive_item(item_id:)
       response = get(path: "me/drive/items/#{item_id}", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(response.parsed_response)
+      MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Asks if a DriveItem (folder or file) exists by its ID.
