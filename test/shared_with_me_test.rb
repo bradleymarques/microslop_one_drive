@@ -61,5 +61,28 @@ module MicroslopOneDrive
       assert_equal "SOMEONE.ELSE@EXAMPLE.COM", last_modified_by.email_address
       assert_equal "Someone Else", last_modified_by.display_name
     end
+
+    def test_shared_with_me_items_are_assigned_the_remote_item
+      mock_get(
+        path: "me/drive/sharedWithMe",
+        parsed_response: fixture_response("shared_with_me/shared_with_me.json")
+      )
+
+      shared_with_me_list = @client.shared_with_me
+      item = shared_with_me_list.shared_with_me_items.first
+
+      remote_item = item.remote_item
+      assert_kind_of MicroslopOneDrive::DriveItem, remote_item
+      assert_equal "Spreadsheet One.xlsx", remote_item.name
+      assert_equal "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", remote_item.mime_type
+      assert_equal :file, remote_item.file_or_folder
+      assert_equal true, remote_item.file?
+      assert_equal false, remote_item.folder?
+      assert_equal "64E5DD3210FD6004!s1d8ad87a1d6e4d4eaa001e67ba140996", remote_item.id
+      assert_equal Time.parse("2026-02-17T14:27:26Z"), remote_item.created_at
+      assert_equal Time.parse("2026-02-17T14:27:27Z"), remote_item.updated_at
+      assert_equal 6_183, remote_item.size
+      assert_equal true, remote_item.shared?
+    end
   end
 end

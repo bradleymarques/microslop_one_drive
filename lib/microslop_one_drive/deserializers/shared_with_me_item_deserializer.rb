@@ -8,6 +8,7 @@ module MicroslopOneDrive
 
         created_by = build_created_by(shared_with_me_item_hash)
         last_modified_by = build_last_modified_by(shared_with_me_item_hash)
+        remote_item = build_remote_item(shared_with_me_item_hash)
 
         SharedWithMeItem.new(
           id: shared_with_me_item_hash.fetch(:id, nil),
@@ -17,7 +18,8 @@ module MicroslopOneDrive
           last_modified_date_time: Utils.safe_parse_time(shared_with_me_item_hash.fetch(:lastModifiedDateTime, nil)),
           created_date_time: Utils.safe_parse_time(shared_with_me_item_hash.fetch(:createdDateTime, nil)),
           created_by: created_by,
-          last_modified_by: last_modified_by
+          last_modified_by: last_modified_by,
+          remote_item: remote_item
         )
       end
 
@@ -33,6 +35,13 @@ module MicroslopOneDrive
         return unless last_modified_by_hash
 
         UserDeserializer.create_from_hash(last_modified_by_hash)
+      end
+
+      def self.build_remote_item(shared_with_me_item_hash)
+        remote_item_hash = shared_with_me_item_hash.fetch(:remoteItem, {})
+        return unless remote_item_hash
+
+        DriveItemDeserializer.create_from_hash(remote_item_hash)
       end
     end
   end

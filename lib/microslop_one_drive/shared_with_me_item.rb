@@ -1,7 +1,7 @@
 module MicroslopOneDrive
   class SharedWithMeItem
     attr_reader :id, :name, :web_url, :size, :last_modified_date_time, :created_date_time, :created_by,
-                :last_modified_by
+                :last_modified_by, :remote_item
 
     def initialize(
       id:,
@@ -11,7 +11,8 @@ module MicroslopOneDrive
       last_modified_date_time:,
       created_date_time:,
       created_by:,
-      last_modified_by:
+      last_modified_by:,
+      remote_item:
     )
       @id = id
       @name = name
@@ -21,6 +22,7 @@ module MicroslopOneDrive
       @created_date_time = created_date_time
       @created_by = created_by
       @last_modified_by = last_modified_by
+      @remote_item = remote_item
     end
 
     def created_at
@@ -33,6 +35,10 @@ module MicroslopOneDrive
 
     def url
       @web_url
+    end
+
+    def updated_by
+      @last_modified_by
     end
   end
 end

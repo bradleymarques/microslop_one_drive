@@ -30,15 +30,19 @@ module MicroslopOneDrive
     end
 
     def created_at
-      created_date_time
+      @created_date_time
     end
 
     def updated_at
-      last_modified_date_time
+      @last_modified_date_time
     end
 
     def url
-      web_url
+      @web_url
+    end
+
+    def updated_by
+      @last_modified_by
     end
   end
 end

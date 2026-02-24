@@ -83,7 +83,7 @@ module MicroslopOneDrive
     end
 
     def build_full_path
-      return nil if parent_reference.nil? || name.nil?
+      return nil if parent_reference&.path.nil? || name.nil?
 
       ::File.join(parent_reference.path, name)
     end
