@@ -22,7 +22,10 @@ require_relative "microslop_one_drive/list_responses/list_response"
 require_relative "microslop_one_drive/list_responses/drive_list"
 require_relative "microslop_one_drive/list_responses/drive_item_list"
 require_relative "microslop_one_drive/list_responses/permission_list"
-require_relative "microslop_one_drive/list_responses/response"
+
+# Batch
+require_relative "microslop_one_drive/batch/batch_response"
+require_relative "microslop_one_drive/batch/response"
 
 # Other models
 require_relative "microslop_one_drive/user"
@@ -31,7 +34,6 @@ require_relative "microslop_one_drive/drive"
 require_relative "microslop_one_drive/permission_set"
 require_relative "microslop_one_drive/permission"
 require_relative "microslop_one_drive/audience"
-require_relative "microslop_one_drive/batch_response"
 require_relative "microslop_one_drive/quota"
 
 # Client

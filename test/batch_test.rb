@@ -53,7 +53,7 @@ module MicroslopOneDrive
     def test_batch_for_no_requests
       requests = []
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 0, batch_response.responses.size
     end
 
@@ -71,11 +71,11 @@ module MicroslopOneDrive
       )
 
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 1, batch_response.responses.size
 
       response = batch_response.responses.first
-      assert_kind_of MicroslopOneDrive::ListResponses::Response, response
+      assert_kind_of MicroslopOneDrive::Batch::Response, response
 
       assert_equal "1", response.id
       assert_equal 200, response.status
@@ -100,13 +100,13 @@ module MicroslopOneDrive
       )
 
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 2, batch_response.responses.size
 
       response1 = batch_response.responses[0]
-      assert_kind_of MicroslopOneDrive::ListResponses::Response, response1
+      assert_kind_of MicroslopOneDrive::Batch::Response, response1
       response2 = batch_response.responses[1]
-      assert_kind_of MicroslopOneDrive::ListResponses::Response, response2
+      assert_kind_of MicroslopOneDrive::Batch::Response, response2
 
       assert_equal "1", response1.id
       assert_equal 200, response1.status
@@ -132,13 +132,13 @@ module MicroslopOneDrive
       )
 
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 2, batch_response.responses.size
 
       response1 = batch_response.responses[0]
-      assert_kind_of MicroslopOneDrive::ListResponses::Response, response1
+      assert_kind_of MicroslopOneDrive::Batch::Response, response1
       response2 = batch_response.responses[1]
-      assert_kind_of MicroslopOneDrive::ListResponses::Response, response2
+      assert_kind_of MicroslopOneDrive::Batch::Response, response2
 
       assert_equal "1", response1.id
       assert_equal 200, response1.status
@@ -161,7 +161,7 @@ module MicroslopOneDrive
       )
 
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 20, batch_response.responses.size
 
       assert batch_response.responses.all?(&:success?)
@@ -187,7 +187,7 @@ module MicroslopOneDrive
       )
 
       batch_response = @client.batch(requests: requests)
-      assert_kind_of MicroslopOneDrive::BatchResponse, batch_response
+      assert_kind_of MicroslopOneDrive::Batch::BatchResponse, batch_response
       assert_equal 21, batch_response.responses.size
 
       assert batch_response.responses.all?(&:success?)

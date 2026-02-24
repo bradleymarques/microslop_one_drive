@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  module ListResponses
+  module Batch
     class Response
       attr_reader :id, :status, :headers, :body
 

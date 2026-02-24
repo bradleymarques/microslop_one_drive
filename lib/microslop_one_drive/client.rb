@@ -174,7 +174,7 @@ module MicroslopOneDrive
     #
     # @return [MicroslopOneDrive::BatchResponse]
     def batch(requests:)
-      batch_response = MicroslopOneDrive::BatchResponse.new
+      batch_response = MicroslopOneDrive::Batch::BatchResponse.new
 
       # No requests, so simply return an empty batch response:
       return batch_response if requests.empty?
@@ -185,7 +185,7 @@ module MicroslopOneDrive
         handle_error(response) unless response.success?
         new_responses = response.parsed_response.fetch("responses", [])
         new_responses.each do
-          batch_response.add_response(MicroslopOneDrive::ListResponses::Response.new(it))
+          batch_response.add_response(MicroslopOneDrive::Batch::Response.new(it))
         end
       end
 
