@@ -13,10 +13,10 @@ module MicroslopOneDrive
         path: "me/drive/items/#{item_id}",
         parsed_response: fixture_response("drive_items/drive_item.json"),
         response_code: 200,
-        success: true,
+        success: true
       )
 
-      assert_equal true, @client.item_exists?(item_id: item_id)
+      assert_equal true, @client.drive_item_exists?(item_id: item_id)
     end
 
     def test_item_exists_returns_false_if_the_item_does_not_exist
@@ -25,10 +25,10 @@ module MicroslopOneDrive
         path: "me/drive/items/#{item_id}",
         parsed_response: fixture_response("drive_items/drive_item_not_found.json"),
         response_code: 404,
-        success: false,
+        success: false
       )
 
-      assert_equal false, @client.item_exists?(item_id: item_id)
+      assert_equal false, @client.drive_item_exists?(item_id: item_id)
     end
   end
 end

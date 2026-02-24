@@ -28,7 +28,7 @@ module MicroslopOneDrive
       MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(response.parsed_response)
     end
 
-    # Gets the current User's "main" OneDrive drive.
+    # Gets the current User's default Drive.
     #
     # From the docs:
     #
@@ -36,7 +36,7 @@ module MicroslopOneDrive
     # > Groups and Sites may have multiple Drive resources available.
     #
     # @return [MicroslopOneDrive::Drive]
-    def my_drive
+    def drive
       response = get(path: "me/drive", query: {})
       handle_error(response) unless response.success?
       MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
@@ -48,7 +48,7 @@ module MicroslopOneDrive
     # shitty things.
     #
     # @return [MicroslopOneDrive::DriveList]
-    def drives
+    def all_drives
       response = get(path: "me/drives", query: {})
       handle_error(response) unless response.success?
       MicroslopOneDrive::ListResponses::DriveList.new(response.parsed_response)
@@ -59,7 +59,7 @@ module MicroslopOneDrive
     # @param drive_id [String] The ID of the Drive to get.
     #
     # @return [MicroslopOneDrive::Drive]
-    def drive(drive_id:)
+    def drive_by_id(drive_id:)
       response = get(path: "me/drives/#{drive_id}", query: {})
       handle_error(response) unless response.success?
       MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
@@ -75,7 +75,7 @@ module MicroslopOneDrive
       response.success?
     end
 
-    # Gets a specific DriveItem (folder or file) by its ID.
+    # Gets a specific DriveItem (folder or file) by its ID in the current user's default Drive.
     #
     # @param item_id [String] The ID of the Drive Item to get.
     #
@@ -86,12 +86,22 @@ module MicroslopOneDrive
       MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
     end
 
-    # Asks if a DriveItem (folder or file) exists by its ID.
+    # Gets a specific DriveItem (folder or file) by its ID in a specific Drive.
+    #
+    # @param drive_id [String] The ID of the Drive to get the Drive Item from.
+    # @param item_id [String] The ID of the Drive Item to get.
+    #
+    # @return [MicroslopOneDrive::DriveItem]
+    def drive_item_in_drive(drive_id:, item_id:)
+      raise NotImplementedError, "Not implemented"
+    end
+
+    # Asks if a DriveItem (folder or file) exists by its ID in the current user's default Drive.
     #
     # @param item_id [String] The ID of the Drive Item to check.
     #
     # @return [Boolean]
-    def item_exists?(item_id:)
+    def drive_item_exists?(item_id:)
       response = get(path: "me/drive/items/#{item_id}", query: {})
 
       return false if response.code == 404
@@ -100,7 +110,17 @@ module MicroslopOneDrive
       handle_error(response)
     end
 
-    # Gets a delta of changes to the current user's "main" OneDrive drive.
+    # Asks if a DriveItem (folder or file) exists by its ID in a specific Drive.
+    #
+    # @param drive_id [String] The ID of the Drive to check the Drive Item in.
+    # @param item_id [String] The ID of the Drive Item to check.
+    #
+    # @return [Boolean]
+    def drive_item_in_drive_exists?(drive_id:, item_id:)
+      raise NotImplementedError, "Not implemented"
+    end
+
+    # Gets a delta of changes to the current user's default Drive.
     #
     # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
     #
@@ -123,7 +143,14 @@ module MicroslopOneDrive
       MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
     end
 
-    # Gets the permissions for a DriveItem (folder or file).
+    # Gets the Drive Items shared with the current user.
+    #
+    # @return [MicroslopOneDrive::SharedWithMeList]
+    def shared_with_me
+      raise NotImplementedError, "Not implemented"
+    end
+
+    # Gets the permissions for a DriveItem (folder or file) in the current user's default Drive.
     #
     # @param item_id [String] The ID of the Drive Item to get the permissions of.
     #
@@ -144,6 +171,16 @@ module MicroslopOneDrive
         drive_item_id: item_id,
         parsed_response: response.parsed_response
       )
+    end
+
+    # Gets the permissions for a DriveItem (folder or file) in a specific Drive.
+    #
+    # @param drive_id [String] The ID of the Drive to get the delta of.
+    # @param item_id [String] The ID of the Drive Item to get the permissions of.
+    #
+    # @return [MicroslopOneDrive::PermissionList]
+    def permissions_in_drive(drive_id:, item_id:)
+      raise NotImplementedError, "Not implemented"
     end
 
     # Gets the permissions for multiple Drive Items.
@@ -171,6 +208,21 @@ module MicroslopOneDrive
       end
 
       permission_lists.flat_map(&:permissions)
+    end
+
+    # Gets the permissions for multiple Drive Items in the specified Drive.
+    #
+    # Uses the batch Microsoft Graph API to make multiple API calls in batches of 20 (the max Microsoft allows on their
+    # batch endpoint).
+    #
+    # See: https://learn.microsoft.com/en-us/graph/json-batching
+    #
+    # @param drive_id [String] The ID of the Drive to get the permissions of.
+    # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
+    #
+    # @return [Array<MicroslopOneDrive::Permission>]
+    def batch_permissions_in_drive(drive_id:, item_ids:)
+      raise NotImplementedError, "Not implemented"
     end
 
     # Makes a batch request to the Microsoft Graph API.

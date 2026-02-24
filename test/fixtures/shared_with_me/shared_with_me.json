@@ -1,0 +1,93 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.driveItem)",
+  "value": [
+    {
+      "createdDateTime": "2026-02-17T14:27:26Z",
+      "id": "64E5DD3210FD6004!s1d8ad87a1d6e4d4eaa001e67ba140996",
+      "lastModifiedDateTime": "2026-02-17T14:27:27Z",
+      "name": "Spreadsheet One.xlsx",
+      "webUrl": "https://onedrive.live.com?cid=64e5dd3210fd6004&id=64E5DD3210FD6004!s1d8ad87a1d6e4d4eaa001e67ba140996",
+      "size": 6183,
+      "createdBy": {
+        "user": {
+          "email": "outlook_64E5DD3210FD6004@outlook.com",
+          "id": "outlook_64E5DD3210FD6004@outlook.com",
+          "displayName": "Someone Else"
+        }
+      },
+      "lastModifiedBy": {
+        "user": {
+          "email": "SOMEONE.ELSE@EXAMPLE.COM",
+          "id": "SOMEONE.ELSE@EXAMPLE.COM",
+          "displayName": "Someone Else"
+        }
+      },
+      "file": {
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "hashes": {}
+      },
+      "fileSystemInfo": {
+        "createdDateTime": "2026-02-17T14:27:26Z",
+        "lastModifiedDateTime": "2026-02-17T14:27:27Z"
+      },
+      "remoteItem": {
+        "createdDateTime": "2026-02-17T14:27:26Z",
+        "id": "64E5DD3210FD6004!s1d8ad87a1d6e4d4eaa001e67ba140996",
+        "lastModifiedDateTime": "2026-02-17T14:27:27Z",
+        "name": "Spreadsheet One.xlsx",
+        "size": 6183,
+        "createdBy": {
+          "user": {
+            "email": "outlook_64E5DD3210FD6004@outlook.com",
+            "id": "outlook_64E5DD3210FD6004@outlook.com",
+            "displayName": "Someone Else"
+          }
+        },
+        "file": {
+          "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "hashes": {}
+        },
+        "fileSystemInfo": {
+          "createdDateTime": "2026-02-17T14:27:26Z",
+          "lastModifiedDateTime": "2026-02-17T14:27:27Z"
+        },
+        "lastModifiedBy": {
+          "user": {
+            "email": "SOMEONE.ELSE@EXAMPLE.COM",
+            "id": "SOMEONE.ELSE@EXAMPLE.COM",
+            "displayName": "Someone Else"
+          }
+        },
+        "parentReference": {
+          "driveType": "personal",
+          "driveId": "64e5dd3210fd6004"
+        },
+        "shared": {
+          "scope": "users",
+          "sharedDateTime": "2026-02-24T09:17:36Z",
+          "owner": {
+            "user": {
+              "id": "64e5dd3210fd6004",
+              "displayName": "Someone Else"
+            }
+          },
+          "sharedBy": {
+            "user": {
+              "email": "outlook_64E5DD3210FD6004@outlook.com",
+              "id": "outlook_64E5DD3210FD6004@outlook.com",
+              "displayName": "Someone Else"
+            }
+          }
+        },
+        "sharepointIds": {
+          "listId": "80298b4c-feaf-4b1c-ae65-57268f16af3d",
+          "listItemId": "17878",
+          "listItemUniqueId": "1d8ad87a-1d6e-4d4e-aa00-1e67ba140996",
+          "siteId": "56edb7e0-47ca-4020-a0c7-a2983bd292b4",
+          "siteUrl": "https://my.microsoftpersonalcontent.com/personal/64e5dd3210fd6004",
+          "webId": "e232ebe3-23f2-45d7-90b5-b07548ff428b"
+        }
+      }
+    }
+  ]
+}

@@ -25,7 +25,7 @@ module MicroslopOneDrive
         .with("#{MicroslopOneDrive::Client::BASE_URL}/me", headers: anything, query: anything)
         .returns(stubbed_response)
 
-      error =assert_raises MicroslopOneDrive::Errors::ClientError do
+      error = assert_raises MicroslopOneDrive::Errors::ClientError do
         @client.me
       end
 

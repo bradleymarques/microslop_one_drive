@@ -1,19 +1,19 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  class DrivesTest < BaseTest
+  class AllDrivesTest < BaseTest
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
     end
 
-    def test_drives_fetches_the_current_user_drives
+    def test_all_drives_fetches_the_current_user_drives
       mock_get(
         path: "me/drives",
         parsed_response: fixture_response("drives/drives.json")
       )
 
-      drive_list = @client.drives
+      drive_list = @client.all_drives
       assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_list
       assert_equal false, drive_list.next_page?
       assert_kind_of MicroslopOneDrive::ListResponses::DriveList, drive_list
