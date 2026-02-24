@@ -8,7 +8,7 @@ module MicroslopOneDrive
     end
 
     def test_batch_permissions_in_drive_fetches_the_permissions_for_multiple_drive_items_in_a_specific_drive
-      flunk "Not implemented"
+      skip "Not implemented"
     end
   end
 end

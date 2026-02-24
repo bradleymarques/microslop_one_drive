@@ -8,7 +8,7 @@ module MicroslopOneDrive
     end
 
     def test_shared_with_me_fetches_the_drive_items_shared_with_me
-      flunk "Not implemented"
+      skip "Not implemented"
     end
   end
 end

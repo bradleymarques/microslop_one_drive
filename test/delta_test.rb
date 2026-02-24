@@ -195,5 +195,27 @@ module MicroslopOneDrive
       assert_equal true, shared_folder.shared?
       assert_equal false, word_document.shared?
     end
+
+    def test_delta_with_drive_id_fetches_an_initial_delta_of_changes_to_a_specific_drive
+      mock_get(
+        path: "me/drives/#{@drive_id}/root/delta",
+        parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
+      )
+
+      drive_item_list = @client.delta(drive_id: @drive_id)
+      drive_items = drive_item_list.items
+
+      assert_equal 7, drive_items.size
+
+      root = get_drive_item_by_name(drive_items, "root")
+      documents = get_drive_item_by_name(drive_items, "Documents")
+      shared_folder = get_drive_item_by_name(drive_items, "Shared Folder")
+      word_document = get_drive_item_by_name(drive_items, "A Word Document.docx")
+
+      assert_equal true, root.shared?
+      assert_equal false, documents.shared?
+      assert_equal true, shared_folder.shared?
+      assert_equal false, word_document.shared?
+    end
   end
 end

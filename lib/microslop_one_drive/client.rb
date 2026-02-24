@@ -28,16 +28,24 @@ module MicroslopOneDrive
       MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(response.parsed_response)
     end
 
-    # Gets the current User's default Drive.
+    # Gets a Drive.
+    #
+    # If no drive_id is provided, the current User's default Drive will be returned, else, the specific Drive identified
+    # by the drive_id will be returned.
     #
     # From the docs:
     #
     # > Most users will only have a single Drive resource.
     # > Groups and Sites may have multiple Drive resources available.
     #
+    # @param drive_id [String, nil] The ID of the Drive to get. If not provided, the current User's default Drive will
+    # be returned.
+    #
     # @return [MicroslopOneDrive::Drive]
-    def drive
-      response = get(path: "me/drive", query: {})
+    def drive(drive_id: nil)
+      url = drive_id.nil? ? "me/drive" : "me/drives/#{drive_id}"
+      response = get(path: url, query: {})
+
       handle_error(response) unless response.success?
       MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
     end
@@ -54,17 +62,6 @@ module MicroslopOneDrive
       MicroslopOneDrive::ListResponses::DriveList.new(response.parsed_response)
     end
 
-    # Gets a specific Drive by its ID.
-    #
-    # @param drive_id [String] The ID of the Drive to get.
-    #
-    # @return [MicroslopOneDrive::Drive]
-    def drive_by_id(drive_id:)
-      response = get(path: "me/drives/#{drive_id}", query: {})
-      handle_error(response) unless response.success?
-      MicroslopOneDrive::Deserializers::DriveDeserializer.create_from_hash(response.parsed_response)
-    end
-
     # Asks if a Drive exists by its ID.
     #
     # @param drive_id [String] The ID of the Drive to check.
@@ -75,36 +72,31 @@ module MicroslopOneDrive
       response.success?
     end
 
-    # Gets a specific DriveItem (folder or file) by its ID in the current user's default Drive.
+    # Gets a specific DriveItem (folder or file)
     #
+    # @param drive_id [String, nil] The ID of the Drive to get the Drive Item from. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to get.
     #
     # @return [MicroslopOneDrive::DriveItem]
-    def drive_item(item_id:)
-      response = get(path: "me/drive/items/#{item_id}", query: {})
+    def drive_item(item_id:, drive_id: nil)
+      url = drive_id.nil? ? "me/drive/items/#{item_id}" : "me/drives/#{drive_id}/items/#{item_id}"
+      response = get(path: url, query: {})
+
       handle_error(response) unless response.success?
       MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
     end
 
-    # Gets a specific DriveItem (folder or file) by its ID in a specific Drive.
+    # Asks if a DriveItem (folder or file) exists by its ID.
     #
-    # @param drive_id [String] The ID of the Drive to get the Drive Item from.
-    # @param item_id [String] The ID of the Drive Item to get.
-    #
-    # @return [MicroslopOneDrive::DriveItem]
-    def drive_item_in_drive(drive_id:, item_id:)
-      response = get(path: "me/drives/#{drive_id}/items/#{item_id}", query: {})
-      handle_error(response) unless response.success?
-      MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
-    end
-
-    # Asks if a DriveItem (folder or file) exists by its ID in the current user's default Drive.
-    #
+    # @param drive_id [String, nil] The ID of the Drive to check the Drive Item in. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to check.
     #
     # @return [Boolean]
-    def drive_item_exists?(item_id:)
-      response = get(path: "me/drive/items/#{item_id}", query: {})
+    def drive_item_exists?(item_id:, drive_id: nil)
+      url = drive_id.nil? ? "me/drive/items/#{item_id}" : "me/drives/#{drive_id}/items/#{item_id}"
+      response = get(path: url, query: {})
 
       return false if response.code == 404
       return true if response.success?
@@ -112,40 +104,16 @@ module MicroslopOneDrive
       handle_error(response)
     end
 
-    # Asks if a DriveItem (folder or file) exists by its ID in a specific Drive.
+    # Gets a delta of changes in a Drive.
     #
-    # @param drive_id [String] The ID of the Drive to check the Drive Item in.
-    # @param item_id [String] The ID of the Drive Item to check.
-    #
-    # @return [Boolean]
-    def drive_item_exists_in_drive?(drive_id:, item_id:)
-      response = get(path: "me/drives/#{drive_id}/items/#{item_id}", query: {})
-
-      return false if response.code == 404
-      return true if response.success?
-
-      handle_error(response)
-    end
-
-    # Gets a delta of changes to the current user's default Drive.
-    #
-    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
+    # @param drive_id [String, nil] The ID of the Drive to get the delta of. If not provided, the current User's default
+    # Drive will be used.
+    # @param token [String, nil] The token to use for the delta. If not provided, the initial delta will be returned.
     #
     # @return [MicroslopOneDrive::DriveItemList]
-    def delta(token: nil)
-      response = get(path: "me/drive/root/delta", query: {token: token})
-      handle_error(response) unless response.success?
-      MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
-    end
-
-    # Gets a delta of changes to a specific Drive identified by its drive_id.
-    #
-    # @param drive_id [String] The ID of the Drive to get the delta of.
-    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
-    #
-    # @return [MicroslopOneDrive::DriveItemList]
-    def delta_for_drive(drive_id:, token: nil)
-      response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
+    def delta(drive_id: nil, token: nil)
+      url = drive_id.nil? ? "me/drive/root/delta" : "me/drives/#{drive_id}/root/delta"
+      response = get(path: url, query: {token: token})
       handle_error(response) unless response.success?
       MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
     end
