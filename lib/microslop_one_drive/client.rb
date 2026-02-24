@@ -125,13 +125,21 @@ module MicroslopOneDrive
       raise NotImplementedError, "Not implemented"
     end
 
-    # Gets the permissions for a DriveItem (folder or file) in the current user's default Drive.
+    # Gets the permissions for a DriveItem (folder or file) in a Drive.
     #
+    # @param drive_id [String, nil] The ID of the Drive to get the permissions of. If not provided, the current User's
+    # default Drive will be used.
     # @param item_id [String] The ID of the Drive Item to get the permissions of.
     #
     # @return [MicroslopOneDrive::PermissionList]
-    def permissions(item_id:)
-      response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
+    def permissions(item_id:, drive_id: nil)
+      url = if drive_id.nil?
+              "me/drive/items/#{item_id}/permissions"
+            else
+              "me/drives/#{drive_id}/items/#{item_id}/permissions"
+            end
+
+      response = get(path: url, query: {})
 
       if response.code == 404
         return MicroslopOneDrive::ListResponses::PermissionList.new(
@@ -148,16 +156,6 @@ module MicroslopOneDrive
       )
     end
 
-    # Gets the permissions for a DriveItem (folder or file) in a specific Drive.
-    #
-    # @param drive_id [String] The ID of the Drive to get the delta of.
-    # @param item_id [String] The ID of the Drive Item to get the permissions of.
-    #
-    # @return [MicroslopOneDrive::PermissionList]
-    def permissions_in_drive(drive_id:, item_id:)
-      raise NotImplementedError, "Not implemented"
-    end
-
     # Gets the permissions for multiple Drive Items.
     #
     # Uses the batch Microsoft Graph API to make multiple API calls in batches of 20 (the max Microsoft allows on their
@@ -165,13 +163,13 @@ module MicroslopOneDrive
     #
     # See: https://learn.microsoft.com/en-us/graph/json-batching
     #
+    # @param drive_id [String, nil] The ID of the Drive to get the permissions of. If not provided, the current User's
+    # default Drive will be used.
     # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
     #
     # @return [Array<MicroslopOneDrive::Permission>]
-    def batch_permissions(item_ids:)
-      requests = item_ids.map {
-        {id: it, method: "GET", url: "/me/drive/items/#{it}/permissions"}
-      }
+    def batch_permissions(item_ids:, drive_id: nil)
+      requests = build_batch_permissions_requests(item_ids: item_ids, drive_id: drive_id)
       batch_response = batch(requests: requests)
       successful_responses = batch_response.responses.select(&:success?)
 
@@ -183,21 +181,6 @@ module MicroslopOneDrive
       end
 
       permission_lists.flat_map(&:permissions)
-    end
-
-    # Gets the permissions for multiple Drive Items in the specified Drive.
-    #
-    # Uses the batch Microsoft Graph API to make multiple API calls in batches of 20 (the max Microsoft allows on their
-    # batch endpoint).
-    #
-    # See: https://learn.microsoft.com/en-us/graph/json-batching
-    #
-    # @param drive_id [String] The ID of the Drive to get the permissions of.
-    # @param item_ids [Array<String>] The IDs of the Drive Items to get the permissions of.
-    #
-    # @return [Array<MicroslopOneDrive::Permission>]
-    def batch_permissions_in_drive(drive_id:, item_ids:)
-      raise NotImplementedError, "Not implemented"
     end
 
     # Makes a batch request to the Microsoft Graph API.
@@ -231,6 +214,14 @@ module MicroslopOneDrive
     end
 
     private
+
+    def build_batch_permissions_requests(item_ids:, drive_id: nil)
+      if drive_id.nil?
+        item_ids.map { {id: it, method: "GET", url: "/me/drive/items/#{it}/permissions"} }
+      else
+        item_ids.map { {id: it, method: "GET", url: "/me/drives/#{drive_id}/items/#{it}/permissions"} }
+      end
+    end
 
     def get(path:, query: {})
       url = "#{BASE_URL}/#{path}"
