@@ -62,9 +62,7 @@ module MicroslopOneDrive
     end
 
     def set_parent(parent)
-      if @parent
-        @parent.remove_child(self)
-      end
+      @parent.remove_child(self) if @parent
 
       @parent = parent
       @parent.add_child(self)
@@ -93,7 +91,7 @@ module MicroslopOneDrive
       return nil if full_parent_path.nil?
 
       full_path_with_name = File.join(full_parent_path, @name)
-      full_path_with_name.sub(/\A.*root:\//, "root:/")
+      full_path_with_name.sub(%r{\A.*root:/}, "root:/")
     end
   end
 end

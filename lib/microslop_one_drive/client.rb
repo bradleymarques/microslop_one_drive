@@ -3,7 +3,7 @@ require "json"
 module MicroslopOneDrive
   class Client
     BASE_URL = "https://graph.microsoft.com/v1.0".freeze
-    BATCH_REQUEST_LIMIT = 20.freeze
+    BATCH_REQUEST_LIMIT = 20 # This is set by Microsoft
 
     # @param access_token [String] OAuth access token for Microsoft Graph.
     # @param logger [Object, nil] Optional logger (e.g. Rails.logger) that responds to +#info+, +#debug+, +#warn+, +#error+.
@@ -25,10 +25,24 @@ module MicroslopOneDrive
     def me
       response = get(path: "me", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::User.new(response.parsed_response)
+      MicroslopOneDrive::Factories::UserFactory.create_from_hash(response.parsed_response)
     end
 
-    # Gets all Drives the current user has access to.
+    # Gets the current User's "main" OneDrive drive.
+    #
+    # From the docs:
+    #
+    # > Most users will only have a single Drive resource.
+    # > Groups and Sites may have multiple Drive resources available.
+    #
+    # @return [MicroslopOneDrive::Drive]
+    def my_drive
+      response = get(path: "me/drive", query: {})
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::Factories::DriveFactory.create_from_hash(response.parsed_response)
+    end
+
+    # Gets ALL Drives the current user has access to.
     #
     # NOTE: This will include some internal Microsoft drives that aren't real drives, such as AI, Face scans, and other
     # shitty things.
@@ -48,7 +62,7 @@ module MicroslopOneDrive
     def drive(drive_id:)
       response = get(path: "me/drives/#{drive_id}", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::Drive.new(response.parsed_response)
+      MicroslopOneDrive::Factories::DriveFactory.create_from_hash(response.parsed_response)
     end
 
     # Asks if a Drive exists by its ID.
@@ -107,7 +121,7 @@ module MicroslopOneDrive
       response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
 
       if response.code == 404
-        return MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: { "value" => [] })
+        return MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: {"value" => []})
       end
 
       handle_error(response) unless response.success?
@@ -126,12 +140,14 @@ module MicroslopOneDrive
     #
     # @return [Array<MicroslopOneDrive::Permission>]
     def batch_permissions(item_ids:)
-      requests = item_ids.map { |item_id| { id: item_id, method: "GET", url: "/me/drive/items/#{item_id}/permissions" } }
+      requests = item_ids.map {
+        {id: it, method: "GET", url: "/me/drive/items/#{it}/permissions"}
+      }
       batch_response = batch(requests: requests)
       successful_responses = batch_response.responses.select(&:success?)
 
-      permission_lists = successful_responses.map do |response|
-        MicroslopOneDrive::PermissionList.new(drive_item_id: response.id, parsed_response: response.body)
+      permission_lists = successful_responses.map do
+        MicroslopOneDrive::PermissionList.new(drive_item_id: it.id, parsed_response: it.body)
       end
 
       permission_lists.flat_map(&:permissions)
@@ -155,12 +171,12 @@ module MicroslopOneDrive
       return batch_response if requests.empty?
 
       batches = requests.each_slice(BATCH_REQUEST_LIMIT).to_a
-      batches.each do |batch|
-        response = post(path: "$batch", body: { requests: batch }.to_json)
+      batches.each do
+        response = post(path: "$batch", body: {requests: it}.to_json)
         handle_error(response) unless response.success?
         new_responses = response.parsed_response.fetch("responses", [])
-        new_responses.each do |new_response_hash|
-          batch_response.add_response(MicroslopOneDrive::Response.new(new_response_hash))
+        new_responses.each do
+          batch_response.add_response(MicroslopOneDrive::Response.new(it))
         end
       end
 

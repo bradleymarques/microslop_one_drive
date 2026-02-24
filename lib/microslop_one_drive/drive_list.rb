@@ -3,10 +3,10 @@ module MicroslopOneDrive
     attr_reader :drives
 
     def initialize(response_hash)
-      super(response_hash)
+      super
 
       @drives = response_hash.fetch("value", []).map do
-        MicroslopOneDrive::Drive.new(it)
+        MicroslopOneDrive::Factories::DriveFactory.create_from_hash(it)
       end
     end
   end

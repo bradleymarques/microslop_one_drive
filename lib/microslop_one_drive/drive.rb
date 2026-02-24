@@ -1,18 +1,44 @@
 module MicroslopOneDrive
   class Drive
-    attr_reader :id, :name, :description, :url, :drive_type, :created_at, :updated_at
+    attr_reader :id, :name, :description, :web_url, :drive_type, :created_date_time, :last_modified_date_time,
+                :created_by, :last_modified_by, :owner, :quota
 
-    def initialize(drive_hash)
-      @drive_hash = drive_hash
+    def initialize(
+      id:,
+      name:,
+      description:,
+      web_url:,
+      drive_type:,
+      created_date_time:,
+      last_modified_date_time:,
+      created_by:,
+      last_modified_by:,
+      owner:,
+      quota:
+    )
+      @id = id
+      @name = name
+      @description = description
+      @web_url = web_url
+      @drive_type = drive_type
+      @created_date_time = created_date_time
+      @last_modified_date_time = last_modified_date_time
+      @created_by = created_by
+      @last_modified_by = last_modified_by
+      @owner = owner
+      @quota = quota
+    end
 
-      @id = drive_hash.fetch("id", nil)
-      @name = drive_hash.fetch("name", nil)
-      @description = drive_hash.fetch("description", nil)
-      @url = drive_hash.fetch("webUrl", nil)
-      @drive_type = drive_hash.fetch("driveType", nil)
+    def created_at
+      created_date_time
+    end
 
-      @created_at = Utils.safe_parse_time(drive_hash.fetch("createdDateTime", nil))
-      @updated_at = Utils.safe_parse_time(drive_hash.fetch("lastModifiedDateTime", nil))
+    def updated_at
+      last_modified_date_time
+    end
+
+    def url
+      web_url
     end
   end
 end

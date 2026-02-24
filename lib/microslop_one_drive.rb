@@ -3,6 +3,11 @@ require "json"
 
 require_relative "microslop_one_drive/version"
 require_relative "microslop_one_drive/utils"
+
+require_relative "microslop_one_drive/factories/user_factory"
+require_relative "microslop_one_drive/factories/drive_factory"
+require_relative "microslop_one_drive/factories/quota_factory"
+
 require_relative "microslop_one_drive/errors/client_error"
 require_relative "microslop_one_drive/user"
 require_relative "microslop_one_drive/list_response"
@@ -16,4 +21,5 @@ require_relative "microslop_one_drive/permission"
 require_relative "microslop_one_drive/audience"
 require_relative "microslop_one_drive/batch_response"
 require_relative "microslop_one_drive/response"
+require_relative "microslop_one_drive/quota"
 require_relative "microslop_one_drive/client"

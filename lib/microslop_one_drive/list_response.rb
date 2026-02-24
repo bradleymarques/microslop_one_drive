@@ -3,8 +3,6 @@ module MicroslopOneDrive
     attr_reader :next_link, :next_token, :delta_link, :delta_token, :context
 
     def initialize(response_hash)
-      @response_hash = response_hash
-
       @context = response_hash.fetch("@odata.context", nil)
 
       @next_link = response_hash.fetch("@odata.nextLink", nil)

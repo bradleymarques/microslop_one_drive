@@ -1,8 +1,8 @@
-require:
-  - ./lib/rubocop/require
-
 AllCops:
   NewCops: enable
+
+Metrics/ParameterLists:
+  Max: 20
 
 # Commonly used screens these days easily fit more than 80 characters.
 Layout/LineLength:
