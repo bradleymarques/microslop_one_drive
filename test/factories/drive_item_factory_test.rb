@@ -24,6 +24,67 @@ module MicroslopOneDrive
         assert_equal Time.parse("2026-02-19T07:35:52Z"), drive_item.updated_at
         assert_equal 1_053_417, drive_item.size
       end
+
+      def test_can_create_a_file
+        drive_item_hash = fixture_response("drive_items/drive_item.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+        assert_kind_of MicroslopOneDrive::File, drive_item
+
+        assert_equal true, drive_item.file?
+        assert_equal false, drive_item.folder?
+        assert_equal false, drive_item.root?
+      end
+
+      def test_can_create_a_folder
+        drive_item_hash = fixture_response("drive_items/drive_item_folder.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+        assert_kind_of MicroslopOneDrive::Folder, drive_item
+
+        assert_equal false, drive_item.file?
+        assert_equal true, drive_item.folder?
+        assert_equal false, drive_item.root?
+      end
+
+      def test_can_create_the_root_folder
+        drive_item_hash = fixture_response("drive_items/drive_item_root.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::DriveItem, drive_item
+        assert_kind_of MicroslopOneDrive::Folder, drive_item
+        assert_kind_of MicroslopOneDrive::RootFolder, drive_item
+
+        assert_equal false, drive_item.file?
+        assert_equal true, drive_item.folder?
+        assert_equal true, drive_item.root?
+      end
+
+      def test_sets_paths_for_the_root_folder
+        drive_item_hash = fixture_response("drive_items/drive_item_root.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::RootFolder, drive_item
+
+        assert_equal "/drive/root:", drive_item.full_path
+        assert_equal "", drive_item.path
+      end
+
+      def test_sets_paths_for_a_folder
+        drive_item_hash = fixture_response("drive_items/drive_item_folder.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::Folder, drive_item
+
+        assert_equal "/drive/root:/Documents", drive_item.full_path
+        assert_equal "Documents", drive_item.path
+      end
+
+      def test_sets_paths_for_a_nested_file
+        drive_item_hash = fixture_response("drive_items/drive_item_nested_file.json")
+        drive_item = MicroslopOneDrive::Factories::DriveItemFactory.create_from_hash(drive_item_hash)
+        assert_kind_of MicroslopOneDrive::File, drive_item
+
+        assert_equal "/drive/root:/Documents/Sub Folder/Project Proposal.docx", drive_item.full_path
+        assert_equal "Documents/Sub Folder/Project Proposal.docx", drive_item.path
+      end
     end
   end
 end

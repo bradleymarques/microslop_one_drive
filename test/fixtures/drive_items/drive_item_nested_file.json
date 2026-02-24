@@ -1,0 +1,45 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('person%40example.com')/drive/items/$entity",
+  "createdDateTime": "2026-02-24T08:18:07Z",
+  "eTag": "\"{DA474C6A-E302-41F1-B22D-918E3930D8BE},5\"",
+  "id": "F097864E0CFEA42!sda474c6ae30241f1b22d918e3930d8be",
+  "lastModifiedDateTime": "2026-02-24T08:18:21Z",
+  "name": "Project Proposal.docx",
+  "webUrl": "https://onedrive.live.com/personal/0f097864e0cfea42/_layouts/15/doc.aspx?resid=da474c6a-e302-41f1-b22d-918e3930d8be&cid=0f097864e0cfea42",
+  "cTag": "\"c:{DA474C6A-E302-41F1-B22D-918E3930D8BE},4\"",
+  "size": 11399,
+  "createdBy": {
+    "user": {
+      "email": "person@example.com",
+      "id": "0f097864e0cfea42",
+      "displayName": "Example Person"
+    }
+  },
+  "lastModifiedBy": {
+    "user": {
+      "email": "person@example.com",
+      "id": "0f097864e0cfea42",
+      "displayName": "Example Person"
+    }
+  },
+  "parentReference": {
+    "driveType": "personal",
+    "driveId": "0f097864e0cfea42",
+    "id": "F097864E0CFEA42!s2cbeab43597a481a8e95ce5bd879576f",
+    "name": "Sub Folder",
+    "path": "/drive/root:/Documents/Sub Folder",
+    "siteId": "d349b2ca-3bcb-4f1c-a509-ad8d9138501d"
+  },
+  "file": {
+    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "hashes": {
+      "quickXorHash": "KEf17BtiUo8iQYbhba4FnB2RWWU=",
+      "sha1Hash": "8AECAB8985AB93D9D0F6876643DDEA340AB57DC5",
+      "sha256Hash": "80253D9FF9E761C11610C835C8D3D39092D580717663BB81C8C6860503AEC581"
+    }
+  },
+  "fileSystemInfo": {
+    "createdDateTime": "2026-02-24T08:18:07Z",
+    "lastModifiedDateTime": "2026-02-24T08:18:21Z"
+  }
+}

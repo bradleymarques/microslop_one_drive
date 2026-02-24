@@ -15,7 +15,9 @@ module MicroslopOneDrive
                 :mime_type,
                 :parent_reference,
                 :is_deleted,
-                :is_shared
+                :is_shared,
+                :full_path,
+                :path
 
     def initialize(
       id:,
@@ -47,6 +49,17 @@ module MicroslopOneDrive
       @parent_reference = parent_reference
       @is_deleted = is_deleted
       @is_shared = is_shared
+
+      @full_path = build_full_path
+      @path = build_path(@full_path)
+    end
+
+    def created_at
+      @created_date_time
+    end
+
+    def updated_at
+      @last_modified_date_time
     end
 
     def deleted?
@@ -65,28 +78,20 @@ module MicroslopOneDrive
       @file_or_folder == :folder
     end
 
-    def created_at
-      @created_date_time
-    end
-
-    def updated_at
-      @last_modified_date_time
-    end
-
     def root?
-      @item_hash.key?("root")
+      false
     end
 
-    private
+    def build_full_path
+      return nil if parent_reference.nil? || name.nil?
 
-    def build_path
-      return "root:" if root?
+      ::File.join(parent_reference.path, name)
+    end
 
-      full_parent_path = @item_hash.dig("parentReference", "path")
-      return nil if full_parent_path.nil?
+    def build_path(full_path)
+      return "" if full_path.nil?
 
-      full_path_with_name = File.join(full_parent_path, @name)
-      full_path_with_name.sub(%r{\A.*root:/}, "root:/")
+      full_path.gsub(%r{\A/?drive/root:/?}, "").chomp("/")
     end
   end
 end

@@ -43,7 +43,15 @@ module MicroslopOneDrive
       drive_item = @client.drive_item(item_id: item_id)
       assert_kind_of MicroslopOneDrive::DriveItem, drive_item
 
-      skip
+      parent_reference = drive_item.parent_reference
+      assert_kind_of MicroslopOneDrive::ParentReference, parent_reference
+
+      assert_equal "0f097864e0cfea42", parent_reference.drive_id
+      assert_equal "F097864E0CFEA42!sea8cc6beffdb43d7976fbc7da445c639", parent_reference.id
+      assert_equal "personal", parent_reference.drive_type
+      assert_equal "Documents", parent_reference.name
+      assert_equal "/drive/root:", parent_reference.path
+      assert_equal "d349b2ca-3bcb-4f1c-a509-ad8d9138501d", parent_reference.site_id
     end
 
     def test_drive_item_for_an_item_that_does_not_exist

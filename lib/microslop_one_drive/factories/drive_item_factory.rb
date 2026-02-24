@@ -37,7 +37,7 @@ module MicroslopOneDrive
         is_deleted = drive_item_hash.dig(:deleted, :state) == "deleted"
         is_shared = drive_item_hash.key?(:shared)
 
-        DriveItem.new(
+        parameters = {
           id: id,
           name: name,
           download_url: download_url,
@@ -52,7 +52,19 @@ module MicroslopOneDrive
           parent_reference: parent_reference,
           is_deleted: is_deleted,
           is_shared: is_shared
-        )
+        }
+
+        root = drive_item_hash.key?(:root) && file_or_folder == :folder
+
+        if root
+          RootFolder.new(**parameters)
+        elsif file_or_folder == :file
+          File.new(**parameters)
+        elsif file_or_folder == :folder
+          Folder.new(**parameters)
+        else
+          DriveItem.new(**parameters)
+        end
       end
     end
   end

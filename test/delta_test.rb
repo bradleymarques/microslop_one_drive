@@ -153,33 +153,6 @@ module MicroslopOneDrive
       assert_equal expected_names, drive_items.map(&:name)
     end
 
-    def test_delta_sets_the_path_for_nested_items
-      mock_get(
-        path: "me/drives/#{@drive_id}/root/delta",
-        parsed_response: fixture_response("deltas/delta_added_nested_items.json")
-      )
-
-      drive_item_list = @client.delta(drive_id: @drive_id)
-      drive_items = drive_item_list.items
-      assert_equal 7, drive_items.size
-
-      root = get_drive_item_by_name(drive_items, "root")
-      folder = get_drive_item_by_name(drive_items, "folder")
-      subfolder = get_drive_item_by_name(drive_items, "subfolder")
-      subsubfolder = get_drive_item_by_name(drive_items, "subsubfolder")
-      file3 = get_drive_item_by_name(drive_items, "file_003.txt")
-      file2 = get_drive_item_by_name(drive_items, "file_002.txt")
-      file1 = get_drive_item_by_name(drive_items, "file_001.txt")
-
-      assert_equal "root:", root.path
-      assert_equal "root:/folder", folder.path
-      assert_equal "root:/folder/subfolder", subfolder.path
-      assert_equal "root:/folder/subfolder/subsubfolder", subsubfolder.path
-      assert_equal "root:/folder/file_001.txt", file1.path
-      assert_equal "root:/folder/subfolder/file_002.txt", file2.path
-      assert_equal "root:/folder/subfolder/subsubfolder/file_003.txt", file3.path
-    end
-
     def test_delta_for_deleted_nested_items
       mock_get(
         path: "me/drives/#{@drive_id}/root/delta",

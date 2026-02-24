@@ -10,6 +10,10 @@ require_relative "microslop_one_drive/factories/quota_factory"
 require_relative "microslop_one_drive/factories/drive_item_factory"
 require_relative "microslop_one_drive/factories/parent_reference_factory"
 
+require_relative "microslop_one_drive/file"
+require_relative "microslop_one_drive/folder"
+require_relative "microslop_one_drive/root_folder"
+
 require_relative "microslop_one_drive/errors/client_error"
 require_relative "microslop_one_drive/user"
 require_relative "microslop_one_drive/parent_reference"
