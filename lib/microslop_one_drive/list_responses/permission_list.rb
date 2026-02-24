@@ -6,17 +6,13 @@ module MicroslopOneDrive
       def initialize(drive_item_id:, parsed_response:)
         super(parsed_response)
 
-        @drive_item_id = drive_item_id
-        @parsed_response = parsed_response
-        @permissions = build_permissions(@drive_item_id, @parsed_response)
+        @permissions = build_permissions(drive_item_id, parsed_response)
       end
 
       private
 
       def build_permissions(drive_item_id, parsed_response)
-        value_list = parsed_response.is_a?(Array) ? parsed_response : parsed_response.fetch("value", [])
-
-        permission_sets = value_list.map do
+        permission_sets = parsed_response.fetch("value", []).map do
           MicroslopOneDrive::PermissionSet.new(drive_item_id: drive_item_id, parsed_response: it)
         end
 
