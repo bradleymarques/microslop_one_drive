@@ -14,9 +14,9 @@ module MicroslopOneDrive
       )
 
       drive_list = @client.drives
-      assert_kind_of MicroslopOneDrive::ListResponse, drive_list
+      assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_list
       assert_equal false, drive_list.next_page?
-      assert_kind_of MicroslopOneDrive::DriveList, drive_list
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveList, drive_list
       assert_equal 2, drive_list.drives.size
       assert_kind_of MicroslopOneDrive::Drive, drive_list.drives.first
 

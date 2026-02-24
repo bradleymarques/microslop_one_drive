@@ -9,12 +9,12 @@ module MicroslopOneDrive
 
     def test_batch_raises_an_error_if_an_error_is_returned_by_microsoft
       requests = [
-        { id: "1", method: "GET", url: "/me" }
+        {id: "1", method: "GET", url: "/me"}
       ]
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 400,
         success: false,
         parsed_response: fixture_response("batch/invalid_format.json")
@@ -30,13 +30,13 @@ module MicroslopOneDrive
 
     def test_batch_raises_an_error_for_non_unique_request_ids
       requests = [
-        { id: "1", method: "GET", url: "/me" },
-        { id: "1", method: "GET", url: "/me" }
+        {id: "1", method: "GET", url: "/me"},
+        {id: "1", method: "GET", url: "/me"}
       ]
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 400,
         success: false,
         parsed_response: fixture_response("batch/non_unique_ids.json")
@@ -59,12 +59,12 @@ module MicroslopOneDrive
 
     def test_batch_for_one_request
       requests = [
-        { id: "1", method: "GET", url: "/me" }
+        {id: "1", method: "GET", url: "/me"}
       ]
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/one_response.json")
@@ -75,7 +75,7 @@ module MicroslopOneDrive
       assert_equal 1, batch_response.responses.size
 
       response = batch_response.responses.first
-      assert_kind_of MicroslopOneDrive::Response, response
+      assert_kind_of MicroslopOneDrive::ListResponses::Response, response
 
       assert_equal "1", response.id
       assert_equal 200, response.status
@@ -87,13 +87,13 @@ module MicroslopOneDrive
 
     def test_batch_for_multiple_requests
       requests = [
-        { id: "1", method: "GET", url: "/me" },
-        { id: "2", method: "GET", url: "/me" }
+        {id: "1", method: "GET", url: "/me"},
+        {id: "2", method: "GET", url: "/me"}
       ]
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/multiple_responses.json")
@@ -104,9 +104,9 @@ module MicroslopOneDrive
       assert_equal 2, batch_response.responses.size
 
       response1 = batch_response.responses[0]
-      assert_kind_of MicroslopOneDrive::Response, response1
+      assert_kind_of MicroslopOneDrive::ListResponses::Response, response1
       response2 = batch_response.responses[1]
-      assert_kind_of MicroslopOneDrive::Response, response2
+      assert_kind_of MicroslopOneDrive::ListResponses::Response, response2
 
       assert_equal "1", response1.id
       assert_equal 200, response1.status
@@ -119,13 +119,13 @@ module MicroslopOneDrive
 
     def test_batch_for_multiple_requests_where_some_responses_are_invalid
       requests = [
-        { id: "1", method: "GET", url: "/me" },
-        { id: "2", method: "GET", url: "/me/this/is/not/a/valid/url" }
+        {id: "1", method: "GET", url: "/me"},
+        {id: "2", method: "GET", url: "/me/this/is/not/a/valid/url"}
       ]
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/some_responses_invalid.json")
@@ -136,9 +136,9 @@ module MicroslopOneDrive
       assert_equal 2, batch_response.responses.size
 
       response1 = batch_response.responses[0]
-      assert_kind_of MicroslopOneDrive::Response, response1
+      assert_kind_of MicroslopOneDrive::ListResponses::Response, response1
       response2 = batch_response.responses[1]
-      assert_kind_of MicroslopOneDrive::Response, response2
+      assert_kind_of MicroslopOneDrive::ListResponses::Response, response2
 
       assert_equal "1", response1.id
       assert_equal 200, response1.status
@@ -150,11 +150,11 @@ module MicroslopOneDrive
     end
 
     def test_batch_for_the_maximum_number_of_requests
-      requests = (1..20).map { |i| { id: i.to_s, method: "GET", url: "/me" } }
+      requests = (1..20).map { {id: it.to_s, method: "GET", url: "/me"} }
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests }.to_json,
+        expected_body: {requests: requests}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/twenty_responses.json")
@@ -168,11 +168,11 @@ module MicroslopOneDrive
     end
 
     def test_batch_for_more_than_the_maximum_number_of_requests_effectively_makes_multiple_requests
-      requests = (1..21).map { |i| { id: i.to_s, method: "GET", url: "/me" } }
+      requests = (1..21).map { {id: it.to_s, method: "GET", url: "/me"} }
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests.first(20) }.to_json,
+        expected_body: {requests: requests.first(20)}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/twenty_responses.json")
@@ -180,7 +180,7 @@ module MicroslopOneDrive
 
       mock_post(
         path: "$batch",
-        expected_body: { requests: requests.last(1) }.to_json,
+        expected_body: {requests: requests.last(1)}.to_json,
         response_code: 200,
         success: true,
         parsed_response: fixture_response("batch/one_response.json")

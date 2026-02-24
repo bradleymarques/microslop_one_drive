@@ -51,7 +51,7 @@ module MicroslopOneDrive
     def drives
       response = get(path: "me/drives", query: {})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveList.new(response.parsed_response)
+      MicroslopOneDrive::ListResponses::DriveList.new(response.parsed_response)
     end
 
     # Gets a specific Drive by its ID.
@@ -109,7 +109,7 @@ module MicroslopOneDrive
     def delta(drive_id:, token: nil)
       response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
       handle_error(response) unless response.success?
-      MicroslopOneDrive::DriveItemList.new(response.parsed_response)
+      MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
     end
 
     # Gets the permissions for a DriveItem (folder or file).
@@ -121,12 +121,18 @@ module MicroslopOneDrive
       response = get(path: "me/drive/items/#{item_id}/permissions", query: {})
 
       if response.code == 404
-        return MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: {"value" => []})
+        return MicroslopOneDrive::ListResponses::PermissionList.new(
+          drive_item_id: item_id,
+          parsed_response: {"value" => []}
+        )
       end
 
       handle_error(response) unless response.success?
 
-      MicroslopOneDrive::PermissionList.new(drive_item_id: item_id, parsed_response: response.parsed_response)
+      MicroslopOneDrive::ListResponses::PermissionList.new(
+        drive_item_id: item_id,
+        parsed_response: response.parsed_response
+      )
     end
 
     # Gets the permissions for multiple Drive Items.
@@ -147,7 +153,10 @@ module MicroslopOneDrive
       successful_responses = batch_response.responses.select(&:success?)
 
       permission_lists = successful_responses.map do
-        MicroslopOneDrive::PermissionList.new(drive_item_id: it.id, parsed_response: it.body)
+        MicroslopOneDrive::ListResponses::PermissionList.new(
+          drive_item_id: it.id,
+          parsed_response: it.body
+        )
       end
 
       permission_lists.flat_map(&:permissions)
@@ -176,7 +185,7 @@ module MicroslopOneDrive
         handle_error(response) unless response.success?
         new_responses = response.parsed_response.fetch("responses", [])
         new_responses.each do
-          batch_response.add_response(MicroslopOneDrive::Response.new(it))
+          batch_response.add_response(MicroslopOneDrive::ListResponses::Response.new(it))
         end
       end
 

@@ -17,19 +17,21 @@ require_relative "microslop_one_drive/folder"
 require_relative "microslop_one_drive/root_folder"
 require_relative "microslop_one_drive/drive_item"
 
+# List Responses
+require_relative "microslop_one_drive/list_responses/list_response"
+require_relative "microslop_one_drive/list_responses/drive_list"
+require_relative "microslop_one_drive/list_responses/drive_item_list"
+require_relative "microslop_one_drive/list_responses/permission_list"
+require_relative "microslop_one_drive/list_responses/response"
+
 # Other models
 require_relative "microslop_one_drive/user"
 require_relative "microslop_one_drive/parent_reference"
-require_relative "microslop_one_drive/list_response"
-require_relative "microslop_one_drive/drive_list"
 require_relative "microslop_one_drive/drive"
-require_relative "microslop_one_drive/drive_item_list"
-require_relative "microslop_one_drive/permission_list"
 require_relative "microslop_one_drive/permission_set"
 require_relative "microslop_one_drive/permission"
 require_relative "microslop_one_drive/audience"
 require_relative "microslop_one_drive/batch_response"
-require_relative "microslop_one_drive/response"
 require_relative "microslop_one_drive/quota"
 
 # Client

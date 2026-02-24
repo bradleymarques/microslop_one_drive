@@ -16,7 +16,7 @@ module MicroslopOneDrive
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       items = drive_item_list.items
       assert_equal 4, items.size
@@ -41,8 +41,8 @@ module MicroslopOneDrive
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
-      assert_kind_of MicroslopOneDrive::ListResponse, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
       assert_nil drive_item_list.next_link
       assert_nil drive_item_list.next_token
@@ -62,8 +62,8 @@ module MicroslopOneDrive
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
-      assert_kind_of MicroslopOneDrive::ListResponse, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
       assert_nil drive_item_list.delta_link
       assert_nil drive_item_list.delta_token
@@ -83,7 +83,7 @@ module MicroslopOneDrive
       )
 
       drive_item_list = @client.delta(drive_id: @drive_id)
-      assert_kind_of MicroslopOneDrive::DriveItemList, drive_item_list
+      assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       assert drive_item_list.delta_link
       assert drive_item_list.delta_token
