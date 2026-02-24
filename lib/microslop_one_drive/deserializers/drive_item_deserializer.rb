@@ -10,6 +10,22 @@ module MicroslopOneDrive
       def self.create_from_hash(drive_item_hash)
         drive_item_hash = Utils.deep_symbolize_keys(drive_item_hash)
 
+        parameters = build_parameters(drive_item_hash)
+
+        root = drive_item_hash.key?(:root) && parameters[:file_or_folder] == :folder
+
+        if root
+          RootFolder.new(**parameters)
+        elsif parameters[:file_or_folder] == :file
+          File.new(**parameters)
+        elsif parameters[:file_or_folder] == :folder
+          Folder.new(**parameters)
+        else
+          DriveItem.new(**parameters)
+        end
+      end
+
+      def self.build_parameters(drive_item_hash)
         id = drive_item_hash.fetch(:id, nil)
         name = drive_item_hash.fetch(:name, nil)
 
@@ -39,7 +55,7 @@ module MicroslopOneDrive
         is_deleted = drive_item_hash.dig(:deleted, :state) == "deleted"
         is_shared = drive_item_hash.key?(:shared)
 
-        parameters = {
+        {
           id: id,
           name: name,
           download_url: download_url,
@@ -55,18 +71,6 @@ module MicroslopOneDrive
           is_deleted: is_deleted,
           is_shared: is_shared
         }
-
-        root = drive_item_hash.key?(:root) && file_or_folder == :folder
-
-        if root
-          RootFolder.new(**parameters)
-        elsif file_or_folder == :file
-          File.new(**parameters)
-        elsif file_or_folder == :folder
-          Folder.new(**parameters)
-        else
-          DriveItem.new(**parameters)
-        end
       end
     end
   end
