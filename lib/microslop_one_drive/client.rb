@@ -100,13 +100,24 @@ module MicroslopOneDrive
       handle_error(response)
     end
 
-    # Gets a delta of changes to a Drive.
+    # Gets a delta of changes to the current user's "main" OneDrive drive.
+    #
+    # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
+    #
+    # @return [MicroslopOneDrive::DriveItemList]
+    def delta(token: nil)
+      response = get(path: "me/drive/root/delta", query: {token: token})
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)
+    end
+
+    # Gets a delta of changes to a specific Drive identified by its drive_id.
     #
     # @param drive_id [String] The ID of the Drive to get the delta of.
     # @param token [String] The token to use for the delta. If not provided, the initial delta will be returned.
     #
     # @return [MicroslopOneDrive::DriveItemList]
-    def delta(drive_id:, token: nil)
+    def delta_for_drive(drive_id:, token: nil)
       response = get(path: "me/drives/#{drive_id}/root/delta", query: {token: token})
       handle_error(response) unless response.success?
       MicroslopOneDrive::ListResponses::DriveItemList.new(response.parsed_response)

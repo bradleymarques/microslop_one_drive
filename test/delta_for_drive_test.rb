@@ -1,7 +1,7 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  class DeltaTest < BaseTest
+  class DeltaForDriveTest < BaseTest
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
@@ -9,13 +9,13 @@ module MicroslopOneDrive
       @drive_id = "0f097864e0cfea42"
     end
 
-    def test_delta_fetches_an_initial_delta_of_changes_to_my_default_drive
+    def test_delta_for_drive_fetches_an_initial_delta_of_changes_to_a_drive
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       items = drive_item_list.items
@@ -34,13 +34,13 @@ module MicroslopOneDrive
       assert_equal true, sample_item.file?
     end
 
-    def test_delta_with_a_delta_link_and_delta_token
+    def test_delta_for_drive_with_a_delta_link_and_delta_token
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_initial.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
       assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
@@ -55,13 +55,13 @@ module MicroslopOneDrive
       assert drive_item_list.delta_token.include?("NDslMjM0")
     end
 
-    def test_delta_with_a_next_link_and_next_token
+    def test_delta_for_drive_with_a_next_link_and_next_token
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_next.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
       assert_kind_of MicroslopOneDrive::ListResponses::ListResponse, drive_item_list
 
@@ -78,11 +78,11 @@ module MicroslopOneDrive
 
     def test_empty_delta
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_empty.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       assert_kind_of MicroslopOneDrive::ListResponses::DriveItemList, drive_item_list
 
       assert drive_item_list.delta_link
@@ -93,13 +93,13 @@ module MicroslopOneDrive
       assert_equal 0, drive_item_list.items.size
     end
 
-    def test_delta_labels_files_and_folders_that_were_deleted
+    def test_delta_for_drive_labels_files_and_folders_that_were_deleted
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_deleted_root_file.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       drive_items = drive_item_list.items
       assert_equal 2, drive_items.size
 
@@ -113,13 +113,13 @@ module MicroslopOneDrive
       assert_equal true, deleted_file.deleted?
     end
 
-    def test_delta_for_a_renamed_file
+    def test_delta_for_drive_for_a_renamed_file
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_renamed.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       drive_items = drive_item_list.items
       assert_equal 2, drive_items.size
 
@@ -130,13 +130,13 @@ module MicroslopOneDrive
       assert_equal "Getting started with OneDrive (RENAMED).pdf", renamed_file.name
     end
 
-    def test_delta_for_added_nested_items
+    def test_delta_for_drive_for_added_nested_items
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_added_nested_items.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       drive_items = drive_item_list.items
       assert_equal 7, drive_items.size
 
@@ -153,13 +153,13 @@ module MicroslopOneDrive
       assert_equal expected_names, drive_items.map(&:name)
     end
 
-    def test_delta_for_deleted_nested_items
+    def test_delta_for_drive_for_deleted_nested_items
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_deleted_nested_items.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       drive_items = drive_item_list.items
 
       assert_equal 7, drive_items.size
@@ -174,13 +174,13 @@ module MicroslopOneDrive
       end
     end
 
-    def test_delta_with_an_initial_set_of_permissions
+    def test_delta_for_drive_with_an_initial_set_of_permissions
       mock_get(
-        path: "me/drive/root/delta",
+        path: "me/drives/#{@drive_id}/root/delta",
         parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
       )
 
-      drive_item_list = @client.delta
+      drive_item_list = @client.delta_for_drive(drive_id: @drive_id)
       drive_items = drive_item_list.items
 
       assert_equal 7, drive_items.size
