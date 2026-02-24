@@ -122,7 +122,9 @@ module MicroslopOneDrive
     #
     # @return [MicroslopOneDrive::SharedWithMeList]
     def shared_with_me
-      raise NotImplementedError, "Not implemented"
+      response = get(path: "me/drive/sharedWithMe")
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::ListResponses::SharedWithMeList.new(response.parsed_response)
     end
 
     # Gets the permissions for a DriveItem (folder or file) in a Drive.

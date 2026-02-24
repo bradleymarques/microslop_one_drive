@@ -10,20 +10,13 @@ module MicroslopOneDrive
       def self.create_from_hash(quota_hash)
         quota_hash = Utils.deep_symbolize_keys(quota_hash)
 
-        deleted = quota_hash.fetch(:deleted, nil)
-        remaining = quota_hash.fetch(:remaining, nil)
-        state = quota_hash.fetch(:state, nil)
-        total = quota_hash.fetch(:total, nil)
-        used = quota_hash.fetch(:used, nil)
-        upgrade_available = quota_hash.dig(:storagePlanInformation, :upgradeAvailable)
-
         Quota.new(
-          deleted: deleted,
-          remaining: remaining,
-          state: state,
-          total: total,
-          used: used,
-          upgrade_available: upgrade_available
+          deleted: quota_hash.fetch(:deleted, nil),
+          remaining: quota_hash.fetch(:remaining, nil),
+          state: quota_hash.fetch(:state, nil),
+          total: quota_hash.fetch(:total, nil),
+          used: quota_hash.fetch(:used, nil),
+          upgrade_available: quota_hash.dig(:storagePlanInformation, :upgradeAvailable)
         )
       end
     end

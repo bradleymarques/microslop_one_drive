@@ -10,36 +10,47 @@ module MicroslopOneDrive
       def self.create_from_hash(drive_hash)
         drive_hash = Utils.deep_symbolize_keys(drive_hash)
 
-        id = drive_hash.fetch(:id, nil)
-        name = drive_hash.fetch(:name, nil)
-        description = drive_hash.fetch(:description, nil)
-        web_url = drive_hash.fetch(:webUrl, nil)
-        drive_type = drive_hash.fetch(:driveType, nil)
-        created_date_time = Utils.safe_parse_time(drive_hash.fetch(:createdDateTime, nil))
-        last_modified_date_time = Utils.safe_parse_time(drive_hash.fetch(:lastModifiedDateTime, nil))
-
-        created_by_hash = drive_hash.dig(:createdBy, :user)
-        last_modified_by_hash = drive_hash.dig(:lastModifiedBy, :user)
-        owner_hash = drive_hash.dig(:owner, :user)
-
-        created_by = created_by_hash.nil? ? nil : UserDeserializer.create_from_hash(created_by_hash)
-        last_modified_by = last_modified_by_hash.nil? ? nil : UserDeserializer.create_from_hash(last_modified_by_hash)
-        owner = owner_hash.nil? ? nil : UserDeserializer.create_from_hash(owner_hash)
-        quota = QuotaDeserializer.create_from_hash(drive_hash.fetch(:quota, {}))
+        created_by = build_created_by(drive_hash)
+        last_modified_by = build_last_modified_by(drive_hash)
+        owner = build_owner(drive_hash)
 
         Drive.new(
-          id: id,
-          name: name,
-          description: description,
-          web_url: web_url,
-          drive_type: drive_type,
-          created_date_time: created_date_time,
-          last_modified_date_time: last_modified_date_time,
+          id: drive_hash.fetch(:id, nil),
+          name: drive_hash.fetch(:name, nil),
+          description: drive_hash.fetch(:description, nil),
+          web_url: drive_hash.fetch(:webUrl, nil),
+          drive_type: drive_hash.fetch(:driveType, nil),
+          created_date_time: Utils.safe_parse_time(drive_hash.fetch(:createdDateTime, nil)),
+          last_modified_date_time: Utils.safe_parse_time(drive_hash.fetch(:lastModifiedDateTime, nil)),
           created_by: created_by,
           last_modified_by: last_modified_by,
           owner: owner,
-          quota: quota
+          quota: QuotaDeserializer.create_from_hash(drive_hash.fetch(:quota, {}))
         )
+      end
+
+      def self.build_created_by(drive_hash)
+        created_by_hash = drive_hash.dig(:createdBy, :user)
+
+        return unless created_by_hash
+
+        UserDeserializer.create_from_hash(created_by_hash)
+      end
+
+      def self.build_last_modified_by(drive_hash)
+        last_modified_by_hash = drive_hash.dig(:lastModifiedBy, :user)
+
+        return unless last_modified_by_hash
+
+        UserDeserializer.create_from_hash(last_modified_by_hash)
+      end
+
+      def self.build_owner(drive_hash)
+        owner_hash = drive_hash.dig(:owner, :user)
+
+        return unless owner_hash
+
+        UserDeserializer.create_from_hash(owner_hash)
       end
     end
   end
