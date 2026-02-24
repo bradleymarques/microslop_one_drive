@@ -32,7 +32,6 @@ module MicroslopOneDrive
     end
 
     def test_shared_with_me_assigns_created_by
-      skip
       mock_get(
         path: "me/drive/sharedWithMe",
         parsed_response: fixture_response("shared_with_me/shared_with_me.json")
@@ -43,6 +42,24 @@ module MicroslopOneDrive
 
       created_by = item.created_by
       assert_kind_of MicroslopOneDrive::User, created_by
+      assert_equal "outlook_64E5DD3210FD6004@outlook.com", created_by.email_address
+      assert_equal "Someone Else", created_by.display_name
+    end
+
+    def test_shared_with_me_assigns_last_modified_by
+      mock_get(
+        path: "me/drive/sharedWithMe",
+        parsed_response: fixture_response("shared_with_me/shared_with_me.json")
+      )
+
+      shared_with_me_list = @client.shared_with_me
+      item = shared_with_me_list.shared_with_me_items.first
+
+      last_modified_by = item.last_modified_by
+
+      assert_kind_of MicroslopOneDrive::User, last_modified_by
+      assert_equal "SOMEONE.ELSE@EXAMPLE.COM", last_modified_by.email_address
+      assert_equal "Someone Else", last_modified_by.display_name
     end
   end
 end
