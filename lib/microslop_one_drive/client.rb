@@ -254,7 +254,7 @@ module MicroslopOneDrive
       @logger.info "==================== START MicroslopOneDrive #{method} #{url} ===================="
       @logger.info "Request method: #{method}"
       @logger.info "Request url: #{url}"
-      @logger.info "Request query: #{query.inspect}" if query && query.any?
+      @logger.info "Request query: #{query.inspect}" if query&.any?
       @logger.info "Request body: #{body.inspect}" if body
     end
 

@@ -37,14 +37,14 @@ module MicroslopOneDrive
       access_token = "mock_access_token"
       mock_logger = mock
       mock_logger.expects(:info).with("").times(2)
-      mock_logger.expects(:info).with("==================== START MicroslopOneDrive GET https://graph.microsoft.com/v1.0/me/drive/root/delta ====================")
+      mock_logger.expects(:info).with("==================== START MicroslopOneDrive GET https://graph.microsoft.com/v1.0/me/drive/root/delta ====================") # rubocop:disable Layout/LineLength
       mock_logger.expects(:info).with("Request method: GET")
       mock_logger.expects(:info).with("Request url: https://graph.microsoft.com/v1.0/me/drive/root/delta")
       mock_logger.expects(:info).with("Request query: {token: nil}")
       mock_logger.expects(:info).with("Response code: 200")
       mock_logger.expects(:info).with("Response body:")
       mock_logger.expects(:info).with(JSON.pretty_generate(stubbed_response))
-      mock_logger.expects(:info).with("==================== END MicroslopOneDrive GET https://graph.microsoft.com/v1.0/me/drive/root/delta ====================")
+      mock_logger.expects(:info).with("==================== END MicroslopOneDrive GET https://graph.microsoft.com/v1.0/me/drive/root/delta ====================") # rubocop:disable Layout/LineLength
 
       mock_get(path: "me/drive/root/delta", parsed_response: stubbed_response)
 
