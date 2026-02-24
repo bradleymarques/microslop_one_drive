@@ -93,7 +93,9 @@ module MicroslopOneDrive
     #
     # @return [MicroslopOneDrive::DriveItem]
     def drive_item_in_drive(drive_id:, item_id:)
-      raise NotImplementedError, "Not implemented"
+      response = get(path: "me/drives/#{drive_id}/items/#{item_id}", query: {})
+      handle_error(response) unless response.success?
+      MicroslopOneDrive::Deserializers::DriveItemDeserializer.create_from_hash(response.parsed_response)
     end
 
     # Asks if a DriveItem (folder or file) exists by its ID in the current user's default Drive.
@@ -116,8 +118,13 @@ module MicroslopOneDrive
     # @param item_id [String] The ID of the Drive Item to check.
     #
     # @return [Boolean]
-    def drive_item_in_drive_exists?(drive_id:, item_id:)
-      raise NotImplementedError, "Not implemented"
+    def drive_item_exists_in_drive?(drive_id:, item_id:)
+      response = get(path: "me/drives/#{drive_id}/items/#{item_id}", query: {})
+
+      return false if response.code == 404
+      return true if response.success?
+
+      handle_error(response)
     end
 
     # Gets a delta of changes to the current user's default Drive.

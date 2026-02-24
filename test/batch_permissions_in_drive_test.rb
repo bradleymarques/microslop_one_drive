@@ -1,13 +1,13 @@
 require "test_helper"
 
 module MicroslopOneDrive
-  class PermissionsTest < BaseTest
+  class BatchPermissionsInDriveTest < BaseTest
     def setup
       @access_token = "mock_access_token"
       @client = MicroslopOneDrive::Client.new(@access_token)
     end
 
-    def test_shared_with_me_fetches_the_drive_items_shared_with_me
+    def test_batch_permissions_in_drive_fetches_the_permissions_for_multiple_drive_items_in_a_specific_drive
       flunk "Not implemented"
     end
   end
