@@ -39,6 +39,19 @@ require_relative "microslop_one_drive/audience"
 require_relative "microslop_one_drive/quota"
 require_relative "microslop_one_drive/shared_with_me_item"
 
+# Endpoints
+require_relative "microslop_one_drive/endpoints/me"
+require_relative "microslop_one_drive/endpoints/drive"
+require_relative "microslop_one_drive/endpoints/all_drives"
+require_relative "microslop_one_drive/endpoints/drive_exists"
+require_relative "microslop_one_drive/endpoints/drive_item"
+require_relative "microslop_one_drive/endpoints/drive_item_exists"
+require_relative "microslop_one_drive/endpoints/delta"
+require_relative "microslop_one_drive/endpoints/shared_with_me"
+require_relative "microslop_one_drive/endpoints/permissions"
+require_relative "microslop_one_drive/endpoints/batch"
+require_relative "microslop_one_drive/endpoints/batch_permissions"
+
 # Client
 require_relative "microslop_one_drive/errors/client_error"
 require_relative "microslop_one_drive/client"
