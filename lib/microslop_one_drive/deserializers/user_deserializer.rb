@@ -21,7 +21,8 @@ module MicroslopOneDrive
           mobile_phone: user_hash.fetch(:mobilePhone, nil),
           job_title: user_hash.fetch(:jobTitle, nil),
           office_location: user_hash.fetch(:officeLocation, nil),
-          business_phones: user_hash.fetch(:businessPhones, [])
+          business_phones: user_hash.fetch(:businessPhones, []),
+          login_name: user_hash.fetch(:loginName, nil)
         )
       end
     end
