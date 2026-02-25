@@ -50,6 +50,7 @@ require_relative "microslop_one_drive/endpoints/delta"
 require_relative "microslop_one_drive/endpoints/permissions"
 require_relative "microslop_one_drive/endpoints/batch"
 require_relative "microslop_one_drive/endpoints/batch_permissions"
+require_relative "microslop_one_drive/endpoints/delete_permission"
 require_relative "microslop_one_drive/endpoints/supports_sites"
 
 # Client

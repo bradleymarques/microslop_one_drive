@@ -15,6 +15,7 @@ module MicroslopOneDrive
     include Endpoints::Batch
     include Endpoints::BatchPermissions
     include Endpoints::SupportsSites
+    include Endpoints::DeletePermission
 
     # @param access_token [String] OAuth access token for Microsoft Graph.
     # @param logger [Object, nil] Optional logger (e.g. Rails.logger) that responds to +#info+, +#debug+, +#warn+, +#error+.
@@ -48,6 +49,16 @@ module MicroslopOneDrive
 
       response = HTTParty.post(url, headers: @headers, body: body)
       log_response(response, "POST", url)
+
+      response
+    end
+
+    def delete(path:)
+      url = "#{BASE_URL}/#{path}"
+      log_request("DELETE", url, body: nil)
+
+      response = HTTParty.delete(url, headers: @headers)
+      log_response(response, "DELETE", url)
 
       response
     end

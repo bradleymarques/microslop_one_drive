@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "itemNotFound",
+    "message": "Item does not exist",
+    "localizedMessage": "That item seems to be missing. Someone may have deleted or moved the item, or you may not have permission to view it.",
+    "innerError": {
+      "date": "2026-02-25T09:32:57",
+      "request-id": "918ccda5-3b50-4b52-ae02-a6133d92f01d",
+      "client-request-id": "80a09784-3dd6-543b-1f09-050f1c70adac"
+    }
+  }
+}

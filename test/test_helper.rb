@@ -26,12 +26,6 @@ class BaseTest < Minitest::Test
       .returns(stubbed_response)
   end
 
-  def get_drive_item_by_name(drive_items, name)
-    drive_item = drive_items.find { it.name == name }
-    assert(drive_item, "Drive item with name #{name} not found")
-    drive_item
-  end
-
   def mock_post(path:, expected_body:, response_code: 200, success: true, parsed_response: {})
     stubbed_response = stub(code: response_code, success?: success, parsed_response: parsed_response)
 
@@ -39,6 +33,36 @@ class BaseTest < Minitest::Test
       .expects(:post)
       .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, body: expected_body)
       .returns(stubbed_response)
+  end
+
+  def mock_delete(
+    path:,
+    response_code: 204,
+    success: true,
+    no_content: true,
+    bad_request: false,
+    not_found: false,
+    parsed_response: {}
+  )
+    stubbed_response = stub(
+      code: response_code,
+      success?: success,
+      no_content?: no_content,
+      bad_request?: bad_request,
+      not_found?: not_found,
+      parsed_response: parsed_response
+    )
+
+    HTTParty
+      .expects(:delete)
+      .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything)
+      .returns(stubbed_response)
+  end
+
+  def get_drive_item_by_name(drive_items, name)
+    drive_item = drive_items.find { it.name == name }
+    assert(drive_item, "Drive item with name #{name} not found")
+    drive_item
   end
 
   def assert_permission(permission, drive_item_id, display_name, email, id, role, audience_type)
