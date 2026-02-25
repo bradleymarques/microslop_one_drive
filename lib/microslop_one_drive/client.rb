@@ -15,7 +15,6 @@ module MicroslopOneDrive
     include Endpoints::Permissions
     include Endpoints::Batch
     include Endpoints::BatchPermissions
-    include Endpoints::Site
     include Endpoints::SupportsSites
 
     # @param access_token [String] OAuth access token for Microsoft Graph.

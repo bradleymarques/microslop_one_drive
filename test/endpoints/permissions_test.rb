@@ -8,7 +8,7 @@ module MicroslopOneDrive
         @client = MicroslopOneDrive::Client.new(@access_token)
       end
 
-      def test_permissions_fetches_the_permissions_for_a_drive_item_with_an_anonymous_link
+      def test_permissions_fetches_the_permissions_for_a_drive_item_with_an_anonymous_link # rubocop:disable Metrics/MethodLength
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
@@ -21,12 +21,41 @@ module MicroslopOneDrive
 
         assert_equal 4, permissions.size
 
-        assert_permission(permissions[0], item_id, "Amy Smith", "amy@example.com", "amy@example.com", "write", "user")
-        assert_permission(permissions[1], item_id, "Bob Myers", "bob@example.com", "bob@example.com", "write", "user")
-        assert_permission(permissions[2], item_id, "Anyone with the link", nil, "anyone_with_the_link", "write",
-                          "anyone")
-        assert_permission(permissions[3], item_id, "Example Person", "person@example.com", "person@example.com", "owner",
-                          "user")
+        assert_permission(
+          permissions[0],
+          item_id, "Amy Smith",
+          "amy@example.com",
+          "amy@example.com",
+          "write",
+          "user"
+        )
+        assert_permission(
+          permissions[1],
+          item_id,
+          "Bob Myers",
+          "bob@example.com",
+          "bob@example.com",
+          "write",
+          "user"
+        )
+        assert_permission(
+          permissions[2],
+          item_id,
+          "Anyone with the link",
+          nil,
+          "anyone_with_the_link",
+          "write",
+          "anyone"
+        )
+        assert_permission(
+          permissions[3],
+          item_id,
+          "Example Person",
+          "person@example.com",
+          "person@example.com",
+          "owner",
+          "user"
+        )
       end
 
       def test_permissions_removed
@@ -42,11 +71,18 @@ module MicroslopOneDrive
 
         assert_equal 1, permissions.size
 
-        assert_permission(permissions[0], item_id, "Example Person", "person@example.com", "person@example.com", "owner",
-                          "user")
+        assert_permission(
+          permissions[0],
+          item_id,
+          "Example Person",
+          "person@example.com",
+          "person@example.com",
+          "owner",
+          "user"
+        )
       end
 
-      def test_permissions_with_drive_id_fetches_the_permissions_for_a_drive_item_in_a_specific_drive
+      def test_permissions_with_drive_id_fetches_the_permissions_for_a_drive_item_in_a_specific_drive # rubocop:disable Metrics/MethodLength
         drive_id = "0f097864e0cfea42"
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
@@ -60,12 +96,42 @@ module MicroslopOneDrive
 
         assert_equal 4, permissions.size
 
-        assert_permission(permissions[0], item_id, "Amy Smith", "amy@example.com", "amy@example.com", "write", "user")
-        assert_permission(permissions[1], item_id, "Bob Myers", "bob@example.com", "bob@example.com", "write", "user")
-        assert_permission(permissions[2], item_id, "Anyone with the link", nil, "anyone_with_the_link", "write",
-                          "anyone")
-        assert_permission(permissions[3], item_id, "Example Person", "person@example.com", "person@example.com", "owner",
-                          "user")
+        assert_permission(
+          permissions[0],
+          item_id,
+          "Amy Smith",
+          "amy@example.com",
+          "amy@example.com",
+          "write",
+          "user"
+        )
+        assert_permission(
+          permissions[1],
+          item_id,
+          "Bob Myers",
+          "bob@example.com",
+          "bob@example.com",
+          "write",
+          "user"
+        )
+        assert_permission(
+          permissions[2],
+          item_id,
+          "Anyone with the link",
+          nil,
+          "anyone_with_the_link",
+          "write",
+          "anyone"
+        )
+        assert_permission(
+          permissions[3],
+          item_id,
+          "Example Person",
+          "person@example.com",
+          "person@example.com",
+          "owner",
+          "user"
+        )
       end
     end
   end

@@ -51,7 +51,6 @@ require_relative "microslop_one_drive/endpoints/shared_with_me"
 require_relative "microslop_one_drive/endpoints/permissions"
 require_relative "microslop_one_drive/endpoints/batch"
 require_relative "microslop_one_drive/endpoints/batch_permissions"
-require_relative "microslop_one_drive/endpoints/site"
 require_relative "microslop_one_drive/endpoints/supports_sites"
 
 # Client

@@ -28,10 +28,24 @@ module MicroslopOneDrive
 
         assert_equal 11, permission_batch.size
 
-        assert_permission(permission_batch[0], item_ids[0], "Amy Smith", "amy@example.com", "amy@example.com", "write",
-                          "user")
-        assert_permission(permission_batch[9], item_ids[1], "Anyone with the link", nil, "anyone_with_the_link", "write",
-                          "anyone")
+        assert_permission(
+          permission_batch[0],
+          item_ids[0],
+          "Amy Smith",
+          "amy@example.com",
+          "amy@example.com",
+          "write",
+          "user"
+        )
+        assert_permission(
+          permission_batch[9],
+          item_ids[1],
+          "Anyone with the link",
+          nil,
+          "anyone_with_the_link",
+          "write",
+          "anyone"
+        )
       end
 
       def test_permissions_batch_with_drive_id_can_fetch_permissions_for_multiple_drive_items_in_a_specific_drive
