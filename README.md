@@ -138,7 +138,7 @@ permissions = permission_list.permissions
 
 # Example: direct permission (e.g. owner) — use granted_to (a User)
 direct = permissions.find { |p| p.is_a?(MicroslopOneDrive::Permissions::DirectPermission) }
-direct.roles        # => ["owner"]
+direct.roles                    # => ["owner"]
 direct.granted_to.display_name  # => "Example Person"
 direct.granted_to.email_address # => "person@example.com"
 direct.granted_to.id            # => "4"
@@ -146,7 +146,7 @@ direct.granted_to.id            # => "4"
 # Example: sharing link — use granted_to_list and link
 link_perm = permissions.find { |p| p.is_a?(MicroslopOneDrive::Permissions::SharingLink) }
 link_perm.roles           # => ["write"]
-link_perm.granted_to_list  # => array of User
+link_perm.granted_to_list # => array of Users
 link_perm.link.web_url    # => "https://1drv.ms/f/c/..."
 link_perm.edit_link?      # => true
 link_perm.anonymous_link? # => true
