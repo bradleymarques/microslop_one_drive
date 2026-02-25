@@ -15,6 +15,17 @@ module MicroslopOneDrive
       #   2. https://learn.microsoft.com/en-us/onedrive/developer/rest-api/resources/permission?view=odsp-graph-online#edit-link
       #   3. https://learn.microsoft.com/en-us/onedrive/developer/rest-api/resources/permission?view=odsp-graph-online#specific-people-link
       #
+      attr_reader :has_password, :granted_to_list
+
+      def initialize(id:, roles:, share_id:, link:, has_password:, granted_to_list:)
+        super(id: id, roles: roles, share_id: share_id, link: link)
+        @has_password = has_password
+        @granted_to_list = granted_to_list
+      end
+
+      def view_link?
+        raise NotImplementedError, "Not implemented"
+      end
     end
   end
 end

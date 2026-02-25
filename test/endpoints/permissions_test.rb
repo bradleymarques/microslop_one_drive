@@ -8,7 +8,7 @@ module MicroslopOneDrive
         @client = MicroslopOneDrive::Client.new(@access_token)
       end
 
-      def test_permissions_returns_a_list_of_permissions_for_a_drive_item
+      def test_permissions_returns_a_list_of_permissions_for_a_drive_item_in_the_default_drive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
@@ -21,11 +21,26 @@ module MicroslopOneDrive
         permissions = permission_list.permissions
 
         assert_equal 2, permissions.size
-        permission1 = permissions[0]
-        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, permission1
+        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, permissions[0]
+        assert_kind_of MicroslopOneDrive::Permissions::DirectPermission, permissions[1]
+      end
 
-        permission2 = permissions[1]
-        assert_kind_of MicroslopOneDrive::Permissions::DirectPermission, permission2
+      def test_permissions_returns_a_list_of_permissions_for_a_drive_item_in_a_specific_drive
+        drive_id = "0f097864e0cfea42"
+        item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
+
+        mock_get(
+          path: "me/drives/#{drive_id}/items/#{item_id}/permissions",
+          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+        )
+
+        permission_list = @client.permissions(drive_id: drive_id, item_id: item_id)
+        assert_kind_of MicroslopOneDrive::ListResponses::PermissionList, permission_list
+        permissions = permission_list.permissions
+
+        assert_equal 2, permissions.size
+        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, permissions[0]
+        assert_kind_of MicroslopOneDrive::Permissions::DirectPermission, permissions[1]
       end
 
       def test_permissions_can_correctly_structure_the_owners_direct_permission
@@ -58,82 +73,40 @@ module MicroslopOneDrive
         assert_equal "https://1drv.ms/f/c/0f097864e0cfea42/AskI1OBYW89MlAMiDozOVqM", link.web_url
       end
 
-      def test_permissions_removed
-        skip "TODO: FIX THIS TEST!"
-        item_id = "F097864E0CFEA42!s76b80a6457684886b4a55cf65da40603"
-
-        mock_get(
-          path: "me/drive/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_removed.json")
-        )
-
-        permission_list = @client.permissions(item_id: item_id)
-        permissions = permission_list.permissions
-
-        assert_equal 1, permissions.size
-
-        assert_permission(
-          permissions[0],
-          item_id,
-          "Example Person",
-          "person@example.com",
-          "person@example.com",
-          "owner",
-          "user"
-        )
-      end
-
-      def test_permissions_with_drive_id_fetches_the_permissions_for_a_drive_item_in_a_specific_drive # rubocop:disable Metrics/MethodLength
-        skip "TODO: FIX THIS TEST!"
-        drive_id = "0f097864e0cfea42"
+      def test_permissions_can_correctly_structure_a_sharing_link # rubocop:disable Metrics/AbcSize
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drives/#{drive_id}/items/#{item_id}/permissions",
+          path: "me/drive/items/#{item_id}/permissions",
           parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
         )
 
-        permission_list = @client.permissions(item_id: item_id, drive_id: drive_id)
-        permissions = permission_list.permissions
+        permission_list = @client.permissions(item_id: item_id)
+        permission = permission_list.permissions[0]
+        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, permission
 
-        assert_equal 4, permissions.size
+        assert_equal "47f8c2a7-b883-4758-9412-f37c0c203abb", permission.id
+        assert permission.share_id.start_with?("u!aHR0cHM6Ly8xZHJ2Lm1zL2YvYy8wZjA5N")
+        assert_equal ["write"], permission.roles
+        assert_equal false, permission.has_password
 
-        assert_permission(
-          permissions[0],
-          item_id,
-          "Amy Smith",
-          "amy@example.com",
-          "amy@example.com",
-          "write",
-          "user"
-        )
-        assert_permission(
-          permissions[1],
-          item_id,
-          "Bob Myers",
-          "bob@example.com",
-          "bob@example.com",
-          "write",
-          "user"
-        )
-        assert_permission(
-          permissions[2],
-          item_id,
-          "Anyone with the link",
-          nil,
-          "anyone_with_the_link",
-          "write",
-          "anyone"
-        )
-        assert_permission(
-          permissions[3],
-          item_id,
-          "Example Person",
-          "person@example.com",
-          "person@example.com",
-          "owner",
-          "user"
-        )
+        granted_to_list = permission.granted_to_list
+        assert_equal 2, granted_to_list.size
+        assert_kind_of MicroslopOneDrive::User, granted_to_list[0]
+        assert_kind_of MicroslopOneDrive::User, granted_to_list[1]
+
+        assert_equal "Amy Smith", granted_to_list[0].display_name
+        assert_equal "amy@example.com", granted_to_list[0].email
+        assert_equal "6", granted_to_list[0].id
+        assert_equal "i:0#.f|membership|amy@example.com", granted_to_list[0].login_name
+
+        link = permission.link
+        assert_kind_of MicroslopOneDrive::Permissions::Link, link
+
+        assert link.web_url.start_with?("https://1drv.ms/f/c/0f097864e0cfea42/")
+        assert_equal "anonymous", link.scope
+        assert_equal "edit", link.type
+        assert_equal false, link.prevents_download
       end
     end
   end

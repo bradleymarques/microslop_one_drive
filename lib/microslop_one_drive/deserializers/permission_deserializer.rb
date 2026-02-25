@@ -45,7 +45,17 @@ module MicroslopOneDrive
 
       def self.build_sharing_link(permission_hash)
         common_parameters = build_common_parameters(permission_hash)
-        MicroslopOneDrive::Permissions::SharingLink.new(**common_parameters)
+
+        granted_to_hash_list = permission_hash.fetch(:grantedToIdentitiesV2, [])
+        granted_to_list = granted_to_hash_list.map { GrantedToDeserializer.create_from_hash(it) }
+
+        has_password = permission_hash.fetch(:hasPassword, false)
+
+        MicroslopOneDrive::Permissions::SharingLink.new(
+          **common_parameters,
+          granted_to_list: granted_to_list,
+          has_password: has_password
+        )
       end
 
       def self.build_sharing_invitation(permission_hash)
@@ -55,15 +65,9 @@ module MicroslopOneDrive
 
       def self.build_direct_permission(permission_hash)
         common_parameters = build_common_parameters(permission_hash)
-        granted_to_hash = permission_hash.fetch(:grantedToV2, nil)
 
-        if granted_to_hash&.key?(:siteUser)
-          granted_to = UserDeserializer.create_from_hash(granted_to_hash[:siteUser])
-        elsif granted_to_hash&.key?(:group)
-          raise NotImplementedError, "Group permissions are not supported yet"
-        else
-          raise NotImplementedError, "Unknown granted to type for hash: #{granted_to_hash.inspect}"
-        end
+        granted_to_hash = permission_hash.fetch(:grantedToV2, nil)
+        granted_to = GrantedToDeserializer.create_from_hash(granted_to_hash)
 
         MicroslopOneDrive::Permissions::DirectPermission.new(**common_parameters, granted_to: granted_to)
       end
