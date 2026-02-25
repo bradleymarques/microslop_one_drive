@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "BadRequest",
+    "message": "This API is not supported for MSA accounts (no addressUrl for Microsoft.FileServices,False).",
+    "innerError": {
+      "date": "2026-02-25T06:40:35",
+      "request-id": "d820624b-8529-4927-9f17-b9912a26bd4b",
+      "client-request-id": "1e7ca566-f10a-76b3-00a1-0b84e88b7f26"
+    }
+  }
+}

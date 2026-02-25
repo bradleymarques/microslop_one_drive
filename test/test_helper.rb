@@ -12,8 +12,13 @@ class BaseTest < Minitest::Test
     JSON.parse(File.read(fixture_path))
   end
 
-  def mock_get(path:, response_code: 200, success: true, parsed_response: {})
-    stubbed_response = stub(code: response_code, success?: success, parsed_response: parsed_response)
+  def mock_get(path:, response_code: 200, success: true, bad_request: false, parsed_response: {})
+    stubbed_response = stub(
+      code: response_code,
+      success?: success,
+      bad_request?: bad_request,
+      parsed_response: parsed_response
+    )
 
     HTTParty
       .expects(:get)
