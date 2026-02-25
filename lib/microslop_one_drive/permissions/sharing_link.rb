@@ -24,7 +24,19 @@ module MicroslopOneDrive
       end
 
       def view_link?
-        raise NotImplementedError, "Not implemented"
+        link.view_link?
+      end
+
+      def edit_link?
+        link.edit_link?
+      end
+
+      def specific_people_link?
+        link.specific_people_link?
+      end
+
+      def anonymous_link?
+        link.anonymous_link?
       end
     end
   end

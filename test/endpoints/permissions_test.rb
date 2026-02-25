@@ -108,6 +108,24 @@ module MicroslopOneDrive
         assert_equal "edit", link.type
         assert_equal false, link.prevents_download
       end
+
+      def test_permissions_anonymous_link_responds_correctly_to_some_methods
+        item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
+
+        mock_get(
+          path: "me/drive/items/#{item_id}/permissions",
+          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+        )
+
+        permission_list = @client.permissions(item_id: item_id)
+        permission = permission_list.permissions[0]
+        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, permission
+
+        assert_equal false, permission.view_link?
+        assert_equal true, permission.edit_link?
+        assert_equal false, permission.specific_people_link?
+        assert_equal true, permission.anonymous_link?
+      end
     end
   end
 end

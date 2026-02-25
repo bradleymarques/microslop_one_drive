@@ -9,6 +9,22 @@ module MicroslopOneDrive
         @type = type
         @prevents_download = prevents_download
       end
+
+      def view_link?
+        type == "view"
+      end
+
+      def edit_link?
+        type == "edit"
+      end
+
+      def specific_people_link?
+        scope == "users"
+      end
+
+      def anonymous_link?
+        scope == "anonymous"
+      end
     end
   end
 end
