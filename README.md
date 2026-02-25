@@ -1,5 +1,7 @@
 # MicroslopOneDrive
 
+[![Gem Version](https://badge.fury.io/rb/microslop_one_drive.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/microslop_one_drive)
+
 Microslop OneDrive API client.
 
 See <https://learn.microsoft.com/en-us/onedrive/developer/rest-api/>
