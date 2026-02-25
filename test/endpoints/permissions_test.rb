@@ -125,6 +125,8 @@ module MicroslopOneDrive
         assert_equal true, permission.edit_link?
         assert_equal false, permission.specific_people_link?
         assert_equal true, permission.anonymous_link?
+
+        assert_equal "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27", permission.drive_item_id
       end
     end
   end

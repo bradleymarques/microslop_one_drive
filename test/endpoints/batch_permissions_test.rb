@@ -26,26 +26,18 @@ module MicroslopOneDrive
         permission_batch = @client.batch_permissions(item_ids: item_ids)
         assert_kind_of Array, permission_batch
 
-        assert_equal 11, permission_batch.size
+        assert_equal 6, permission_batch.size
 
-        assert_permission(
-          permission_batch[0],
-          item_ids[0],
-          "Amy Smith",
-          "amy@example.com",
-          "amy@example.com",
-          "write",
-          "user"
-        )
-        assert_permission(
-          permission_batch[9],
-          item_ids[1],
-          "Anyone with the link",
-          nil,
-          "anyone_with_the_link",
-          "write",
-          "anyone"
-        )
+        sample_permission = permission_batch.first
+        assert_kind_of MicroslopOneDrive::Permissions::SharingLink, sample_permission
+        assert_equal "47f8c2a7-b883-4758-9412-f37c0c203abb", sample_permission.id
+        assert_equal true, sample_permission.edit_link?
+        assert_equal true, sample_permission.anonymous_link?
+
+        assert_equal 3, sample_permission.granted_to_list.size
+        assert_equal ["Amy Smith", "Charles Garcia", "Bob Myers"], sample_permission.granted_to_list.map(&:display_name)
+
+        assert_equal "F097864E0CFEA42!se0d408c95b584ccf9403220e8cce56a3", sample_permission.drive_item_id
       end
 
       def test_permissions_batch_with_drive_id_can_fetch_permissions_for_multiple_drive_items_in_a_specific_drive
@@ -67,26 +59,7 @@ module MicroslopOneDrive
         permission_batch = @client.batch_permissions(item_ids: item_ids, drive_id: drive_id)
         assert_kind_of Array, permission_batch
 
-        assert_equal 11, permission_batch.size
-
-        assert_permission(
-          permission_batch[0],
-          item_ids[0],
-          "Amy Smith",
-          "amy@example.com",
-          "amy@example.com",
-          "write",
-          "user"
-        )
-        assert_permission(
-          permission_batch[9],
-          item_ids[1],
-          "Anyone with the link",
-          nil,
-          "anyone_with_the_link",
-          "write",
-          "anyone"
-        )
+        assert_equal 6, permission_batch.size
       end
 
       private
