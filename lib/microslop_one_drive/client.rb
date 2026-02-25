@@ -11,7 +11,6 @@ module MicroslopOneDrive
     include Endpoints::DriveItem
     include Endpoints::DriveItemExists
     include Endpoints::Delta
-    include Endpoints::SharedWithMe
     include Endpoints::Permissions
     include Endpoints::Batch
     include Endpoints::BatchPermissions
