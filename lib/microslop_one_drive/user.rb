@@ -1,7 +1,7 @@
 module MicroslopOneDrive
   class User
     attr_reader :principal_name, :id, :display_name, :surname, :given_name, :preferred_language, :mail, :mobile_phone,
-                :job_title, :office_location, :business_phones
+                :job_title, :office_location, :business_phones, :login_name
 
     def initialize(
       principal_name: nil,
@@ -14,7 +14,8 @@ module MicroslopOneDrive
       mobile_phone: nil,
       job_title: nil,
       office_location: nil,
-      business_phones: []
+      business_phones: [],
+      login_name: nil
     )
       @principal_name = principal_name
       @id = id
@@ -27,14 +28,19 @@ module MicroslopOneDrive
       @job_title = job_title
       @office_location = office_location
       @business_phones = business_phones
+      @login_name = login_name
+    end
+
+    def email
+      @mail
     end
 
     def email_address
-      mail
+      @mail
     end
 
     def last_name
-      surname
+      @surname
     end
   end
 end

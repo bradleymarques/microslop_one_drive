@@ -17,7 +17,7 @@ module MicroslopOneDrive
 
         response = get(path: url, query: {})
 
-        if response.code == 404
+        if response.not_found?
           return MicroslopOneDrive::ListResponses::PermissionList.new(
             drive_item_id: item_id,
             parsed_response: {"value" => []}
