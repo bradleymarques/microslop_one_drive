@@ -131,18 +131,30 @@ shared_items = drive_item_list.items.select(&:shared?)
 example_item = shared_items.first
 
 permission_list = client.permissions(item_id: example_item.id)
-permission = permission_list.first
+# Or with a specific drive: client.permissions(item_id: example_item.id, drive_id: drive.id)
 
-permission.role # => "write"
-permission.audience.type # => "user"
-permission.audience.id # => "person@example.com"
-permission.audience.display_name # => "Example Person"
-permission.audience.email_address # => "person@example.com"
+permissions = permission_list.permissions
+# Each permission is a DirectPermission, SharingLink, or SharingInvitation.
+
+# Example: direct permission (e.g. owner) — use granted_to (a User)
+direct = permissions.find { |p| p.is_a?(MicroslopOneDrive::Permissions::DirectPermission) }
+direct.roles        # => ["owner"]
+direct.granted_to.display_name  # => "Example Person"
+direct.granted_to.email_address # => "person@example.com"
+direct.granted_to.id            # => "4"
+
+# Example: sharing link — use granted_to_list and link
+link_perm = permissions.find { |p| p.is_a?(MicroslopOneDrive::Permissions::SharingLink) }
+link_perm.roles           # => ["write"]
+link_perm.granted_to_list  # => array of User
+link_perm.link.web_url    # => "https://1drv.ms/f/c/..."
+link_perm.edit_link?      # => true
+link_perm.anonymous_link? # => true
 ```
 
 ### Get Permissions for multiple Drive Items
 
-Instead of calling `client.permissions(...)` for each item -- which would make N API calls for N items -- we use
+Instead of calling `client.permissions(...)` for each item — which would make N API calls for N items — use
 Microsoft Graph API [batch](https://learn.microsoft.com/en-us/graph/json-batching?tabs=http) feature.
 
 ```rb
@@ -150,8 +162,18 @@ drive_item_list = client.delta(drive_id: drive.id)
 shared_items = drive_item_list.items.select(&:shared?)
 
 permissions = client.batch_permissions(item_ids: shared_items.map(&:id))
-# Returns a flat array of MicroslopOneDrive::Permission (batches of 20 are made under the hood).
-permissions.each { |p| puts "#{p.audience.display_name}: #{p.role}" }
+# Or with a specific drive: client.batch_permissions(item_ids: shared_items.map(&:id), drive_id: drive.id)
+# Returns a flat array of permission objects (DirectPermission, SharingLink, SharingInvitation).
+# Batches of 20 are made under the hood.
+
+permissions.each do |p|
+  case p
+  when MicroslopOneDrive::Permissions::DirectPermission
+    puts "#{p.granted_to.display_name}: #{p.roles.join(', ')}"
+  when MicroslopOneDrive::Permissions::SharingLink
+    puts "Link (#{p.link.type}): #{p.roles.join(', ')}"
+  end
+end
 ```
 
 ### Checking if the user's accounts supports SharePoint Sites
