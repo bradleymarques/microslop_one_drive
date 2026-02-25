@@ -152,6 +152,12 @@ permissions = client.batch_permissions(item_ids: shared_items.map(&:id))
 permissions.each { |p| puts "#{p.audience.display_name}: #{p.role}" }
 ```
 
+### Checking if the user's accounts supports SharePoint Sites
+
+```rb
+client.supports_sites? # => true or false
+```
+
 ## Contributing
 
 ### Setup
