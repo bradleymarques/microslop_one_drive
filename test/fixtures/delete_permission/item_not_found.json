@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "itemNotFound",
+    "message": "Item not found",
+    "innerError": {
+      "date": "2026-02-25T09:31:44",
+      "request-id": "173db367-c2df-4463-b4f7-30f0d41a8d72",
+      "client-request-id": "5a06a911-835f-a7fc-8876-8a0f596141a2"
+    }
+  }
+}
