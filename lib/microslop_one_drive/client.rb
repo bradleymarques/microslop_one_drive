@@ -16,6 +16,7 @@ module MicroslopOneDrive
     include Endpoints::BatchPermissions
     include Endpoints::SupportsSites
     include Endpoints::DeletePermission
+    include Endpoints::RevokeGrants
 
     # @param access_token [String] OAuth access token for Microsoft Graph.
     # @param logger [Object, nil] Optional logger (e.g. Rails.logger) that responds to +#info+, +#debug+, +#warn+, +#error+.

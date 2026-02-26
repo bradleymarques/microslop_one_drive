@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "itemNotFound",
+    "message": "Invalid Permission Key. Could not find the permission.",
+    "innerError": {
+      "date": "2026-02-26T08:41:44",
+      "request-id": "338de658-f9bc-4b22-a8f1-b99def106600",
+      "client-request-id": "a6d7b7c0-6c2f-d042-291c-b60da5e8bcbe"
+    }
+  }
+}
