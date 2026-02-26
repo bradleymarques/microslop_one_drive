@@ -27,8 +27,8 @@ class BaseTest < Minitest::Test
       .returns(stubbed_response)
   end
 
-  def mock_post(path:, expected_body:, response_code: 200, success: true, parsed_response: {})
-    stubbed_response = stub(code: response_code, success?: success, parsed_response: parsed_response)
+  def mock_post(path:, expected_body:, response_code: 200, success: true, ok: true, parsed_response: {}) # rubocop:disable Naming/MethodParameterName
+    stubbed_response = stub(code: response_code, success?: success, ok?: ok, parsed_response: parsed_response)
 
     HTTParty
       .expects(:post)

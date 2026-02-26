@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "invalidRequest",
+    "message": "One of the provided arguments is not acceptable.",
+    "innerError": {
+      "code": "badArgument",
+      "date": "2026-02-26T08:37:31",
+      "request-id": "079c4c41-0759-4a3e-b06f-fd8575dec7bb",
+      "client-request-id": "fbde3420-1b04-1c7c-33e9-56d7ae8312ce"
+    }
+  }
+}

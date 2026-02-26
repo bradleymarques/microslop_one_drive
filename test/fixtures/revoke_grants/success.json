@@ -1,0 +1,17 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#microsoft.graph.permission",
+  "id": "e5778080-9150-43f7-8e9d-acd248bcab54",
+  "roles": [
+    "write"
+  ],
+  "shareId": "u!aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8wZjA5Nzg2NGUwY2ZlYTQyL0lRQlZVOW9vSXp4MVM0al90SWxwd2hTUUFVYldoUFVYM1JNdmpjNndHdTVrZ3NB",
+  "hasPassword": false,
+  "grantedToIdentitiesV2": [],
+  "grantedToIdentities": [],
+  "link": {
+    "scope": "users",
+    "type": "edit",
+    "webUrl": "https://1drv.ms/w/c/0f097864e0cfea42/IQBVU9ooIzx1S4j_tIlpwhSQAUbWhPUX3RMvjc6wGu5kgsA",
+    "preventsDownload": false
+  }
+}

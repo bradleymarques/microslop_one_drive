@@ -57,6 +57,7 @@ require_relative "microslop_one_drive/endpoints/batch"
 require_relative "microslop_one_drive/endpoints/batch_permissions"
 require_relative "microslop_one_drive/endpoints/delete_permission"
 require_relative "microslop_one_drive/endpoints/supports_sites"
+require_relative "microslop_one_drive/endpoints/revoke_grants"
 
 # Client
 require_relative "microslop_one_drive/errors/client_error"

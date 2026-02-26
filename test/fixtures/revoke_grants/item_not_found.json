@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "itemNotFound",
+    "message": "Exception of type 'Microsoft.Vroom.Exceptions.ItemNotFoundVroomException' was thrown.",
+    "innerError": {
+      "date": "2026-02-26T08:39:34",
+      "request-id": "9851999a-2a76-4090-a09d-57a4cf4a59f9",
+      "client-request-id": "08274a0e-2f75-239c-e76e-474113cd5b59"
+    }
+  }
+}

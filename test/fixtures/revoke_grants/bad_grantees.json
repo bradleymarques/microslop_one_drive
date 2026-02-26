@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "invalidRequest",
+    "message": "One (and only one) of email, alias, or objectid must be specified.",
+    "innerError": {
+      "date": "2026-02-26T08:43:09",
+      "request-id": "0c993fb5-9d6d-4acf-9a64-f93f653b3905",
+      "client-request-id": "8f76a485-5fe7-7dac-3c8d-1ce8670dde69"
+    }
+  }
+}
