@@ -62,6 +62,32 @@ module MicroslopOneDrive
         assert_equal 6, permission_batch.size
       end
 
+      def test_can_handle_empty_granted_to_list
+        drive_id = "0f097864e0cfea42"
+        item_ids = [
+          "F097864E0CFEA42!se0d408c95b584ccf9403220e8cce56a3",
+          "F097864E0CFEA42!sdb175a6fe02b4039886168a4a695387c",
+          "F097864E0CFEA42!s76b80a6457684886b4a55cf65da40603"
+        ]
+
+        expected_post_body = build_expected_post_body_for_drive(item_ids, drive_id)
+
+        mock_post(
+          path: "$batch",
+          expected_body: expected_post_body,
+          parsed_response: fixture_response("batch_permissions/batch_permissions_empty_granted_to.json")
+        )
+
+        permission_batch = @client.batch_permissions(item_ids: item_ids, drive_id: drive_id)
+        assert_kind_of Array, permission_batch
+
+        sharing_links = permission_batch.select { it.is_a?(MicroslopOneDrive::Permissions::SharingLink) }
+        assert_equal 3, sharing_links.size
+        assert_equal 0, sharing_links[0].granted_to_list.size
+        assert_equal 0, sharing_links[1].granted_to_list.size
+        assert_equal 0, sharing_links[2].granted_to_list.size
+      end
+
       private
 
       def build_expected_post_body(item_ids)
