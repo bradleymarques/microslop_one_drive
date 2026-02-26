@@ -5,6 +5,6 @@ version=$(ruby -e "load 'lib/microslop_one_drive/version.rb'; puts MicroslopOneD
 git tag -a v$version -m "Release $version"
 git push origin v$version
 
-gem build microslop_drive.gemspec
+gem build microslop_one_drive.gemspec
 sleep 1
-gem push microslop_drive-$version.gem
+gem push microslop_one_drive-$version.gem
