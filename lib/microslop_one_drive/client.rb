@@ -3,6 +3,7 @@ require "json"
 module MicroslopOneDrive
   class Client
     BASE_URL = "https://graph.microsoft.com/v1.0".freeze
+    BETA_BASE_URL = "https://graph.microsoft.com/beta".freeze
 
     include Endpoints::Me
     include Endpoints::Drive
@@ -34,8 +35,8 @@ module MicroslopOneDrive
 
     private
 
-    def get(path:, query: {})
-      url = "#{BASE_URL}/#{path}"
+    def get(path:, query: {}, base_url: BASE_URL)
+      url = "#{base_url}/#{path}"
       log_request("GET", url, query: query)
 
       response = HTTParty.get(url, headers: @headers, query: query)
@@ -44,8 +45,8 @@ module MicroslopOneDrive
       response
     end
 
-    def post(path:, body:)
-      url = "#{BASE_URL}/#{path}"
+    def post(path:, body:, base_url: BASE_URL)
+      url = "#{base_url}/#{path}"
       log_request("POST", url, body: body)
 
       response = HTTParty.post(url, headers: @headers, body: body)
@@ -54,8 +55,8 @@ module MicroslopOneDrive
       response
     end
 
-    def delete(path:)
-      url = "#{BASE_URL}/#{path}"
+    def delete(path:, base_url: BASE_URL)
+      url = "#{base_url}/#{path}"
       log_request("DELETE", url, body: nil)
 
       response = HTTParty.delete(url, headers: @headers)

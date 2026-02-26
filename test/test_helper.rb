@@ -12,7 +12,15 @@ class BaseTest < Minitest::Test
     JSON.parse(File.read(fixture_path))
   end
 
-  def mock_get(path:, response_code: 200, success: true, bad_request: false, not_found: false, parsed_response: {})
+  def mock_get(
+    path:,
+    response_code: 200,
+    success: true,
+    bad_request: false,
+    not_found: false,
+    parsed_response: {},
+    base_url: MicroslopOneDrive::Client::BASE_URL
+  )
     stubbed_response = stub(
       code: response_code,
       success?: success,
@@ -23,16 +31,24 @@ class BaseTest < Minitest::Test
 
     HTTParty
       .expects(:get)
-      .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, query: anything)
+      .with("#{base_url}/#{path}", headers: anything, query: anything)
       .returns(stubbed_response)
   end
 
-  def mock_post(path:, expected_body:, response_code: 200, success: true, ok: true, parsed_response: {}) # rubocop:disable Naming/MethodParameterName
+  def mock_post(
+    path:,
+    expected_body:,
+    response_code: 200,
+    success: true,
+    ok: true, # rubocop:disable Naming/MethodParameterName
+    parsed_response: {},
+    base_url: MicroslopOneDrive::Client::BASE_URL
+  )
     stubbed_response = stub(code: response_code, success?: success, ok?: ok, parsed_response: parsed_response)
 
     HTTParty
       .expects(:post)
-      .with("#{MicroslopOneDrive::Client::BASE_URL}/#{path}", headers: anything, body: expected_body)
+      .with("#{base_url}/#{path}", headers: anything, body: expected_body)
       .returns(stubbed_response)
   end
 
