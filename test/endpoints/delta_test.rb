@@ -12,8 +12,9 @@ module MicroslopOneDrive
 
       def test_delta_fetches_an_initial_delta_of_changes_to_my_default_drive
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_initial.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_initial.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -37,8 +38,9 @@ module MicroslopOneDrive
 
       def test_delta_with_a_delta_link_and_delta_token
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_initial.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_initial.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -58,8 +60,9 @@ module MicroslopOneDrive
 
       def test_delta_with_a_next_link_and_next_token
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_next.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_next.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -79,8 +82,9 @@ module MicroslopOneDrive
 
       def test_empty_delta
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_empty.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_empty.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -96,8 +100,9 @@ module MicroslopOneDrive
 
       def test_delta_labels_files_and_folders_that_were_deleted
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_deleted_root_file.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_deleted_root_file.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -116,8 +121,9 @@ module MicroslopOneDrive
 
       def test_delta_for_a_renamed_file
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_renamed.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_renamed.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -133,8 +139,9 @@ module MicroslopOneDrive
 
       def test_delta_for_added_nested_items
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_added_nested_items.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_added_nested_items.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -156,8 +163,9 @@ module MicroslopOneDrive
 
       def test_delta_for_deleted_nested_items
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_deleted_nested_items.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_deleted_nested_items.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -177,8 +185,9 @@ module MicroslopOneDrive
 
       def test_delta_with_an_initial_set_of_permissions
         mock_get(
-          path: "me/drive/root/delta",
-          parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
+          :path => "me/drive/root/delta",
+          :parsed_response => fixture_response("deltas/delta_with_permissions_initial.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta
@@ -199,8 +208,9 @@ module MicroslopOneDrive
 
       def test_delta_with_drive_id_fetches_an_initial_delta_of_changes_to_a_specific_drive
         mock_get(
-          path: "me/drives/#{@drive_id}/root/delta",
-          parsed_response: fixture_response("deltas/delta_with_permissions_initial.json")
+          :path => "me/drives/#{@drive_id}/root/delta",
+          :parsed_response => fixture_response("deltas/delta_with_permissions_initial.json"),
+          "success?" => true
         )
 
         drive_item_list = @client.delta(drive_id: @drive_id)

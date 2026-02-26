@@ -14,8 +14,9 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}",
-          parsed_response: fixture_response("drive_items/drive_item.json")
+          :path => "me/drive/items/#{item_id}",
+          :parsed_response => fixture_response("drive_items/drive_item.json"),
+          "success?" => true
         )
 
         drive_item = @client.drive_item(item_id: item_id)
@@ -37,8 +38,9 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}",
-          parsed_response: fixture_response("drive_items/drive_item.json")
+          :path => "me/drive/items/#{item_id}",
+          :parsed_response => fixture_response("drive_items/drive_item.json"),
+          "success?" => true
         )
 
         drive_item = @client.drive_item(item_id: item_id)
@@ -59,10 +61,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!not-an-item-id"
 
         mock_get(
-          path: "me/drive/items/#{item_id}",
-          parsed_response: fixture_response("drive_items/drive_item_not_found.json"),
-          response_code: 404,
-          success: false
+          :path => "me/drive/items/#{item_id}",
+          :parsed_response => fixture_response("drive_items/drive_item_not_found.json"),
+          :code => 404,
+          "success?" => false
         )
 
         error = assert_raises MicroslopOneDrive::Errors::ClientError do
@@ -77,8 +79,9 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drives/#{@drive_id}/items/#{item_id}",
-          parsed_response: fixture_response("drive_items/drive_item.json")
+          :path => "me/drives/#{@drive_id}/items/#{item_id}",
+          :parsed_response => fixture_response("drive_items/drive_item.json"),
+          "success?" => true
         )
 
         drive_item = @client.drive_item(item_id: item_id, drive_id: @drive_id)

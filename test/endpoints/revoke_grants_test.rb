@@ -16,6 +16,7 @@ module MicroslopOneDrive
 
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: grantees}.to_json,
           parsed_response: fixture_response("revoke_grants/success.json"),
           response_code: 200,
@@ -31,6 +32,7 @@ module MicroslopOneDrive
 
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: grantees}.to_json,
           parsed_response: fixture_response("revoke_grants/success.json"),
           response_code: 200,
@@ -43,6 +45,7 @@ module MicroslopOneDrive
       def test_raises_bad_request_error_if_the_request_is_invalid
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: []}.to_json,
           parsed_response: fixture_response("revoke_grants/bad_request.json"),
           response_code: 400,
@@ -63,6 +66,7 @@ module MicroslopOneDrive
 
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: grantees}.to_json,
           parsed_response: fixture_response("revoke_grants/item_not_found.json"),
           response_code: 404,
@@ -82,6 +86,7 @@ module MicroslopOneDrive
 
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: grantees}.to_json,
           parsed_response: fixture_response("revoke_grants/permission_not_found.json"),
           response_code: 404,
@@ -101,6 +106,7 @@ module MicroslopOneDrive
 
         mock_post(
           path: "me/drive/items/#{@item_id}/permissions/#{@permission_id}/revokeGrants",
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL,
           expected_body: {grantees: grantees}.to_json,
           parsed_response: fixture_response("revoke_grants/bad_grantees.json"),
           response_code: 400,

@@ -19,7 +19,11 @@ module MicroslopOneDrive
       def revoke_grants(item_id:, permission_id:, grantees:)
         url = "me/drive/items/#{item_id}/permissions/#{permission_id}/revokeGrants"
 
-        response = post(path: url, body: {grantees: grantees}.to_json)
+        response = post(
+          path: url,
+          body: {grantees: grantees}.to_json,
+          base_url: MicroslopOneDrive::Client::BETA_BASE_URL
+        )
 
         return true if response.success?
 
