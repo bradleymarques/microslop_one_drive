@@ -2,6 +2,9 @@ module MicroslopOneDrive
   module Deserializers
     class GrantedToDeserializer
       def self.create_from_hash(granted_to_hash)
+        return nil if granted_to_hash.nil?
+        return nil if granted_to_hash.empty?
+
         granted_to_hash = Utils.deep_symbolize_keys(granted_to_hash)
 
         if granted_to_hash.key?(:siteUser)
