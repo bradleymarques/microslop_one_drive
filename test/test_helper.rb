@@ -14,20 +14,10 @@ class BaseTest < Minitest::Test
 
   def mock_get(
     path:,
-    response_code: 200,
-    success: true,
-    bad_request: false,
-    not_found: false,
-    parsed_response: {},
-    base_url: MicroslopOneDrive::Client::BASE_URL
+    base_url: MicroslopOneDrive::Client::BASE_URL,
+    **
   )
-    stubbed_response = stub(
-      code: response_code,
-      success?: success,
-      bad_request?: bad_request,
-      not_found?: not_found,
-      parsed_response: parsed_response
-    )
+    stubbed_response = stub(**)
 
     HTTParty
       .expects(:get)

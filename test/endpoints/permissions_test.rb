@@ -12,8 +12,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+          :path => "me/drive/items/#{item_id}/permissions",
+          :parsed_response => fixture_response("permissions/permissions_with_anonymous_link.json"),
+          "not_found?" => false,
+          "success?" => true
         )
 
         permission_list = @client.permissions(item_id: item_id)
@@ -30,8 +32,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drives/#{drive_id}/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+          :path => "me/drives/#{drive_id}/items/#{item_id}/permissions",
+          :parsed_response => fixture_response("permissions/permissions_with_anonymous_link.json"),
+          "not_found?" => false,
+          "success?" => true
         )
 
         permission_list = @client.permissions(drive_id: drive_id, item_id: item_id)
@@ -47,8 +51,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+          :path => "me/drive/items/#{item_id}/permissions",
+          :parsed_response => fixture_response("permissions/permissions_with_anonymous_link.json"),
+          "not_found?" => false,
+          "success?" => true
         )
 
         permission_list = @client.permissions(item_id: item_id)
@@ -77,8 +83,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+          :path => "me/drive/items/#{item_id}/permissions",
+          :parsed_response => fixture_response("permissions/permissions_with_anonymous_link.json"),
+          "not_found?" => false,
+          "success?" => true
         )
 
         permission_list = @client.permissions(item_id: item_id)
@@ -113,8 +121,10 @@ module MicroslopOneDrive
         item_id = "F097864E0CFEA42!sa466b4459868496abe59bb1479272d27"
 
         mock_get(
-          path: "me/drive/items/#{item_id}/permissions",
-          parsed_response: fixture_response("permissions/permissions_with_anonymous_link.json")
+          :path => "me/drive/items/#{item_id}/permissions",
+          :parsed_response => fixture_response("permissions/permissions_with_anonymous_link.json"),
+          "not_found?" => false,
+          "success?" => true
         )
 
         permission_list = @client.permissions(item_id: item_id)

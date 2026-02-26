@@ -10,7 +10,11 @@ module MicroslopOneDrive
       mock_logger = mock
       mock_logger.expects(:info).never
 
-      mock_get(path: "me/drive/root/delta", parsed_response: stubbed_response)
+      mock_get(
+        :path => "me/drive/root/delta",
+        :parsed_response => stubbed_response,
+        "success?" => true
+      )
 
       client = MicroslopOneDrive::Client.new(access_token)
 
@@ -24,7 +28,11 @@ module MicroslopOneDrive
       mock_logger = mock
       mock_logger.expects(:info).never
 
-      mock_get(path: "me/drive/root/delta", parsed_response: stubbed_response)
+      mock_get(
+        :path => "me/drive/root/delta",
+        :parsed_response => stubbed_response,
+        "success?" => true
+      )
 
       client = MicroslopOneDrive::Client.new(access_token, logger: nil)
 
@@ -46,7 +54,13 @@ module MicroslopOneDrive
       mock_logger.expects(:info).with(JSON.pretty_generate(stubbed_response))
       mock_logger.expects(:info).with("==================== END MicroslopOneDrive GET https://graph.microsoft.com/v1.0/me/drive/root/delta ====================") # rubocop:disable Layout/LineLength
 
-      mock_get(path: "me/drive/root/delta", parsed_response: stubbed_response)
+      mock_get(
+        :path => "me/drive/root/delta",
+        :parsed_response => stubbed_response,
+        :code => 200,
+        "success?" => true,
+        "ok?" => true
+      )
 
       client = MicroslopOneDrive::Client.new(access_token, logger: mock_logger)
       client.delta

@@ -12,8 +12,9 @@ module MicroslopOneDrive
 
       def test_drive_without_drive_id_fetches_the_current_user_default_drive
         mock_get(
-          path: "me/drive",
-          parsed_response: fixture_response("drives/drive.json")
+          :path => "me/drive",
+          :parsed_response => fixture_response("drives/drive.json"),
+          "success?" => true
         )
 
         drive = @client.drive
@@ -27,8 +28,9 @@ module MicroslopOneDrive
 
       def test_drive_with_drive_id_fetches_a_specific_drive
         mock_get(
-          path: "me/drives/#{@drive_id}",
-          parsed_response: fixture_response("drives/drive.json")
+          :path => "me/drives/#{@drive_id}",
+          :parsed_response => fixture_response("drives/drive.json"),
+          "success?" => true
         )
 
         drive = @client.drive(drive_id: @drive_id)
