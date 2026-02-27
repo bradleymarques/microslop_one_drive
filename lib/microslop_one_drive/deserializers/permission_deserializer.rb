@@ -47,7 +47,7 @@ module MicroslopOneDrive
         common_parameters = build_common_parameters(permission_hash)
 
         granted_to_hash_list = permission_hash.fetch(:grantedToIdentitiesV2, [])
-        granted_to_list = granted_to_hash_list.map { IdentityDeserializer.create_from_hash(it) }.compact
+        granted_to_list = granted_to_hash_list.map { IdentitySetDeserializer.create_from_hash(it) }.compact
 
         has_password = permission_hash.fetch(:hasPassword, false)
 
@@ -67,7 +67,7 @@ module MicroslopOneDrive
         common_parameters = build_common_parameters(permission_hash)
 
         granted_to_hash = permission_hash.fetch(:grantedToV2, nil)
-        granted_to = IdentityDeserializer.create_from_hash(granted_to_hash)
+        granted_to = IdentitySetDeserializer.create_from_hash(granted_to_hash)
 
         MicroslopOneDrive::Permissions::DirectPermission.new(**common_parameters, granted_to: granted_to)
       end

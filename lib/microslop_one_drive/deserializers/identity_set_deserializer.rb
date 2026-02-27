@@ -1,6 +1,6 @@
 module MicroslopOneDrive
   module Deserializers
-    class IdentityDeserializer
+    class IdentitySetDeserializer
       TYPE_MAPPING = {
         siteUser: UserDeserializer,
         user: UserDeserializer,

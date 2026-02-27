@@ -1,15 +1,15 @@
 module MicroslopOneDrive
   module Deserializers
-    class IdentityDeserializerTest < BaseTest
+    class IdentitySetDeserializerTest < BaseTest
       def test_create_from_nil
         identity_set_hash = nil
-        identity_set = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity_set = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
         assert_nil identity_set
       end
 
       def test_create_from_empty_hash
         identity_set_hash = {}
-        identity_set = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity_set = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
         assert_nil identity_set
       end
 
@@ -22,7 +22,7 @@ module MicroslopOneDrive
             loginName: "i:0#.f|membership|person@example.com"
           }
         }
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
         assert_kind_of MicroslopOneDrive::IdentitySets::User, identity
 
         assert_equal "Example Person", identity.display_name
@@ -33,7 +33,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_site_user_hash
         identity_set_hash = fixture_response("granted_to/v1_site_user.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::User, identity
 
@@ -45,7 +45,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_user_hash
         identity_set_hash = fixture_response("granted_to/v1_user.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::User, identity
 
@@ -56,7 +56,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_application_hash
         identity_set_hash = fixture_response("granted_to/v1_application.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Application, identity
 
@@ -66,7 +66,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_group_hash
         identity_set_hash = fixture_response("granted_to/v1_group.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Group, identity
 
@@ -76,7 +76,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_site_group_hash
         identity_set_hash = fixture_response("granted_to/v1_site_group.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Group, identity
 
@@ -86,7 +86,7 @@ module MicroslopOneDrive
 
       def test_create_from_v1_device_hash
         identity_set_hash = fixture_response("granted_to/v1_device.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Device, identity
 
@@ -96,7 +96,7 @@ module MicroslopOneDrive
 
       def test_create_from_v2_user_hash
         identity_set_hash = fixture_response("granted_to/v2_user.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::User, identity
 
@@ -108,7 +108,7 @@ module MicroslopOneDrive
 
       def test_create_from_v2_group_hash
         identity_set_hash = fixture_response("granted_to/v2_group.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Group, identity
 
@@ -118,7 +118,7 @@ module MicroslopOneDrive
 
       def test_create_from_v2_site_group_hash
         identity_set_hash = fixture_response("granted_to/v2_site_group.json")
-        identity = MicroslopOneDrive::Deserializers::IdentityDeserializer.create_from_hash(identity_set_hash)
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
 
         assert_kind_of MicroslopOneDrive::IdentitySets::Group, identity
 
