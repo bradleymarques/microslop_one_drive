@@ -176,6 +176,49 @@ permissions.each do |p|
 end
 ```
 
+### Deleting a Permission from a Drive Item
+
+Use `delete_permission` to remove a permission from a drive item. It returns `true` both when the permission was just
+deleted and when it's already gone (idempotent behavior). It raises an error if the drive or item does not exist.
+
+```rb
+permission = permissions.first
+
+# Delete from the default drive
+client.delete_permission(item_id: example_item.id, permission_id: permission.id) # => true
+
+# Or from a specific drive
+client.delete_permission(
+  drive_id: drive.id,
+  item_id: example_item.id,
+  permission_id: permission.id
+) # => true
+```
+
+### Revoking Grants on a Permission (beta API)
+
+Use `revoke_grants` to revoke specific grantees from an existing permission. This uses the Microsoft Graph **beta**
+endpoint under the hood:
+
+<https://learn.microsoft.com/en-us/graph/api/permission-revokegrants?view=graph-rest-beta>
+
+Each grantee is a hash with **exactly one** of the following keys: `:email`, `:alias`, or `:objectId`.
+
+```rb
+permission = permissions.find { |p| p.is_a?(MicroslopOneDrive::Permissions::SharingLink) }
+
+grantees = [
+  {email: "person@example.com"},
+  {objectId: "00000000-0000-0000-0000-000000000000"}
+]
+
+client.revoke_grants(
+  item_id: example_item.id,
+  permission_id: permission.id,
+  grantees: grantees
+) # => true
+```
+
 ### Checking if the user's accounts supports SharePoint Sites
 
 ```rb
