@@ -14,6 +14,9 @@ require_relative "microslop_one_drive/deserializers/shared_with_me_item_deserial
 require_relative "microslop_one_drive/deserializers/permission_deserializer"
 require_relative "microslop_one_drive/deserializers/link_deserializer"
 require_relative "microslop_one_drive/deserializers/granted_to_deserializer"
+require_relative "microslop_one_drive/deserializers/application_deserializer"
+require_relative "microslop_one_drive/deserializers/group_deserializer"
+require_relative "microslop_one_drive/deserializers/device_deserializer"
 
 # Drive items
 require_relative "microslop_one_drive/file"
@@ -33,7 +36,11 @@ require_relative "microslop_one_drive/batch/batch_response"
 require_relative "microslop_one_drive/batch/response"
 
 # Other models
-require_relative "microslop_one_drive/user"
+require_relative "microslop_one_drive/audiences/base_audience"
+require_relative "microslop_one_drive/audiences/user"
+require_relative "microslop_one_drive/audiences/application"
+require_relative "microslop_one_drive/audiences/group"
+require_relative "microslop_one_drive/audiences/device"
 require_relative "microslop_one_drive/parent_reference"
 require_relative "microslop_one_drive/drive"
 require_relative "microslop_one_drive/quota"

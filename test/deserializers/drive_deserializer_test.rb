@@ -60,15 +60,15 @@ module MicroslopOneDrive
         assert_kind_of MicroslopOneDrive::Drive, drive
 
         created_by = drive.created_by
-        assert_kind_of MicroslopOneDrive::User, created_by
+        assert_kind_of MicroslopOneDrive::Audiences::User, created_by
         assert_equal "System Account", created_by.display_name
 
         last_modified_by = drive.last_modified_by
-        assert_kind_of MicroslopOneDrive::User, last_modified_by
+        assert_kind_of MicroslopOneDrive::Audiences::User, last_modified_by
         assert_equal "System Account", last_modified_by.display_name
 
         owner = drive.owner
-        assert_kind_of MicroslopOneDrive::User, owner
+        assert_kind_of MicroslopOneDrive::Audiences::User, owner
         assert_equal "person@example.com", owner.email_address
         assert_equal "person@example.com", owner.display_name
       end

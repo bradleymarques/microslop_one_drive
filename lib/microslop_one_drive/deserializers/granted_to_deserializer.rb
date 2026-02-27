@@ -9,8 +9,16 @@ module MicroslopOneDrive
 
         if granted_to_hash.key?(:siteUser)
           UserDeserializer.create_from_hash(granted_to_hash[:siteUser])
+        elsif granted_to_hash.key?(:user)
+          UserDeserializer.create_from_hash(granted_to_hash[:user])
+        elsif granted_to_hash.key?(:application)
+          ApplicationDeserializer.create_from_hash(granted_to_hash[:application])
         elsif granted_to_hash.key?(:group)
-          raise NotImplementedError, "Group permissions are not supported yet"
+          GroupDeserializer.create_from_hash(granted_to_hash[:group])
+        elsif granted_to_hash.key?(:siteGroup)
+          GroupDeserializer.create_from_hash(granted_to_hash[:siteGroup])
+        elsif granted_to_hash.key?(:device)
+          DeviceDeserializer.create_from_hash(granted_to_hash[:device])
         else
           raise NotImplementedError, "Unknown granted to type for hash: #{granted_to_hash.inspect}"
         end
