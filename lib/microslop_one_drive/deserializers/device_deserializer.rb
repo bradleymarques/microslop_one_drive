@@ -7,7 +7,7 @@ module MicroslopOneDrive
 
         device_hash = Utils.deep_symbolize_keys(device_hash)
 
-        MicroslopOneDrive::Audiences::Device.new(
+        MicroslopOneDrive::IdentitySets::Device.new(
           id: device_hash.fetch(:id, nil),
           display_name: device_hash.fetch(:displayName, nil)
         )

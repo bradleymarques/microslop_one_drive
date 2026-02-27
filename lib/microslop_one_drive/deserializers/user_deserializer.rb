@@ -3,14 +3,14 @@ require "microslop_one_drive/utils"
 module MicroslopOneDrive
   module Deserializers
     class UserDeserializer
-      # Creates a new User object from a hash.
+      # Creates a new User identity (IdentitySet user) object from a hash.
       #
       # @param user_hash [Hash] The hash to create the User object from.
-      # @return [MicroslopOneDrive::Audiences::User] The created User object.
+      # @return [MicroslopOneDrive::IdentitySets::User] The created User object.
       def self.create_from_hash(user_hash)
         user_hash = Utils.deep_symbolize_keys(user_hash)
 
-        MicroslopOneDrive::Audiences::User.new(
+        MicroslopOneDrive::IdentitySets::User.new(
           id: user_hash.fetch(:id, nil),
           principal_name: user_hash.fetch(:userPrincipalName, nil),
           display_name: user_hash.fetch(:displayName, nil),

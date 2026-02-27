@@ -1,6 +1,6 @@
 module MicroslopOneDrive
-  module Audiences
-    class BaseAudience
+  module IdentitySets
+    class BaseIdentitySet
       attr_reader :id, :display_name
 
       def initialize(id:, display_name:)

@@ -13,7 +13,7 @@ require_relative "microslop_one_drive/deserializers/parent_reference_deserialize
 require_relative "microslop_one_drive/deserializers/shared_with_me_item_deserializer"
 require_relative "microslop_one_drive/deserializers/permission_deserializer"
 require_relative "microslop_one_drive/deserializers/link_deserializer"
-require_relative "microslop_one_drive/deserializers/granted_to_deserializer"
+require_relative "microslop_one_drive/deserializers/identity_deserializer"
 require_relative "microslop_one_drive/deserializers/application_deserializer"
 require_relative "microslop_one_drive/deserializers/group_deserializer"
 require_relative "microslop_one_drive/deserializers/device_deserializer"

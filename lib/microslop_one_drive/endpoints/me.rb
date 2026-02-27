@@ -3,7 +3,7 @@ module MicroslopOneDrive
     module Me
       # Gets the current user
       #
-      # @return [MicroslopOneDrive::Audiences::User]
+      # @return [MicroslopOneDrive::IdentitySets::User]
       def me
         response = get(path: "me", query: {})
         handle_error(response) unless response.success?

@@ -7,7 +7,7 @@ module MicroslopOneDrive
 
         group_hash = Utils.deep_symbolize_keys(group_hash)
 
-        MicroslopOneDrive::Audiences::Group.new(
+        MicroslopOneDrive::IdentitySets::Group.new(
           id: group_hash.fetch(:id, nil),
           display_name: group_hash.fetch(:displayName, nil)
         )

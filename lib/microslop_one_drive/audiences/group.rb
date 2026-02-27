@@ -1,5 +1,5 @@
 module MicroslopOneDrive
-  module Audiences
-    class Group < BaseAudience; end
+  module IdentitySets
+    class Group < BaseIdentitySet; end
   end
 end

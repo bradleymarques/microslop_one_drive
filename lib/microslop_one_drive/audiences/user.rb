@@ -1,6 +1,6 @@
 module MicroslopOneDrive
-  module Audiences
-    class User < BaseAudience
+  module IdentitySets
+    class User < BaseIdentitySet
       attr_reader :principal_name, :surname, :given_name, :preferred_language, :mail, :mobile_phone,
                   :job_title, :office_location, :business_phones, :login_name
 

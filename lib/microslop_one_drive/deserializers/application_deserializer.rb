@@ -7,7 +7,7 @@ module MicroslopOneDrive
 
         application_hash = Utils.deep_symbolize_keys(application_hash)
 
-        MicroslopOneDrive::Audiences::Application.new(
+        MicroslopOneDrive::IdentitySets::Application.new(
           id: application_hash.fetch(:id, nil),
           display_name: application_hash.fetch(:displayName, nil)
         )
