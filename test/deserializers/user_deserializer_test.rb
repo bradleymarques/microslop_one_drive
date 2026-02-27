@@ -5,7 +5,7 @@ module MicroslopOneDrive
     class UserDeserializerTest < BaseTest
       def test_create_from_empty_hash
         user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash({})
-        assert_kind_of MicroslopOneDrive::User, user
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, user
 
         assert_nil user.principal_name
         assert_nil user.id
@@ -38,7 +38,7 @@ module MicroslopOneDrive
         }
 
         user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(user_hash)
-        assert_kind_of MicroslopOneDrive::User, user
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, user
 
         assert_equal "Example Person", user.display_name
         assert_equal "Example", user.given_name
@@ -70,7 +70,7 @@ module MicroslopOneDrive
         }
 
         user = MicroslopOneDrive::Deserializers::UserDeserializer.create_from_hash(user_hash)
-        assert_kind_of MicroslopOneDrive::User, user
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, user
 
         assert_equal "Example Person", user.display_name
         assert_equal "Example", user.given_name

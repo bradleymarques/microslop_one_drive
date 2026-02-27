@@ -66,7 +66,7 @@ module MicroslopOneDrive
         assert_equal ["owner"], permission.roles
 
         granted_to = permission.granted_to
-        assert_kind_of MicroslopOneDrive::User, granted_to
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, granted_to
 
         assert_equal "Example Person", granted_to.display_name
         assert_equal "person@example.com", granted_to.email
@@ -100,8 +100,8 @@ module MicroslopOneDrive
 
         granted_to_list = permission.granted_to_list
         assert_equal 2, granted_to_list.size
-        assert_kind_of MicroslopOneDrive::User, granted_to_list[0]
-        assert_kind_of MicroslopOneDrive::User, granted_to_list[1]
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, granted_to_list[0]
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, granted_to_list[1]
 
         assert_equal "Amy Smith", granted_to_list[0].display_name
         assert_equal "amy@example.com", granted_to_list[0].email

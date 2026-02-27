@@ -16,7 +16,7 @@ module MicroslopOneDrive
         )
 
         me = @client.me
-        assert_kind_of MicroslopOneDrive::User, me
+        assert_kind_of MicroslopOneDrive::IdentitySets::User, me
         assert_equal "person@example.com", me.email_address
         assert_equal "Person Example", me.display_name
         assert_equal "Example", me.surname
