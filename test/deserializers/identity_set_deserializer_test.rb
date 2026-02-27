@@ -125,6 +125,21 @@ module MicroslopOneDrive
         assert_equal "5", identity.id
         assert_equal "Members", identity.display_name
       end
+
+      def test_create_from_some_unknown_hash
+        identity_set_hash = {
+          someNewKindOfIdentitySet: {
+            id: "1",
+            displayName: "Example Person"
+          }
+        }
+        identity = MicroslopOneDrive::Deserializers::IdentitySetDeserializer.create_from_hash(identity_set_hash)
+
+        assert_kind_of MicroslopOneDrive::IdentitySets::BaseIdentitySet, identity
+
+        assert_equal "1", identity.id
+        assert_equal "Example Person", identity.display_name
+      end
     end
   end
 end

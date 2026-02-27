@@ -18,9 +18,7 @@ module MicroslopOneDrive
 
         key, deserializer_class = TYPE_MAPPING.find { identity_set_hash.keys.include?(it.first) }
 
-        unless deserializer_class
-          raise NotImplementedError, "Unknown identity set type for hash: #{identity_set_hash.inspect}"
-        end
+        return BaseIdentitySetDeserializer.create_from_hash(identity_set_hash.values.first) if deserializer_class.nil?
 
         deserializer_class.create_from_hash(identity_set_hash[key])
       end
