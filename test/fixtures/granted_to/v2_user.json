@@ -1,0 +1,9 @@
+{
+  "user": {
+    "@odata.type": "#microsoft.graph.sharePointIdentity",
+    "id": "GUID",
+    "displayName": "User Name",
+    "email": "user@example.com",
+    "loginName": "i:0#.f|membership|user@example.com"
+  }
+}

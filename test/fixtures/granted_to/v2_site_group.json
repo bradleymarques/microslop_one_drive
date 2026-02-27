@@ -1,0 +1,7 @@
+{
+  "siteGroup": {
+    "@odata.type": "#microsoft.graph.sharePointIdentity",
+    "id": "5",
+    "displayName": "Members"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "group": {
+    "@odata.type": "#microsoft.graph.sharePointIdentity",
+    "id": "GUID",
+    "displayName": "Finance Team"
+  }
+}
